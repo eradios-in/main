@@ -29,4 +29,6 @@ public interface StationRepo extends JpaRepository<Station, Integer> {
     Page<Station> findByNameContainingIgnoreCaseOrLanguageContainingIgnoreCaseOrGenreContainingIgnoreCaseOrStateContainingIgnoreCase(
             String name, String language, String genre, String state, Pageable pageable);
 
+    @Query("SELECT CONCAT('stations/', s.formattedName) FROM Station s WHERE s.formattedName IS NOT NULL AND s.formattedName <> '' AND s.formattedName <> 'error'")
+    List<String> findAllValidFormattedNames(); // for sitemap controller
 }

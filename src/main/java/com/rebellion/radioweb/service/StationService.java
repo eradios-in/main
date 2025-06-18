@@ -20,4 +20,5 @@ public interface StationService {
     Station saveStation(Station station);
     boolean sendContactEmail(Map<String, String> emailData);
     Page<StationOutDao> searchStations(String name, String language, String genre, String state, Pageable pageable);
+    List<String> getListOfAllValidStationFormattedNames();
 }

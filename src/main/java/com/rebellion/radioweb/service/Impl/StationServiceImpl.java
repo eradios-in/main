@@ -75,14 +75,9 @@ public class StationServiceImpl implements StationService {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    // @Override
-    // public Map<String, List<String>> getAllFilters() {
-    //     Map<String, List<String>> filters = new HashMap<>();
-    //     filters.put("languages", Optional.ofNullable(stationRepo.findDistinctLanguages()).orElseGet(ArrayList::new));
-    //     filters.put("states", Optional.ofNullable(stationRepo.findDistinctStates()).orElseGet(ArrayList::new));
-    //     filters.put("genres", Optional.ofNullable(stationRepo.findDistinctGenres()).orElseGet(ArrayList::new));
-    //     return filters;
-    // }
+    public List<String> getListOfAllValidStationFormattedNames(){
+        return stationRepo.findAllValidFormattedNames();
+    }
 
     @Override
     public Station saveStation(Station input) {

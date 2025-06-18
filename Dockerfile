@@ -1,7 +1,7 @@
 # Use a multi-stage build to reduce final image size
 
 # --- Stage 1: Build the application ---
-FROM maven:4.0.0-eclipse-temurin-21 AS build
+FROM maven:3.9.9-eclipse-temurin-21 AS build
 WORKDIR /app
 COPY . .
 RUN mvn clean package -DskipTests

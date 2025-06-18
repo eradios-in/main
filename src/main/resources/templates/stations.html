@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>Listen to Indian Radio Stations Online | eRadios.in</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto&display=swap"
+    rel="stylesheet">
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <!-- Mobile-First Custom Styles -->
+  <style>
+    /* Base styles for mobile (default) */
+    body {
+      background: linear-gradient(135deg, #e8e8eb 0%, #e6e8ee 100%);
+      font-family: 'Roboto', sans-serif;
+      color: #333333;
+      font-size: 16px;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: #1a1a2e;
+      margin-bottom: 0.5rem;
+      border-bottom: 2px solid #bd9208;
+      text-align: center;
+    }
+
+    h2 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #1a1a2e;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p,
+    label,
+    .card-text {
+      font-family: 'Roboto', sans-serif;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: #bd9208;
+      text-decoration: none;
+      transition: color 0.3s ease-in-out;
+    }
+
+    a:hover {
+      color: #a07a06;
+    }
+
+    .station-logo {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      aspect-ratio: 1/1;
+      margin-right: 0.5rem;
+    }
+
+    .navbar-brand i {
+      color: #bd9208;
+    }
+
+    footer a {
+      color: #fff;
+    }
+
+    footer a:hover {
+      color: #bd9208;
+    }
+
+    .btn-custom {
+      background-color: #bd9208;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    hr.section-divider {
+      border: 0;
+      border-top: 1px solid #bd9208;
+      margin: 1.5rem 0;
+    }
+
+    .btn-custom:hover {
+      background-color: #a07a06;
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    .station-card {
+      border: 1px solid rgba(95, 95, 95, 0.281);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .station-card:hover {
+      transform: scale(1.03);
+      background-color: rgba(128, 128, 128, 0.1);
+    }
+
+    .pagination .page-link {
+      color: #232526;
+      background-color: #fff;
+      border: none;
+      border-radius: 0.5rem;
+      margin: 0 0.2rem;
+      font-size: 0.9rem;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .pagination .page-link:hover {
+      background-color: #bd9208;
+      color: #232526;
+    }
+
+    .pagination .active .page-link {
+      background-color: #bd9208;
+      color: #232526;
+      font-weight: bold;
+      border: none;
+    }
+
+    .container {
+      padding: 0 1rem;
+    }
+
+    .main-section {
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin: 0 auto;
+    }
+
+    .ad-space {
+      width: 100%;
+      min-height: 60px;
+      background: #f8f9fa;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 1rem auto;
+      max-width: 100%;
+    }
+
+    .search-wrapper {
+      max-width: 600px;
+      margin: 40px auto;
+      color: #ccc;
+    }
+    #stationSearch:focus {
+      box-shadow: 0px 0px 3px #bd9208;
+      border-color: #bd9208;
+    }
+
+    /* Adjustments for larger screens */
+    @media (min-width: 576px) {
+      h1 {
+        font-size: 2rem;
+        text-align: left;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      p,
+      label,
+      .card-text {
+        font-size: 1rem;
+      }
+
+      .station-logo {
+        width: 50px;
+        height: 50px;
+        box-shadow: 0px 0px 2px #aaa;
+        padding: 2px;
+      }
+
+      .btn-custom {
+        padding: 0.6rem 1.2rem;
+        font-size: 1rem;
+      }
+
+      .ad-space {
+        max-width: 468px;
+        min-height: 60px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .container {
+        padding: 0 1.5rem;
+      }
+
+      .main-section {
+        padding: 2rem;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
+      }
+
+      .ad-space {
+        max-width: 728px;
+        min-height: 90px;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .container {
+        max-width: 900px;
+      }
+
+      .main-section {
+        padding: 2.5rem;
+      }
+    }
+  </style>
+  <!-- SEO Meta Tags -->
+  <meta name="description"
+    content="Discover and listen to the best Indian radio stations online. Stream live music, news, and entertainment in your favorite language, state, or genre on eRadios.in. Enjoy high-quality, mobile-friendly radio streaming for free.">
+  <meta name="keywords"
+    content="Indian radio, online radio, radio stations India, live radio, music streaming, Hindi radio, Tamil radio, Punjabi radio, Bollywood music, Indian news radio, listen radio online, free radio, eRadios.in">
+  <meta name="author" content="eRadios.in">
+  <link rel="canonical" href="https://www.eradios.in/stations" />
+  <meta property="og:title" content="Listen to Indian Radio Stations Online | eRadios.in">
+  <meta property="og:description"
+    content="Stream India's top radio stations online. Listen to live music, news, and entertainment by language, state, or genre. 100% free and mobile-friendly.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.eradios.in/stations">
+  <meta property="og:site_name" content="eRadios.in">
+  <meta property="og:image" content="https://www.eradios.in/static/images/logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Listen to Indian Radio Stations Online | eRadios.in">
+  <meta name="twitter:description"
+    content="Stream India's top radio stations online. Listen to live music, news, and entertainment by language, state, or genre. 100% free and mobile-friendly.">
+  <meta name="twitter:image" content="https://www.eradios.in/static/images/logo.png">
+</head>
+
+<body>
+  <!-- Loader Overlay -->
+  <div id="pageLoader" style="
+    position:fixed;
+    top:0;left:0;width:100vw;height:100vh;
+    background:linear-gradient(135deg, #fffbe6 0%, #fff3cd 100%);
+    z-index:9999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:opacity 0.4s;
+  ">
+    <div style="text-align:center;">
+      <i class="fas fa-radiation fa-spin" style="font-size:8rem;color:#bd9208;"></i>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="/"><i class="fas fa-radiation fa-spin fs-3 me-2"></i>eRadios.in</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/stations">Stations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Ad Space -->
+  <div class="container text-center">
+    <div class="ad-space">
+      <span class="text-muted">
+        <script async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2939946349164066"
+          crossorigin="anonymous"></script>
+        <!-- flexibleHorizontalAd -->
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2939946349164066"
+          data-ad-slot="4375934059" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </span>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <section class="py-3">
+    <div class="container main-section">
+      <h1>Radio Stations</h1>
+
+      <!-- Search Bar Section -->
+      <div class="search-wrapper">
+        <div class="mb-3">
+          <input type="text" id="stationSearch" class="form-control form-control-lg border border-warning"
+            placeholder="Search station, language, genre, state..." oninput="searchStations()" />
+        </div>
+      </div>
+
+      <!-- Stations Cards -->
+      <div class="row row-cols-1 g-3 mt-3" id="stationsContainer">
+        <!-- Cards will be populated by JavaScript -->
+      </div>
+
+      <!-- Pagination -->
+      <nav class="mt-3">
+        <ul class="pagination justify-content-center" id="pagination">
+          <!-- Pagination links will be populated by JavaScript -->
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Ad Space -->
+  <div class="container text-center">
+    <div class="ad-space">
+      <span class="text-muted">
+        <script async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2939946349164066"
+          crossorigin="anonymous"></script>
+        <!-- flexibleHorizontalAd -->
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2939946349164066"
+          data-ad-slot="4375934059" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </span>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3">
+    <div class="container">
+      <p>© 2025 eRadios.in</p>
+      <div>
+        <a href="/privacy" class="mx-2">Privacy Policy</a> |
+        <a href="/about" class="mx-2">About</a> |
+        <a href="/terms" class="mx-2">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Stations Data and Logic -->
+  <script>
+    let allStations = [];
+    let filteredStations = [];
+    const itemsPerPage = 20;
+    const backendPageSize = 60;
+    let currentPage = 1;
+    let totalStations = 0;
+    let lastSearch = "";
+
+    // Fetch stations for the current page (no filter, backend handles search)
+    async function fetchStationsForPage(absPage, search = "") {
+      const backendPage = Math.floor((absPage - 1) * itemsPerPage / backendPageSize) + 1;
+      let url;
+      if (search && search.trim().length > 0) {
+        const params = new URLSearchParams({
+          page: backendPage,
+          size: backendPageSize,
+          query: search.trim()
+        });
+        url = `/api/stations/search?${params.toString()}`;
+      } else {
+        url = `/api/stations?page=${backendPage}&size=${backendPageSize}&sortBy=name`;
+      }
+
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        allStations = data.data;
+        filteredStations = [...allStations];
+        totalStations = data.totalItems || allStations.length;
+        renderStations();
+      } catch (error) {
+        console.error('Error fetching stations:', error);
+        allStations = [];
+        filteredStations = [];
+        renderStations();
+      } finally {
+        const loader = document.getElementById('pageLoader');
+        if (loader) {
+          loader.style.opacity = '0';
+          setTimeout(() => loader.style.display = 'none', 400);
+        }
+      }
+    }
+
+    // Search handler
+    function searchStations() {
+      const search = document.getElementById('stationSearch').value.trim();
+      lastSearch = search;
+      currentPage = 1;
+      fetchStationsForPage(currentPage, search);
+    }
+
+    function renderStations() {
+      const container = document.getElementById('stationsContainer');
+      container.innerHTML = '';
+      // Calculate start index within the current chunk
+      const startInChunk = ((currentPage - 1) * itemsPerPage) % backendPageSize;
+      const endInChunk = startInChunk + itemsPerPage;
+      const stationsToDisplay = filteredStations.slice(startInChunk, endInChunk);
+
+      stationsToDisplay.forEach((station, idx) => {
+        const card = document.createElement('div');
+        card.className = 'col';
+        card.innerHTML = `
+        <div class="card h-100 border-0 shadow-sm station-card">
+          <div class="card-body d-flex align-items-center">
+            <img src="${station.favicon}" alt="${station.name} Logo" class="station-logo rounded">
+            <div class="flex-grow-1">
+              <p class="card-text mb-0">${station.name}</p>
+            </div>
+            <a class="text-decoration-none" href="/stations/${station.formattedName}">
+              <button class="btn btn-custom">Visit</button>
+            </a>
+          </div>
+        </div>
+      `;
+        container.appendChild(card);
+
+        // Insert ad after every 7th station
+        if ((idx + 1) % 7 === 0) {
+          const adDiv = document.createElement('div');
+          adDiv.className = 'col';
+          adDiv.innerHTML = `
+          <div class="card h-100 border-0 shadow-sm d-flex align-items-center justify-content-center" style="min-height:120px;">
+            <span class="text-muted">[Ad Space 728x90]</span>
+          </div>
+        `;
+          container.appendChild(adDiv);
+        }
+      });
+
+      renderPagination();
+    }
+
+    function renderPagination() {
+      const pagination = document.getElementById('pagination');
+      pagination.innerHTML = '';
+
+      const totalPages = Math.ceil(totalStations / itemsPerPage);
+
+      // Show a window of 4 pages, centered on currentPage if possible
+      let startPage = Math.max(1, currentPage - 1);
+      let endPage = Math.min(totalPages, startPage + 3);
+      if (endPage - startPage < 3) {
+        startPage = Math.max(1, endPage - 3);
+      }
+
+      // Previous
+      const prevLi = document.createElement('li');
+      prevLi.className = 'page-item' + (currentPage === 1 ? ' disabled' : '');
+      prevLi.innerHTML = `<a class="page-link" href="javascript:void(0)" onclick="changePage(${currentPage - 1})">Previous</a>`;
+      pagination.appendChild(prevLi);
+
+      // Page numbers
+      for (let i = startPage; i <= endPage; i++) {
+        const li = document.createElement('li');
+        li.className = 'page-item' + (i === currentPage ? ' active' : '');
+        li.innerHTML = `<a class="page-link" href="javascript:void(0)" onclick="changePage(${i})">${i}</a>`;
+        pagination.appendChild(li);
+      }
+
+      // Next
+      const nextLi = document.createElement('li');
+      nextLi.className = 'page-item' + (currentPage === totalPages ? ' disabled' : '');
+      nextLi.innerHTML = `<a class="page-link" href="javascript:void(0)" onclick="changePage(${currentPage + 1})">Next</a>`;
+      pagination.appendChild(nextLi);
+    }
+
+    function changePage(page) {
+      const totalPages = Math.ceil(totalStations / itemsPerPage);
+      if (page < 1 || page > totalPages) return;
+      currentPage = page;
+      fetchStationsForPage(currentPage, lastSearch);
+    }
+
+    // Initial fetch
+    fetchStationsForPage(currentPage);
+  </script>
+  <!-- Custom JS -->
+  <script th:src="@{/js/scripts.js}"></script>
+</body>
+
+</html>

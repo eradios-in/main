@@ -1,0 +1,151 @@
+package com.rebellion.radioweb.service.Impl;
+
+import java.io.IOException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.rebellion.radioweb.entity.Station;
+import com.rebellion.radioweb.entity.StationOutDao;
+import com.rebellion.radioweb.repo.StationRepo;
+import com.rebellion.radioweb.service.StationService;
+
+@Service
+public class StationServiceImpl implements StationService {
+
+    private final EmailService emailService;
+    private final StationRepo stationRepo;
+    private final ObjectMapper mapper;
+
+    @Autowired
+    public StationServiceImpl(EmailService emailService, StationRepo stationRepo, ObjectMapper mapper) {
+        this.emailService = emailService;
+        this.stationRepo = stationRepo;
+        this.mapper = mapper;
+    }
+
+    @Override
+    public Page<Station> getAllStations(PageRequest pageRequest) {
+        return stationRepo.findAll(pageRequest);
+    }
+
+    @Override
+    public Page<StationOutDao> getAllStationsOut(PageRequest pageRequest) {
+        Page<Station> stations = stationRepo.findAll(pageRequest);
+        return stations.map(station -> mapper.convertValue(station, StationOutDao.class));
+    }
+
+    @Override
+    public ResponseEntity<List<StationOutDao>> getRelatedStations() {
+        List<Station> stations = stationRepo.findFirst9ByOrderByLanguage();
+        List<StationOutDao> stationOutDaos = mapper.convertValue(stations, new TypeReference<List<StationOutDao>>() {});
+        return new ResponseEntity<>(stationOutDaos, HttpStatus.OK);
+    }
+
+    public ResponseEntity<Station> getStationById(int id) {
+        Optional<Station> station = stationRepo.findById(id);
+        if (station.isPresent()) {
+            return new ResponseEntity<>(station.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public ResponseEntity<Station> getStationByFormattedName(String formattedName) {
+        Optional<Station> station = stationRepo.findByFormattedName(formattedName);
+        if (station.isPresent()) {
+            return new ResponseEntity<>(station.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    // @Override
+    // public Map<String, List<String>> getAllFilters() {
+    //     Map<String, List<String>> filters = new HashMap<>();
+    //     filters.put("languages", Optional.ofNullable(stationRepo.findDistinctLanguages()).orElseGet(ArrayList::new));
+    //     filters.put("states", Optional.ofNullable(stationRepo.findDistinctStates()).orElseGet(ArrayList::new));
+    //     filters.put("genres", Optional.ofNullable(stationRepo.findDistinctGenres()).orElseGet(ArrayList::new));
+    //     return filters;
+    // }
+
+    @Override
+    public Station saveStation(Station input) {
+        return stationRepo.save(input);
+    }
+
+    @Override
+    public boolean sendContactEmail(Map<String, String> emailData) {
+        if(emailData == null) {
+            return false;
+        }
+         String message = "Sender's Name: " + emailData.get("fullName") + "\n"
+                       + "Sender's Email: " + emailData.get("email") + "\n"
+                       + "Subject: " + emailData.get("subject") + "\n"
+                       + "Message: " + emailData.get("content");
+
+        // Send the email
+        emailService.sendEmail(emailData.get("email"), emailData.get("subject"), message);
+        return true;
+    }
+
+    @Override
+    public Page<StationOutDao> searchStations(String name, String language, String genre, String state, Pageable pageable) {
+        Page<Station> stations = stationRepo.findByNameContainingIgnoreCaseOrLanguageContainingIgnoreCaseOrGenreContainingIgnoreCaseOrStateContainingIgnoreCase(
+                name, language, genre, state, pageable);
+        return stations.map(station -> mapper.convertValue(station, StationOutDao.class));
+    }
+
+    // ************************************* DANGER ZONE ******************************************
+    /**
+     * Fetches stations from an external API and saves them to the repository.
+     * 
+     * @return List of Station objects fetched from the API.
+     */
+    @Override
+    public List<Station> fetchStationsFromAPI() {
+        List<Station> stations = new ArrayList<>();
+        var client = HttpClient.newHttpClient();
+        var request = HttpRequest.newBuilder()
+                .uri(java.net.URI.create("http://162.55.180.156/json/stations/bycountrycodeexact/in"))
+                .header("Accept", "application/json")
+                .build();
+        HttpResponse<String> response;
+
+        try {
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) {
+                stations = mapper.readValue(response.body(), new TypeReference<List<Station>>() {
+                });
+                for (Station station : stations) {
+                    System.out.println(station);
+                    stationRepo.save(station);
+                }
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return stations;
+    }
+}

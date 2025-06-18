@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="robots" content="noindex, nofollow">
+
+    <title>eRadios.in - Data Filter</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        /* Base styles for mobile (default) */
+        body {
+            background: linear-gradient(135deg, #e8e8eb 0%, #e6e8ee 100%);
+            font-family: 'Roboto', sans-serif;
+            color: #333333;
+            font-size: 16px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-section {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: #1a1a2e;
+            margin-bottom: 0.5rem;
+            border-bottom: 2px solid #bd9208;
+            text-align: center;
+        }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #1a1a2e;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #1a1a2e;
+            margin-bottom: 0.5rem;
+        }
+
+        p,
+        label,
+        select,
+        input {
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            padding-left: 1.2rem;
+        }
+
+        li {
+            margin-bottom: 0.3rem;
+        }
+
+        a {
+            color: #bd9208;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+        }
+
+        a:hover {
+            color: #a07a06;
+        }
+
+        .navbar-brand i {
+            color: #bd9208;
+        }
+
+        footer a {
+            color: #fff;
+        }
+
+        footer a:hover {
+            color: #bd9208;
+        }
+
+        .station-image {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            aspect-ratio: 1/1;
+            margin-bottom: 0.5rem;
+        }
+
+        .play-btn i {
+            font-size: 1.5rem;
+            color: #bd9208;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .play-btn i:hover {
+            color: #a07a06;
+        }
+
+        .btn-custom {
+            background-color: #bd9208;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        .btn-custom:hover {
+            background-color: #a07a06;
+            transform: scale(1.05);
+        }
+
+        .btn-dark {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .container {
+            padding: 0 1rem;
+        }
+
+        .ad-space {
+            width: 100%;
+            min-height: 60px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem auto;
+            max-width: 100%;
+        }
+
+        /* Adjustments for larger screens */
+        @media (min-width: 576px) {
+            h1 {
+                font-size: 2rem;
+                text-align: left;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            h4 {
+                font-size: 1.2rem;
+            }
+
+            p,
+            label,
+            select,
+            input {
+                font-size: 1rem;
+            }
+
+            ul {
+                font-size: 1rem;
+            }
+
+            .station-image {
+                width: 100px;
+                height: 100px;
+            }
+
+            .play-btn i {
+                font-size: 2rem;
+            }
+
+            .btn-custom,
+            .btn-dark {
+                padding: 0.6rem 1.2rem;
+                font-size: 1rem;
+            }
+
+            .form-control,
+            .form-select {
+                font-size: 1rem;
+            }
+
+            .ad-space {
+                max-width: 468px;
+                min-height: 60px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .main-section {
+                padding: 2rem;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+                border-radius: 15px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .ad-space {
+                max-width: 728px;
+                min-height: 90px;
+            }
+
+            .play-btn i {
+                font-size: 2rem;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .container {
+                max-width: 900px;
+            }
+
+            .main-section {
+                padding: 2.5rem;
+            }
+
+            .play-btn i {
+                font-size: 5rem;
+            }
+        }
+    </style>
+    <!-- HLS.js for streaming support -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.4.12/dist/hls.min.js"></script>
+</head>
+
+<body>
+    <!-- Loader Overlay -->
+    <div id="pageLoader" style="
+    position:fixed;
+    top:0;left:0;width:100vw;height:100vh;
+    background:linear-gradient(135deg, #fffbe6 0%, #fff3cd 100%);
+    z-index:9999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:opacity 0.4s;
+  ">
+        <div style="text-align:center;">
+            <i class="fas fa-radiation fa-spin" style="font-size:8rem;color:#bd9208;"></i>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/"><i class="fas fa-radiation fa-spin fs-3 me-2"></i>eRadios.in</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/stations">Stations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Ad Space -->
+    <div class="container text-center">
+        <div class="ad-space">
+            <span class="text-muted">
+                <!-- Ad code here -->
+            </span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <section class="py-3">
+        <div class="container">
+            <div class="main-section">
+                <h1>Data Filter</h1>
+                <div th:each="item,iterStat : ${data}">
+                    <!-- Station Card -->
+                    <div class="d-flex flex-column flex-md-row align-items-center mb-3">
+                        <img th:src="${item.favicon}" th:alt="${item.name}"
+                            class="station-image rounded mb-2 mb-md-0 me-md-2 border"
+                            onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/0/0b/Earphones_icon.png';">
+                        <div class="d-flex align-items-center justify-content-between w-100">
+                            <h2 class="text-center text-md-start mb-0" th:text="${item.name}">Station Name</h2>
+                            <a class="play-btn" th:id="'play_btn_' + ${iterStat.index}"><i
+                                    class="fas fa-play-circle"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Audio Player Script for this station -->
+                    <script th:inline="javascript">
+                        /*<![CDATA[*/
+                        const player[[${ iterStat.index }]] = document.createElement('audio');
+                        player[[${ iterStat.index }]].controls = false;
+                        document.body.appendChild(player[[${ iterStat.index }]]);
+                        const playBtn[[${ iterStat.index }]] = document.getElementById("play_btn_" + [[${ iterStat.index }]]);
+                        const streamUrl[[${ iterStat.index }]] = /*[[${item.url_resolved}]]*/ '';
+                        const stationHomepage[[${ iterStat.index }]] = /*[[${item.homepage}]]*/ '';
+                        let isHls[[${ iterStat.index }]] = streamUrl[[${ iterStat.index }]].endsWith(".m3u8") || streamUrl[[${ iterStat.index }]].includes(".m3u8");
+
+                        function setupStream[[${ iterStat.index }]]() {
+                            if (isHls[[${ iterStat.index }]] && Hls.isSupported()) {
+                                const hls = new Hls({ autoStartLoad: true });
+                                hls.loadSource(streamUrl[[${ iterStat.index }]]);
+                                hls.attachMedia(player[[${ iterStat.index }]]);
+                                hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                                    playBtn[[${ iterStat.index }]].innerHTML = `<i class="fas fa-play-circle"></i>`;
+                                });
+                            } else if (isHls[[${ iterStat.index }]] && player[[${ iterStat.index }]].canPlayType('application/vnd.apple.mpegurl')) {
+                                player[[${ iterStat.index }]].src = streamUrl[[${ iterStat.index }]];
+                                player[[${ iterStat.index }]].addEventListener('loadedmetadata', () => {
+                                    playBtn[[${ iterStat.index }]].innerHTML = `<i class="fas fa-play-circle"></i>`;
+                                });
+                            } else {
+                                player[[${ iterStat.index }]].src = streamUrl[[${ iterStat.index }]];
+                                player[[${ iterStat.index }]].addEventListener('canplay', () => {
+                                    playBtn[[${ iterStat.index }]].innerHTML = `<i class="fas fa-play-circle"></i>`;
+                                });
+                            }
+                        }
+
+                        setupStream[[${ iterStat.index }]]();
+
+                        playBtn[[${ iterStat.index }]].addEventListener('click', () => {
+                            if (player[[${ iterStat.index }]].paused) {
+                                player[[${ iterStat.index }]].play().catch(err => {
+                                    console.warn("Playback failed:", err);
+                                    if (isHls[[${ iterStat.index }]] && Hls.isSupported()) {
+                                        const hls = new Hls();
+                                        hls.loadSource(streamUrl[[${ iterStat.index }]]);
+                                        hls.attachMedia(player[[${ iterStat.index }]]);
+                                        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                                            player[[${ iterStat.index }]].play();
+                                        });
+                                    } else {
+                                        alert('Cannot play stream. Opening in external player...');
+                                        playBtn[[${ iterStat.index }]].innerHTML = `<a href="${stationHomepage[[${ iterStat.index }]]}" target="_blank"><i class="play-icon fas fa-external-link-alt"></i></a>`;
+                                    }
+                                });
+                                playBtn[[${ iterStat.index }]].innerHTML = `<i class="fas fa-pause-circle"></i>`;
+                            } else {
+                                player[[${ iterStat.index }]].pause();
+                                playBtn[[${ iterStat.index }]].innerHTML = `<i class="fas fa-play-circle"></i>`;
+                            }
+                        });
+
+                        document.addEventListener('DOMContentLoaded', function () {
+                            // keydown event listener for backquote key
+                            document.addEventListener('keydown', function (event) {
+                                if (event.key === '`') { // backquote key
+                                    playBtn[[${ iterStat.index }]].click();
+                                }
+                            });
+                        });
+                        /*]]>*/
+                    </script>
+
+                    <!-- Form -->
+                    <form class="form-group station-form mb-4" th:id="'stationForm_' + ${iterStat.index}">
+                        <input th:id="'id_' + ${iterStat.index}" class="w-100 form-control mb-2" type="text"
+                            th:value="${item.id}" readonly />
+                        <label class="form-label" th:for="'name_' + ${iterStat.index}">Name:</label>
+                        <a target="_blank" th:href="@{'https://www.google.com/search?q=' + ${item.name}}"
+                            class="text-end text-primary">&nbsp;&nbsp;&nbsp;&nbsp;Google It</a>
+                        <input th:id="'name_' + ${iterStat.index}" class="w-100 form-control mb-2" type="text"
+                            th:value="${item.name}" />
+                        <iframe th:src="@{'https://www.google.com/search?igu=1&q=' + ${item.name}}" width="100%"
+                            height="600"></iframe>
+
+                        <label class="form-label" th:for="'about_' + ${iterStat.index}">About:</label>
+                        <input th:id="'about_' + ${iterStat.index}" class="w-100 form-control mb-2" type="text"
+                            th:value="${item.about}" />
+
+                        <label class="form-label" th:for="'meta_Description_' + ${iterStat.index}">Meta
+                            Description:</label>
+                        <input th:id="'meta_Description_' + ${iterStat.index}" class="w-100 form-control mb-2"
+                            type="text" th:value="${item.metaDescription}" />
+
+                        <label class="form-label" th:for="'url_resolved_' + ${iterStat.index}">URL Resolved:</label>
+                        <input th:id="'url_resolved_' + ${iterStat.index}" class="w-100 form-control mb-2" type="text"
+                            th:value="${item.url_resolved}" />
+
+                        <label class="form-label"
+                            th:for="'homepage_' + ${iterStat.index}">Homepage:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a target="_blank" th:href="${item.homepage}" class="text-end text-primary">Visit</a>
+                        <input th:id="'homepage_' + ${iterStat.index}" class="w-100 form-control mb-2" type="text"
+                            th:value="${item.homepage}" />
+                        <iframe th:src="@{${item.homepage}}" width="100%" height="400"></iframe>
+
+                        <label class="form-label" th:for="'favicon_' + ${iterStat.index}">Favicon:</label>
+                        <input th:id="'favicon_' + ${iterStat.index}" class="w-100 form-control mb-2" type="text"
+                            th:value="${item.favicon}" />
+
+                        <label th:for="'state_' + ${iterStat.index}" class="form-label">State:</label>&nbsp;<span
+                            class="text-primary" th:text="${item.state}"></span>
+                        <div th:id="'selectedStates_' + ${iterStat.index}" class="mb-2 d-flex flex-wrap gap-2"></div>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button"
+                                th:id="'state_' + ${iterStat.index}" data-bs-toggle="dropdown" aria-expanded="false">
+                                -- Select States --
+                            </button>
+                            <ul class="dropdown-menu w-100 p-2" aria-labelledby="state"
+                                style="max-height: 250px; overflow-y: auto;"
+                                th:id="'checkboxMenu_' + ${iterStat.index}">
+                            </ul>
+                        </div>
+
+                        <label th:for="'languageDropdown_' + ${iterStat.index}"
+                            class="form-label">Language:</label>&nbsp;<span class="text-primary"
+                            th:text="${item.language}"></span>
+                        <div th:id="'selectedLanguages_' + ${iterStat.index}" class="mb-2 d-flex flex-wrap gap-2"></div>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button"
+                                th:id="'languageDropdown_' + ${iterStat.index}" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                -- Select Languages --
+                            </button>
+                            <ul class="dropdown-menu w-100 p-2" style="max-height: 250px; overflow-y: auto;"
+                                th:id="'languageMenu_' + ${iterStat.index}">
+                            </ul>
+                        </div>
+
+                        <label th:for="'genreDropdown_' + ${iterStat.index}"
+                            class="form-label">Genre:</label>&nbsp;<span class="text-primary"
+                            th:text="${item.genre}"></span>
+                        <div th:id="'selectedGenres_' + ${iterStat.index}" class="mb-2 d-flex flex-wrap gap-2"></div>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button"
+                                th:id="'genreDropdown_' + ${iterStat.index}" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                -- Select Genres --
+                            </button>
+                            <ul class="dropdown-menu w-100 p-2" style="max-height: 250px; overflow-y: auto;"
+                                th:id="'genreMenu_' + ${iterStat.index}">
+                            </ul>
+                        </div>
+                        <div class="d-flex justify-content-center mt-3">
+                            <button class="btn btn-dark px-3 submitBtn" type="button"
+                                th:data-index="${iterStat.index}">Submit</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Pagination Buttons -->
+                <div class="d-flex justify-content-between mt-3">
+                    <a th:href="@{'/filter?page=' + ${currentPage-1}}"><button class="btn btn-custom">Prev</button></a>
+                    <a th:href="@{'/filter?page=' + ${currentPage+1}}"><button class="btn btn-custom">Next</button></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ad Space -->
+    <div class="container text-center">
+        <div class="ad-space">
+            <span class="text-muted">
+                <!-- Ad code here -->
+            </span>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+        <div class="container">
+            <p>© 2025 eRadios.in</p>
+            <div>
+                <a href="/privacy" class="mx-2">Privacy Policy</a> |
+                <a href="/about" class="mx-2">About</a> |
+                <a href="/terms" class="mx-2">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Hide loader after DOM is ready
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                const loader = document.getElementById('pageLoader');
+                if (loader) {
+                    loader.style.opacity = '0';
+                    setTimeout(() => loader.style.display = 'none', 400);
+                }
+            }, 400);
+        });
+
+        // Data for dropdowns
+        const states = [
+            "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh",
+            "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland",
+            "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal"
+        ];
+        const languages = [
+            "Assamese", "Bengali", "Bodo", "Dogri", "Gujarati", "Hindi", "Kannada", "Kashmiri", "Konkani",
+            "Maithili", "Malayalam", "Manipuri", "Marathi", "Nepali", "Odia", "Punjabi", "Sanskrit",
+            "Santhali", "Sindhi", "Tamil", "Telugu", "Urdu"
+        ];
+        const genres = [
+            "Bollywood", "Retro", "Classical", "Folk", "Devotional", "Regional", "Indie", "Pop", "Rock",
+            "Hip-Hop", "EDM", "Jazz", "Blues", "Instrumental", "Romantic", "News", "Talkshows", "Interviews",
+            "Comedy", "Motivation", "Storytime", "Spiritual", "Learning", "Fitness", "Meditation",
+            "Business", "Travel", "Sports", "Kids", "Youth", "Women"
+        ];
+
+        // Initialize dropdowns and badges for each form
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.station-form').forEach(function (form, idx) {
+                // State
+                const checkboxMenu = form.querySelector('[id^="checkboxMenu_"]');
+                const selectedStates = form.querySelector('[id^="selectedStates_"]');
+                states.forEach(state => {
+                    const id = state.replace(/\s+/g, '') + '_' + idx;
+                    const li = document.createElement('li');
+                    li.className = 'form-check';
+                    li.innerHTML = `
+                        <input class="form-check-input" type="checkbox" value="${state}" id="${id}">
+                        <label class="form-check-label" for="${id}">${state}</label>
+                    `;
+                    checkboxMenu.appendChild(li);
+                });
+                checkboxMenu.addEventListener('change', () => {
+                    const checkboxes = checkboxMenu.querySelectorAll('input[type="checkbox"]');
+                    selectedStates.innerHTML = '';
+                    checkboxes.forEach(cb => {
+                        if (cb.checked) {
+                            const span = document.createElement('span');
+                            span.className = 'badge bg-primary';
+                            span.textContent = cb.value;
+                            selectedStates.appendChild(span);
+                        }
+                    });
+                });
+
+                // Language
+                const languageMenu = form.querySelector('[id^="languageMenu_"]');
+                const selectedLanguages = form.querySelector('[id^="selectedLanguages_"]');
+                languages.forEach(lang => {
+                    const id = lang.toLowerCase() + '_' + idx;
+                    const li = document.createElement('li');
+                    li.className = 'form-check';
+                    li.innerHTML = `
+                        <input class="form-check-input" type="checkbox" value="${lang}" id="${id}">
+                        <label class="form-check-label" for="${id}">${lang}</label>
+                    `;
+                    languageMenu.appendChild(li);
+                });
+                languageMenu.addEventListener('change', () => {
+                    const checkboxes = languageMenu.querySelectorAll('input[type="checkbox"]');
+                    selectedLanguages.innerHTML = '';
+                    checkboxes.forEach(cb => {
+                        if (cb.checked) {
+                            const badge = document.createElement('span');
+                            badge.className = 'badge bg-success';
+                            badge.textContent = cb.value;
+                            selectedLanguages.appendChild(badge);
+                        }
+                    });
+                });
+
+                // Genre
+                const genreMenu = form.querySelector('[id^="genreMenu_"]');
+                const selectedGenres = form.querySelector('[id^="selectedGenres_"]');
+                genres.forEach(genre => {
+                    const id = genre.toLowerCase().replace(/\s+/g, '-') + '_' + idx;
+                    const li = document.createElement('li');
+                    li.className = 'form-check';
+                    li.innerHTML = `
+                        <input class="form-check-input" type="checkbox" value="${genre}" id="${id}">
+                        <label class="form-check-label" for="${id}">${genre}</label>
+                    `;
+                    genreMenu.appendChild(li);
+                });
+                genreMenu.addEventListener('change', () => {
+                    const checkboxes = genreMenu.querySelectorAll('input[type="checkbox"]');
+                    selectedGenres.innerHTML = '';
+                    checkboxes.forEach(cb => {
+                        if (cb.checked) {
+                            const badge = document.createElement('span');
+                            badge.className = 'badge bg-info text-dark';
+                            badge.textContent = cb.value;
+                            selectedGenres.appendChild(badge);
+                        }
+                    });
+                });
+            });
+
+            // Submit handler for each form
+            document.querySelectorAll('.submitBtn').forEach(function (btn) {
+                btn.addEventListener('click', async function (event) {
+                    event.preventDefault();
+                    const idx = btn.getAttribute('data-index');
+                    const form = document.getElementById('stationForm_' + idx);
+
+                    const state = Array.from(form.querySelectorAll('[id^="selectedStates_"] .badge')).map(badge => badge.textContent).join(', ');
+                    const language = Array.from(form.querySelectorAll('[id^="selectedLanguages_"] .badge')).map(badge => badge.textContent).join(', ');
+                    const genre = Array.from(form.querySelectorAll('[id^="selectedGenres_"] .badge')).map(badge => badge.textContent).join(', ');
+
+                    try {
+                        const response = await fetch('/api/filter', {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                id: form.querySelector('[id^="id_"]').value,
+                                name: form.querySelector('[id^="name_"]').value,
+                                about: form.querySelector('[id^="about_"]').value,
+                                metaDescription: form.querySelector('[id^="meta_Description_"]').value,
+                                url_resolved: form.querySelector('[id^="url_resolved_"]').value,
+                                homepage: form.querySelector('[id^="homepage_"]').value,
+                                favicon: form.querySelector('[id^="favicon_"]').value,
+                                state: state,
+                                language: language,
+                                genre: genre,
+                            })
+                        });
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        const data = await response.json();
+                        alert('Data submitted successfully');
+                        window.location.reload();
+                    } catch (error) {
+                        console.error('There seems to be an error: ', error);
+                    }
+                });
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>

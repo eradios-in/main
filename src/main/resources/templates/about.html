@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>eRadios - Listen Free</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto&display=swap"
+    rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <!-- Mobile-First Custom Styles -->
+  <style>
+    /* Base styles for mobile (default) */
+    body {
+      background: linear-gradient(135deg, #e8e8eb 0%, #e6e8ee 100%);
+      font-family: 'Roboto', sans-serif;
+      color: #333333;
+      font-size: 16px;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: #1a1a2e;
+      margin-bottom: 0.5rem;
+      border-bottom: 2px solid #bd9208;
+      text-align: center;
+    }
+
+    h2 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #1a1a2e;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p,
+    ul {
+      font-family: 'Roboto', sans-serif;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+    }
+
+    li {
+      margin-bottom: 0.3rem;
+    }
+
+    a {
+      color: #bd9208;
+      text-decoration: none;
+      transition: color 0.3s ease-in-out;
+    }
+
+    a:hover {
+      color: #a07a06;
+    }
+
+    .navbar-brand i {
+      color: #bd9208;
+    }
+
+    footer a {
+      color: #fff;
+    }
+
+    footer a:hover {
+      color: #bd9208;
+    }
+
+    .container {
+      padding: 0 1rem;
+    }
+
+    .main-section {
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin: 0 auto;
+      color: #333333;
+    }
+
+    .ad-space {
+      width: 100%;
+      min-height: 60px;
+      background: #f8f9fa;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 1rem auto;
+      max-width: 100%;
+    }
+
+    /* Adjustments for larger screens */
+    @media (min-width: 576px) {
+      h1 {
+        font-size: 2rem;
+        text-align: left;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      p,
+      ul {
+        font-size: 1rem;
+      }
+
+      .ad-space {
+        max-width: 468px;
+        min-height: 60px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .container {
+        padding: 0 1.5rem;
+      }
+
+      .main-section {
+        padding: 2rem;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
+      }
+
+      .ad-space {
+        max-width: 728px;
+        min-height: 90px;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .container {
+        max-width: 900px;
+      }
+
+      .main-section {
+        padding: 2.5rem;
+      }
+    }
+  </style>
+  <!-- Meta Tags for SEO -->
+  <meta name="description" content="eRadios.in is your one-stop platform for streaming live Indian and global radio stations online streamed in India. Discover music, news, devotional, and regional radio—all in one place, anytime, anywhere.">
+  <meta name="keywords"
+    content="eRadios,indian radio, online radio, live radio, radio streaming, music, news, entertainment, global radio, high-quality streaming, mobile-friendly, diverse stations">
+  <meta name="author" content="eRadios.in">
+  <meta property="og:title" content="About eRadios.in - Your Radio Streaming Platform">
+  <meta property="og:description" content="eRadios.in is your one-stop platform for streaming live Indian and global radio stations online streamed in India. Discover music, news, devotional, and regional radio—all in one place, anytime, anywhere.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.eradios.in/about">
+  <meta property="og:site_name" content="eRadios.in">
+  <meta property="og:image" content="https://www.eradios.in/static/images/logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="About eRadios.in - Your Radio Streaming Platform">
+  <meta name="twitter:description" content="eRadios.in is your one-stop platform for streaming live Indian and global radio stations online streamed in India. Discover music, news, devotional, and regional radio—all in one place, anytime, anywhere.">
+  <meta name="twitter:image" content="https://www.eradios.in/static/images/logo.png">
+</head>
+
+<body>
+  <!-- Loader Overlay -->
+  <div id="pageLoader" style="
+    position:fixed;
+    top:0;left:0;width:100vw;height:100vh;
+    background:linear-gradient(135deg, #fffbe6 0%, #fff3cd 100%);
+    z-index:9999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:opacity 0.4s;
+  ">
+    <div style="text-align:center;">
+      <i class="fas fa-radiation fa-spin" style="font-size:8rem;color:#bd9208;"></i>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="/"><i class="fas fa-radiation fa-spin fs-3 me-2"></i>eRadios.in</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/stations">Stations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Ad Space -->
+  <div class="container text-center">
+    <div class="ad-space">
+      <span class="text-muted">
+        <script async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2939946349164066"
+          crossorigin="anonymous"></script>
+        <!-- flexibleHorizontalAd -->
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2939946349164066"
+          data-ad-slot="4375934059" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </span>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <section class="features-section py-3">
+    <div class="container main-section">
+      <h1>About eRadios.in</h1>
+      <p>Welcome to eRadios.in, your go-to platform for streaming live radio stations from across the globe! Launched in
+        2025, we’re passionate about bringing the joy of radio to your fingertips, wherever you are.</p>
+
+      <h2>Our Mission</h2>
+      <p>At eRadios.in, our mission is to connect people through the power of music, news, and entertainment. We aim to
+        provide a seamless and enjoyable listening experience by offering a diverse range of radio stations that cater
+        to every taste and mood.</p>
+
+      <h2>What We Offer</h2>
+      <ul>
+        <li><strong>Diverse Selection</strong>: Access a wide variety of radio stations, from pop and classical to talk
+          shows and regional channels.</li>
+        <li><strong>High-Quality Streaming</strong>: Enjoy uninterrupted, crystal-clear audio with minimal buffering.
+        </li>
+        <li><strong>Mobile-Friendly Experience</strong>: Listen on the go with our responsive design, optimized for all
+          devices.</li>
+      </ul>
+
+      <h2>Why Choose Us?</h2>
+      <p>We believe radio is more than just sound—it’s a way to discover new cultures, stay informed, and unwind.
+        eRadios.in is designed to be simple, user-friendly, and accessible, ensuring you can tune in to your favorite
+        stations anytime, anywhere.</p>
+
+      <h2>Get in Touch</h2>
+      <p>Have questions or suggestions? We’d love to hear from you! Reach out to us via <a href="/contact">Contact Us</a> page.
+      <p>Thank you for choosing eRadios.in—let’s tune in to a world of sound together!</p>
+    </div>
+  </section>
+
+  <!-- Ad Space -->
+  <div class="container text-center">
+    <div class="ad-space">
+      <span class="text-muted">
+        <script async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2939946349164066"
+          crossorigin="anonymous"></script>
+        <!-- flexibleHorizontalAd -->
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2939946349164066"
+          data-ad-slot="4375934059" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </span>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3">
+    <div class="container">
+      <p>© 2025 eRadios.in</p>
+      <div>
+        <a href="/privacy" class="mx-2">Privacy Policy</a> |
+        <a href="/about" class="mx-2">About</a> |
+        <a href="/terms" class="mx-2">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script th:src="@{/js/scripts.js}"></script>
+  <script>
+    // Hide loader after DOM is ready
+    document.addEventListener('DOMContentLoaded', function () {
+      setTimeout(function () {
+        const loader = document.getElementById('pageLoader');
+        if (loader) {
+          loader.style.opacity = '0';
+          setTimeout(() => loader.style.display = 'none', 400);
+        }
+      }, 400);
+    });
+  </script>
+</body>
+
+</html>

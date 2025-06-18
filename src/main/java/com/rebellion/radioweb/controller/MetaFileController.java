@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 import com.rebellion.radioweb.service.Impl.StationServiceImpl;
 
@@ -68,7 +67,6 @@ public class MetaFileController  {
         }
 
         writer.println("</urlset>");
-        new RestTemplate().getForObject("https://www.google.com/ping?sitemap=" + baseUrl + "/sitemap.xml", String.class);
     }
 
     @GetMapping(value = "/robots.txt", produces = "text/plain")
@@ -77,8 +75,6 @@ public class MetaFileController  {
         PrintWriter writer = response.getWriter();
 
         writer.println("User-agent: *");
-        writer.println("Disallow: /admin/");
-        writer.println("Disallow: /api/");
         writer.println();
         writer.println("Sitemap: " + baseUrl + "/sitemap.xml");
 

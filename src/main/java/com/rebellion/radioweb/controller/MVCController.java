@@ -31,6 +31,11 @@ public class MVCController {
         return "index";
     }
 
+    @GetMapping("/error")
+    public String showErrorPage() {
+        return "error";
+    }
+
     @GetMapping("stations")
     public ModelAndView getStationsPage(ModelAndView modelAndView) {
         // modelAndView.addObject("filters", stationServiceImpl.getAllFilters());

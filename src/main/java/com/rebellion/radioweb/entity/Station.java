@@ -17,8 +17,8 @@ public class Station {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
-    private String formattedName;
+    private String name="error";
+    private String formattedName="error";
     private String metaDescription;
     @Column(length = 4096)
     private String about;
@@ -28,7 +28,7 @@ public class Station {
     private String homepage;
     private String tags;
     @Column(length = 2048)
-    private String favicon;
+    private String favicon = "/images/station_fallback_image.webp";
     private String state;
     private String language;
     private String genre;

@@ -179,6 +179,7 @@
         }
     </style>
     <!-- SEO and Social Sharing Meta Tags -->
+    <meta name="google-adsense-account" content="ca-pub-2939946349164066">
     <meta name="description"
         content="Contact eRadios.in for feedback, support, copyright issues, or to add your station. We're here to help you with any enquiry about our global radio streaming platform.">
     <meta name="keywords"
@@ -200,7 +201,7 @@
 
 <body>
     <!-- Loader Overlay -->
-  <div id="pageLoader" style="
+    <div id="pageLoader" style="
     position:fixed;
     top:0;left:0;width:100vw;height:100vh;
     background:linear-gradient(135deg, #fffbe6 0%, #fff3cd 100%);
@@ -210,10 +211,10 @@
     justify-content:center;
     transition:opacity 0.4s;
   ">
-    <div style="text-align:center;">
-      <i class="fas fa-radiation fa-spin" style="font-size:8rem;color:#bd9208;"></i>
+        <div style="text-align:center;">
+            <i class="fas fa-radiation fa-spin" style="font-size:8rem;color:#bd9208;"></i>
+        </div>
     </div>
-  </div>
 
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -238,23 +239,6 @@
             </div>
         </div>
     </nav>
-
-    <!-- Ad Space -->
-    <div class="container text-center">
-        <div class="ad-space">
-            <span class="text-muted">
-                <script async
-                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2939946349164066"
-                    crossorigin="anonymous"></script>
-                <!-- flexibleHorizontalAd -->
-                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2939946349164066"
-                    data-ad-slot="4375934059" data-ad-format="auto" data-full-width-responsive="true"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </span>
-        </div>
-    </div>
 
     <!-- Contact Form -->
     <section class="py-3">
@@ -318,23 +302,6 @@
         </div>
     </section>
 
-    <!-- Ad Space -->
-    <div class="container text-center">
-        <div class="ad-space">
-            <span class="text-muted">
-                <script async
-                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2939946349164066"
-                    crossorigin="anonymous"></script>
-                <!-- flexibleHorizontalAd -->
-                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2939946349164066"
-                    data-ad-slot="4375934059" data-ad-format="auto" data-full-width-responsive="true"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </span>
-        </div>
-    </div>
-
     <!-- Footer -->
     <footer class="bg-dark text-white text-center py-3">
         <div class="container">
@@ -397,30 +364,28 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 })
-                .then(response => {
-                    if (response.ok) {
-                        formMessage.textContent = 'Your message has been sent successfully!';
-                        formMessage.className = 'mb-3 alert alert-success';
-                        form.reset();
-                        form.classList.remove('was-validated');
-                    } else {
+                    .then(response => {
+                        if (response.ok) {
+                            formMessage.textContent = 'Your message has been sent successfully!';
+                            formMessage.className = 'mb-3 alert alert-success';
+                            form.reset();
+                            form.classList.remove('was-validated');
+                        } else {
+                            formMessage.textContent = 'There was an error sending your message. Please try again later.';
+                            formMessage.className = 'mb-3 alert alert-danger';
+                        }
+                    })
+                    .catch(() => {
                         formMessage.textContent = 'There was an error sending your message. Please try again later.';
                         formMessage.className = 'mb-3 alert alert-danger';
-                    }
-                })
-                .catch(() => {
-                    formMessage.textContent = 'There was an error sending your message. Please try again later.';
-                    formMessage.className = 'mb-3 alert alert-danger';
-                })
-                .finally(() => {
-                    submitBtn.innerHTML = originalBtnContent;
-                    submitBtn.disabled = false;
-                });
+                    })
+                    .finally(() => {
+                        submitBtn.innerHTML = originalBtnContent;
+                        submitBtn.disabled = false;
+                    });
             }, false);
         })();
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2939946349164066"
-     crossorigin="anonymous"></script>
 </body>
 
 </html>

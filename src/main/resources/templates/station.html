@@ -208,6 +208,7 @@
     }
   </style>
   <!-- SEO Meta Tags -->
+   <meta name="google-adsense-account" content="ca-pub-2939946349164066">
   <meta name="description"
     th:content="${station.metaDescription}">
   <meta name="keywords"
@@ -266,23 +267,6 @@
     </div>
   </nav>
 
-  <!-- Ad Space -->
-  <div class="container text-center">
-    <div class="ad-space">
-      <span class="text-muted">
-        <script async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2939946349164066"
-          crossorigin="anonymous"></script>
-        <!-- flexibleHorizontalAd -->
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2939946349164066"
-          data-ad-slot="4375934059" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-      </span>
-    </div>
-  </div>
-
   <!-- Main Content -->
   <section class="py-3">
     <div class="container main-section">
@@ -303,23 +287,6 @@
       <div>
         <h2>Description</h2>
         <div th:utext="${station.about}">Station description goes here.</div>
-      </div>
-
-      <!-- Ad Space -->
-      <div class="container text-center">
-        <div class="ad-space">
-          <span class="text-muted">
-            <script async
-              src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2939946349164066"
-              crossorigin="anonymous"></script>
-            <!-- flexibleHorizontalAd -->
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2939946349164066"
-              data-ad-slot="4375934059" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>
-              (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-          </span>
-        </div>
       </div>
 
       <hr class="section-divider">
@@ -343,23 +310,6 @@
       </div>
     </div>
   </section>
-
-  <!-- Ad Space -->
-  <div class="container text-center">
-    <div class="ad-space">
-      <span class="text-muted">
-        <script async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2939946349164066"
-          crossorigin="anonymous"></script>
-        <!-- flexibleHorizontalAd -->
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2939946349164066"
-          data-ad-slot="4375934059" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-      </span>
-    </div>
-  </div>
 
   <!-- Footer -->
   <footer class="bg-dark text-white text-center py-3">
@@ -528,19 +478,7 @@
           </div>
         `;
         container.appendChild(card);
-
-        if (idx === 4) {
-          const adDiv = document.createElement('div');
-          adDiv.className = 'col';
-          adDiv.innerHTML = `
-            <div class="card h-100 border-0 shadow-sm d-flex align-items-center justify-content-center" style="min-height:120px;">
-              <span class="text-muted">[Ad Space 728x90]</span>
-            </div>
-          `;
-          container.appendChild(adDiv);
-        }
       });
-
       renderPagination();
     }
 
@@ -590,8 +528,6 @@
     fetchStations(backendPage);
   </script>
   <script th:src="@{/js/scripts.js}"></script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2939946349164066"
-     crossorigin="anonymous"></script>
 </body>
 
 </html>

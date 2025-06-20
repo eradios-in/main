@@ -100,9 +100,9 @@ public class StationServiceImpl implements StationService {
     }
 
     @Override
-    public Page<StationOutDao> searchStations(String name, String language, String genre, String state, Pageable pageable) {
-        Page<Station> stations = stationRepo.findByNameContainingIgnoreCaseOrLanguageContainingIgnoreCaseOrGenreContainingIgnoreCaseOrStateContainingIgnoreCase(
-                name, language, genre, state, pageable);
+    public Page<StationOutDao> searchStations(String name, String tags, Pageable pageable) {
+        Page<Station> stations = stationRepo.findByNameContainingIgnoreCaseOrTagsContainingIgnoreCase(
+                name, tags, pageable);
         return stations.map(station -> mapper.convertValue(station, StationOutDao.class));
     }
 

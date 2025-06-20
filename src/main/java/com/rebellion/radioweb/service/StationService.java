@@ -19,6 +19,6 @@ public interface StationService {
     // Map<String, List<String>> getAllFilters();
     Station saveStation(Station station);
     boolean sendContactEmail(Map<String, String> emailData);
-    Page<StationOutDao> searchStations(String name, String language, String genre, String state, Pageable pageable);
+    Page<StationOutDao> searchStations(String name, String tags, Pageable pageable);
     List<String> getListOfAllValidStationFormattedNames();
 }

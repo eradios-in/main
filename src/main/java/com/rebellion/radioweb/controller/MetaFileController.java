@@ -76,6 +76,11 @@ public class MetaFileController  {
 
         writer.println("User-agent: *");
         writer.println();
+
+        writer.println("Disallow: /error");
+        writer.println("Disallow: /filter");
+        writer.println();
+        
         writer.println("Sitemap: " + baseUrl + "/sitemap.xml");
 
         writer.flush();

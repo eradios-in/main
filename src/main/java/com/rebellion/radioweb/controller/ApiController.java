@@ -54,7 +54,7 @@ public ResponseEntity<Map<String, Object>> searchStations(
         @RequestParam(defaultValue = "60") int size,
         @RequestParam String query) {
     PageRequest pageRequest = PageRequest.of(page - 1, size, Sort.by("name"));
-    Page<StationOutDao> response = stationServiceImpl.searchStations(query, query, query, query, pageRequest);
+    Page<StationOutDao> response = stationServiceImpl.searchStations(query, query, pageRequest);
     Map<String, Object> responseBody = new HashMap<>();
     responseBody.put("data", response.getContent());
     responseBody.put("currentPage", page);

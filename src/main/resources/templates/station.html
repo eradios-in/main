@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <title th:text="${station.name} + ' - eRadios.in'">Station - eRadios.in</title>
+  <title th:text="${station.name} + ' | eRadios.in - Indian Online Radio Streaming'">Station - eRadios.in</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Google Fonts -->
@@ -21,7 +21,6 @@
       font-size: 16px;
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #e8e8eb 0%, #e6e8ee 100%);
     }
 
     a {
@@ -208,9 +207,8 @@
     }
   </style>
   <!-- SEO Meta Tags -->
-   <meta name="google-adsense-account" content="ca-pub-2939946349164066">
-  <meta name="description"
-    th:content="${station.metaDescription}">
+  <meta name="google-adsense-account" content="ca-pub-2939946349164066">
+  <meta name="description" th:content="${station.metaDescription}">
   <meta name="keywords"
     th:content="'eRadios, ' + ${station.name} + ', online radio, live radio, radio streaming, music, news, entertainment, high-quality streaming, mobile-friendly, Indian stations'">
   <meta name="author" content="eRadios.in">
@@ -225,7 +223,7 @@
   <meta name="twitter:description" th:content="${station.metaDescription}">
   <meta name="twitter:image" th:content="${station.favicon} ?: 'https://www.eradios.in/static/images/logo.png'">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2939946349164066"
-     crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -274,7 +272,8 @@
     <div class="container main-section">
       <!-- Station Details Section -->
       <div class="d-flex flex-column align-items-center mb-3">
-        <img th:src="${station.favicon}" th:alt="${station.name} + ' Logo'" class="station-logo rounded border border-secondary border-2 mb-3">
+        <img th:src="${station.favicon}" th:alt="${station.name} + ' Logo'"
+          class="station-logo rounded border border-secondary border-2 mb-3">
         <div class="d-flex align-items-center justify-content-between w-100">
           <h1 th:text="${station.name}">Station Name</h1>
           <a href="javascript:void(0);" class="play-icon" id="play_btn">
@@ -346,7 +345,7 @@
 
     const player = document.createElement('audio');
     player.controls = false;
-    document.body.appendChild(player); // Optionally append to DOM
+    document.body.appendChild(player);
 
     const playBtn = document.getElementById("play_btn");
     const streamUrl = /*[[${station.url_resolved}]]*/ '';
@@ -354,25 +353,39 @@
 
     let isHls = streamUrl.endsWith(".m3u8") || streamUrl.includes(".m3u8");
 
+    function showLoader() {
+      playBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i>`;
+    }
+
+    function showPlayIcon() {
+      playBtn.innerHTML = `<i class="fas fa-play-circle"></i>`;
+    }
+
+    function showPauseIcon() {
+      playBtn.innerHTML = `<i class="fas fa-pause-circle"></i>`;
+    }
+
     function setupStream() {
+      showLoader();
+
       if (isHls && Hls.isSupported()) {
         const hls = new Hls({ autoStartLoad: true });
         hls.loadSource(streamUrl);
         hls.attachMedia(player);
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
-          playBtn.innerHTML = `<i class="fas fa-play-circle"></i>`;
+          showPlayIcon();
         });
       } else if (isHls && player.canPlayType('application/vnd.apple.mpegurl')) {
-        // Safari supports HLS natively
+        // Safari HLS support
         player.src = streamUrl;
         player.addEventListener('loadedmetadata', () => {
-          playBtn.innerHTML = `<i class="fas fa-play-circle"></i>`;
+          showPlayIcon();
         });
       } else {
-        // MP3, AAC, or other regular streams
+        // MP3, AAC, etc.
         player.src = streamUrl;
         player.addEventListener('canplay', () => {
-          playBtn.innerHTML = `<i class="fas fa-play-circle"></i>`;
+          showPlayIcon();
         });
       }
     }
@@ -381,7 +394,10 @@
 
     playBtn.addEventListener('click', () => {
       if (player.paused) {
-        player.play().catch(err => {
+        showLoader(); // Show loader while trying to play
+        player.play().then(() => {
+          showPauseIcon(); // Switch to pause after successful play
+        }).catch(err => {
           console.warn("Playback failed:", err);
 
           if (isHls && Hls.isSupported()) {
@@ -390,19 +406,19 @@
             hls.attachMedia(player);
             hls.on(Hls.Events.MANIFEST_PARSED, () => {
               player.play();
+              showPauseIcon();
             });
           } else {
             alert('Cannot play stream. Opening in external player...');
             playBtn.innerHTML = `<a href="${stationHomepage}" target="_blank"><i class="play-icon fas fa-external-link-alt"></i></a>`;
           }
         });
-
-        playBtn.innerHTML = `<i class="fas fa-pause-circle"></i>`;
       } else {
         player.pause();
-        playBtn.innerHTML = `<i class="fas fa-play-circle"></i>`;
+        showPlayIcon(); // Switch back to play icon when paused
       }
     });
+
 
     let allStations = [];
     let filteredStations = [];
@@ -444,7 +460,7 @@
           ? (station.language && station.language.includes(languageFilter))
           : true;
         const matchesState = stateFilter
-          ? (station.state && station.state.includes(stateFilter)) 
+          ? (station.state && station.state.includes(stateFilter))
           : true;
         const matchesGenre = genreFilter
           ? (station.genre && station.genre.includes(genreFilter))

@@ -1,0 +1,20 @@
+body {
+    background: linear-gradient(360deg, rgb(58, 58, 58), rgba(63, 63, 63, 0.397)), url('/images/body-bg.png');
+    background-repeat: repeat-y;
+    background-position: center top;
+    background-attachment: fixed;
+}
+
+.navbar-nav .nav-link {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    /* Ensures full height in parent */
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    color: whitesmoke;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #bd9208;
+}

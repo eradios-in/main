@@ -1,48 +1,236 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
   <title>Error | eRadios.in - Indian Online Radio Streaming</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto&display=swap"
+    rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <!-- Mobile-First Custom Styles -->
   <style>
+    /* Base styles for mobile (default) */
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: #333333;
+      font-size: 16px;
+      margin: 0;
+      padding: 0;
+    }
 
-    .error-container {
-      min-height: 100vh;
-      max-width: 40vw;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    h1 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: #1a1a2e;
+      margin-bottom: 0.5rem;
+      border-bottom: 2px solid #bd9208;
       text-align: center;
-      flex-direction: column;
-      padding: 20px;
+    }
+
+    h2 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #1a1a2e;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p,
+    ul {
+      font-family: 'Roboto', sans-serif;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+    }
+
+    li {
+      margin-bottom: 0.3rem;
+    }
+
+    a {
+      color: #bd9208;
+      text-decoration: none;
+      transition: color 0.3s ease-in-out;
+    }
+
+    a:hover {
+      color: #a07a06;
+    }
+
+    .navbar-brand i {
+      color: #bd9208;
+    }
+
+    footer a {
+      color: #fff;
+    }
+
+    footer a:hover {
+      color: #bd9208;
+    }
+
+    .container {
+      padding: 0 1rem;
+    }
+
+    .main-section {
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin: 0 auto;
+      color: #333333;
     }
 
     .error-code {
-      font-size: 6rem;
-      font-weight: 700;
+      font-size: 5rem;
+      font-weight: 600;
       color: red;
     }
 
-    .error-message {
-      font-size: 1.5rem;
-      color: #333;
+    /* Adjustments for larger screens */
+    @media (min-width: 576px) {
+      h1 {
+        font-size: 2rem;
+        text-align: left;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      p,
+      ul {
+        font-size: 1rem;
+      }
     }
 
-    .back-btn {
-      margin-top: 20px;
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .container {
+        padding: 0 1.5rem;
+      }
+
+      .main-section {
+        padding: 2rem;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .container {
+        max-width: 900px;
+      }
+
+      .main-section {
+        padding: 2.5rem;
+      }
     }
   </style>
 </head>
-<body>
 
-  <div class="container error-container">
-    <div class="error-code">404</div>
-    <div class="error-message">Oops! The page you're looking for doesn't exist.</div>
-    <div class="error-message mt-5">The data for this station is yet to be filtered. It's a work in progress. We hope to see you soon again.</div>
-    <div class="text-center mt-2"> <a href="/" class="btn btn-secondary back-btn me-2">Homepage</a> <a href="/stations" class="btn btn-secondary back-btn">Stations List</a></div>
+<body>
+  <!-- Loader Overlay -->
+  <div id="pageLoader" style="
+    position:fixed;
+    top:0;left:0;width:100vw;height:100vh;
+    background:linear-gradient(135deg, #fffbe6 0%, #fff3cd 100%);
+    z-index:9999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:opacity 0.4s;
+  ">
+    <div style="text-align:center;">
+      <i class="fas fa-radiation fa-spin" style="font-size:8rem;color:#bd9208;"></i>
+    </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="/"><i class="fas fa-radiation fa-spin fs-3 me-2"></i>eRadios.in</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/stations">Stations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <section class="features-section py-5 min-vh-100">
+    <div class="container main-section py-5">
+      <div class="d-flex flex-column align-items-center py-5">
+        <div class="error-code">404</div>
+        <div class="mt-3 fs-5 fw-200 text-secondary"><p>Oops! You caught us. We will fix it quick.</p></div>
+        <button class="btn btn-secondary back-btn me-2" onclick="history.back()">Go Back</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3">
+    <div class="container">
+      <p>© 2025 eRadios.in</p>
+      <div>
+        <a href="/privacy" class="mx-2">Privacy Policy</a> |
+        <a href="/about" class="mx-2">About</a> |
+        <a href="/terms" class="mx-2">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script th:src="@{/js/scripts.js}"></script>
+  <script>
+    // Hide loader after DOM is ready
+    document.addEventListener('DOMContentLoaded', function () {
+      setTimeout(function () {
+        const loader = document.getElementById('pageLoader');
+        if (loader) {
+          loader.style.opacity = '0';
+          setTimeout(() => loader.style.display = 'none', 400);
+        }
+      }, 400);
+    });
+  </script>
 </body>
+
 </html>

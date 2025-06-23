@@ -11,8 +11,4 @@ public class RadiowebApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RadiowebApplication.class, args);
 	}
-<<<<<<< HEAD
-=======
-
->>>>>>> dev
 }

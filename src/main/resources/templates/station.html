@@ -229,11 +229,11 @@
   <meta property="og:type" content="music.radio_station">
   <meta property="og:url" th:content="@{/stations/{name}(name=${station.formattedName})}">
   <meta property="og:site_name" content="eRadios.in">
-  <meta property="og:image" th:content="${station.favicon} ?: 'https://www.eradios.in/static/images/logo.png'">
+  <meta property="og:image" th:content="${station.favicon} ?: 'https://www.eradios.in/images/logo.png'">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" th:content="${station.name} + ' – Listen Live on eRadios.in'">
   <meta name="twitter:description" th:content="${station.metaDescription}">
-  <meta name="twitter:image" th:content="${station.favicon} ?: 'https://www.eradios.in/static/images/logo.png'">
+  <meta name="twitter:image" th:content="${station.favicon} ?: 'https://www.eradios.in/images/logo.png'">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2939946349164066"
     crossorigin="anonymous"></script>
 </head>
@@ -273,6 +273,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/contact">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/add-station"><i class="fas fa-plus-circle"></i></a>
           </li>
         </ul>
       </div>

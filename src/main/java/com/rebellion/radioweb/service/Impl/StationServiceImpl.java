@@ -14,14 +14,17 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rebellion.radioweb.entity.Station;
+import com.rebellion.radioweb.entity.StationInDto;
 import com.rebellion.radioweb.entity.StationOutDao;
 import com.rebellion.radioweb.repo.StationRepo;
 import com.rebellion.radioweb.service.StationService;
@@ -142,5 +145,20 @@ public class StationServiceImpl implements StationService {
             e.printStackTrace();
         }
         return stations;
+    }
+
+    @Override
+    public boolean addStationRequest(StationInDto input) {
+        // User submits a station via form.
+        // Submit for review if stream URL is valid.
+        // Send a confirmation email if accepted.
+        RestTemplate restTemplate = new RestTemplate();
+        HttpStatusCode status = restTemplate.getForEntity(input.getUrl(), Void.class).getStatusCode();
+        if(status.is2xxSuccessful()) {
+            String content = String.format("Email: %s\nName: %s\nFav Url: %s\nStream Url: %s\nStates: %s\nLanguages: %s\nGenres: %s", input.getEmail(), input.getName(), input.getFavicon_url(), input.getUrl(), input.getState(), input.getLanguage(), input.getGenre());
+            emailService.sendEmail(input.getEmail(), "Add Station: " + input.getName(), content);
+            return true;
+        }
+        return false;
     }
 }

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Contact | eRadios.in - Indian Online Radio Streaming</title>
+    <title>Add Station | eRadios.in - Indian Online Radio Streaming</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
@@ -29,7 +29,7 @@
             padding: 0;
         }
 
-        .contact-form-container {
+        .add-station-form-container {
             margin: 1.5rem auto;
             padding: 1.5rem;
             background-color: #ffffff;
@@ -149,7 +149,7 @@
         }
 
         @media (min-width: 768px) {
-            .contact-form-container {
+            .add-station-form-container {
                 padding: 2rem;
                 box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
                 border-radius: 15px;
@@ -174,7 +174,7 @@
                 max-width: 900px;
             }
 
-            .contact-form-container {
+            .add-station-form-container {
                 padding: 2.5rem;
             }
         }
@@ -182,24 +182,25 @@
     <!-- SEO and Social Sharing Meta Tags -->
     <meta name="google-adsense-account" content="ca-pub-2939946349164066">
     <meta name="description"
-        content="Contact eRadios.in for feedback, support, copyright issues, or to add your station. We're here to help you with any enquiry about our global radio streaming platform.">
+        content="Add your radio station to eRadios.in and reach global listeners. Submit your station easily and expand your audience today.">
     <meta name="keywords"
-        content="eRadios, contact, online radio, radio streaming, feedback, support, add station, copyright, enquiry">
+        content="eRadios, add radio station, submit station, online radio, radio streaming, global radio platform, reach listeners">
     <meta name="author" content="eRadios.in">
-    <meta property="og:title" content="Contact eRadios.in - Get in Touch">
+    <meta property="og:title" content="Add Your Radio Station to eRadios.in">
     <meta property="og:description"
-        content="Reach out to eRadios.in for support, feedback, or to add your radio station. We're here to help you enjoy the best global radio streaming experience.">
+        content="Submit your radio station to eRadios.in and connect with a global audience. Get discovered through our online radio streaming platform.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.eradios.in/contact">
+    <meta property="og:url" content="https://www.eradios.in/add-station">
     <meta property="og:site_name" content="eRadios.in">
     <meta property="og:image" content="https://www.eradios.in/images/logo.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Contact eRadios.in - Get in Touch">
+    <meta name="twitter:title" content="Add Your Radio Station to eRadios.in">
     <meta name="twitter:description"
-        content="Reach out to eRadios.in for support, feedback, or to add your radio station. We're here to help you enjoy the best global radio streaming experience.">
+        content="Submit your station to eRadios.in and reach a global audience. Get listed on our popular online radio directory today.">
     <meta name="twitter:image" content="https://www.eradios.in/images/logo.png">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2939946349164066"
         crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -236,36 +237,37 @@
                         <a class="nav-link" href="/stations">Stations</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/contact">Contact</a>
+                        <a class="nav-link" href="/contact">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/add-station"><i class="fas fa-plus-circle"></i></a>
+                        <a class="nav-link active" href="/add-station"><i class="fas fa-plus-circle"></i></a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Contact Form -->
+    <!-- Add Station Form -->
     <section class="py-3">
         <div class="container">
-            <div class="contact-form-container min-vh-100">
-                <h1>Contact Us</h1>
+            <div class="add-station-form-container min-vh-100">
+                <h2>Add Your Radio Station</h2>
                 <div id="formMessage" class="mb-3"></div>
-                <form id="contactForm" action="/contact/submit" method="POST" novalidate>
-                    <!-- Full Name -->
+                <form id="addStationForm" action="/add-station" method="POST" novalidate>
+
+                    <!-- Name -->
                     <div class="mb-3">
-                        <label for="fullName" class="form-label">Full Name</label>
-                        <input type="text" class="form-control" id="fullName" name="fullName" required
-                            pattern="[A-Za-z\s]{2,50}" placeholder="Enter your full name">
+                        <label for="name" class="form-label">Station Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required
+                            placeholder="Enter station name">
                         <div class="invalid-feedback">
-                            Please enter a valid name (2-50 characters, letters and spaces only).
+                            Please enter the station name.
                         </div>
                     </div>
 
                     <!-- Email -->
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
+                        <label for="email" class="form-label">Your Email</label>
                         <input type="email" class="form-control" id="email" name="email" required
                             placeholder="Enter your email">
                         <div class="invalid-feedback">
@@ -273,39 +275,63 @@
                         </div>
                     </div>
 
-                    <!-- Subject -->
+                    <!-- Favicon URL -->
                     <div class="mb-3">
-                        <label for="subject" class="form-label">Subject</label>
-                        <select class="form-select" id="subject" name="subject" required>
-                            <option value="" disabled selected>Select a subject</option>
-                            <option value="Something is broken on website">Something is broken on website</option>
-                            <option value="Copyright Infringement report">Copyright Infringement report</option>
-                            <option value="Feedback">Feedback</option>
-                            <option value="Other enquiry">Other Enquiry</option>
-                        </select>
+                        <label for="favicon_url" class="form-label">Favicon URL</label>
+                        <input type="url" class="form-control" id="favicon_url" name="favicon_url"
+                            placeholder="https://example.com/favicon.png">
                         <div class="invalid-feedback">
-                            Please select a subject.
+                            Please enter a valid image URL.
                         </div>
                     </div>
 
-                    <!-- Content -->
+                    <!-- Station Stream URL -->
                     <div class="mb-3">
-                        <label for="content" class="form-label">Message</label>
-                        <textarea class="form-control" id="content" name="content" rows="17" required minlength="10"
-                            maxlength="500" placeholder="Write your message here"></textarea>
+                        <label for="url" class="form-label">Stream URL</label>
+                        <input type="url" class="form-control" id="url" name="url" required
+                            placeholder="https://example.com/stream.mp3">
                         <div class="invalid-feedback">
-                            Please enter a message (10-500 characters).
+                            Please enter a valid streaming URL.
                         </div>
+                    </div>
+
+                    <!-- State -->
+                    <div class="mb-3">
+                        <label for="state" class="form-label">States</label>
+                        <input type="text" class="form-control" id="state" name="state"
+                            placeholder="Enter states name">
+                    </div>
+
+                    <!-- Language -->
+                    <div class="mb-3">
+                        <label for="language" class="form-label">Languages</label>
+                        <input type="text" class="form-control" id="language" name="language"
+                            placeholder="e.g. Hindi, Tamil, Bengali">
+                    </div>
+
+                    <!-- Genre -->
+                    <div class="mb-3">
+                        <label for="genre" class="form-label">Genres</label>
+                        <input type="text" class="form-control" id="genre" name="genre"
+                            placeholder="e.g. Music, Talk, News">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="comment" class="form-label">Comment</label>
+                        <textarea class="form-control" id="comment" name="comment"
+                            placeholder="Share your feedback here..." rows="5"></textarea>
                     </div>
 
                     <!-- Submit Button -->
                     <div class="d-grid">
                         <button type="submit" class="btn btn-submit">Submit</button>
                     </div>
+
                 </form>
             </div>
         </div>
     </section>
+
 
     <!-- Footer -->
     <footer class="bg-dark text-secondary py-4">
@@ -353,7 +379,7 @@
 
         (function () {
             'use strict';
-            const form = document.getElementById('contactForm');
+            const form = document.getElementById('addStationForm');
             form.addEventListener('submit', function (event) {
                 event.preventDefault();
                 event.stopPropagation();
@@ -365,10 +391,13 @@
 
                 // Gather form data
                 const data = {
-                    fullName: form.fullName.value,
-                    email: form.email.value,
-                    subject: form.subject.value,
-                    content: form.content.value
+                    name: form.name.value.trim(),
+                    email: form.email.value.trim(),
+                    favicon_url: form.favicon_url.value.trim(),
+                    url: form.url.value.trim(),
+                    state: form.state.value.trim(),
+                    language: form.language.value.trim(),
+                    genre: form.genre.value.trim()
                 };
 
                 const formMessage = document.getElementById('formMessage');
@@ -381,24 +410,24 @@
                 formMessage.textContent = '';
                 formMessage.className = 'mb-3';
 
-                fetch('/api/email', {
+                fetch('/add-station', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 })
                     .then(response => {
                         if (response.ok) {
-                            formMessage.textContent = 'Your message has been sent successfully!';
+                            formMessage.textContent = 'Your station has been submitted successfully!';
                             formMessage.className = 'mb-3 alert alert-success';
                             form.reset();
                             form.classList.remove('was-validated');
                         } else {
-                            formMessage.textContent = 'There was an error sending your message. Please try again later.';
+                            formMessage.textContent = 'Error submitting the form. Please try again later.';
                             formMessage.className = 'mb-3 alert alert-danger';
                         }
                     })
                     .catch(() => {
-                        formMessage.textContent = 'There was an error sending your message. Please try again later.';
+                        formMessage.textContent = 'Network error. Please try again later.';
                         formMessage.className = 'mb-3 alert alert-danger';
                     })
                     .finally(() => {
@@ -407,6 +436,7 @@
                     });
             }, false);
         })();
+
     </script>
 </body>
 

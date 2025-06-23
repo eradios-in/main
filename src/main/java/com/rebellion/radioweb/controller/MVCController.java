@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.rebellion.radioweb.entity.Station;
+import com.rebellion.radioweb.entity.StationInDto;
 import com.rebellion.radioweb.service.Impl.StationServiceImpl;
 
 import java.util.List;
@@ -15,6 +16,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequestMapping("")
@@ -36,14 +39,14 @@ public class MVCController {
         return "error";
     }
 
-    @GetMapping("stations")
+    @GetMapping("/stations")
     public ModelAndView getStationsPage(ModelAndView modelAndView) {
         // modelAndView.addObject("filters", stationServiceImpl.getAllFilters());
         modelAndView.setViewName("stations");
         return modelAndView;
     }
 
-    @GetMapping("stations/{formattedName}")
+    @GetMapping("/stations/{formattedName}")
     public ModelAndView getStation(@PathVariable String formattedName, ModelAndView modelAndView) {
         Station station = stationServiceImpl.getStationByFormattedName(formattedName).getBody();
         List<String> tags = null;
@@ -92,4 +95,14 @@ public class MVCController {
         return modelAndView;
     }
 
+    @GetMapping("add-station")
+    public String getAddStationPage(){
+        return "add-station";
+    }
+
+    @PostMapping("/add-station")
+    public ModelAndView addStation(@RequestBody StationInDto input, ModelAndView modelAndView){
+        stationServiceImpl.addStationRequest(input);
+        return modelAndView;
+    }
 }

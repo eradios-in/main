@@ -4,15 +4,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.rebellion.radioweb.entity.Blog;
 import com.rebellion.radioweb.entity.Station;
 import com.rebellion.radioweb.entity.StationInDto;
+import com.rebellion.radioweb.service.Impl.BlogServiceImpl;
 import com.rebellion.radioweb.service.Impl.StationServiceImpl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,9 +28,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class MVCController {
 
     private StationServiceImpl stationServiceImpl;
+    private BlogServiceImpl blogServiceImpl;
 
-    public MVCController(StationServiceImpl stationServiceImpl) {
+    @Autowired
+    public MVCController(StationServiceImpl stationServiceImpl, BlogServiceImpl blogServiceImpl) {
         this.stationServiceImpl = stationServiceImpl;
+        this.blogServiceImpl = blogServiceImpl;
     }
 
     @GetMapping("")
@@ -40,10 +47,8 @@ public class MVCController {
     }
 
     @GetMapping("/stations")
-    public ModelAndView getStationsPage(ModelAndView modelAndView) {
-        // modelAndView.addObject("filters", stationServiceImpl.getAllFilters());
-        modelAndView.setViewName("stations");
-        return modelAndView;
+    public String getStationsPage() {
+        return "stations";
     }
 
     @GetMapping("/stations/{formattedName}")
@@ -104,5 +109,28 @@ public class MVCController {
     public ModelAndView addStation(@RequestBody StationInDto input, ModelAndView modelAndView){
         stationServiceImpl.addStationRequest(input);
         return modelAndView;
+    }
+
+    @GetMapping("/blogs")
+    public ModelAndView getBlogsPage(ModelAndView modelAndView){
+        modelAndView.addObject("blogs", blogServiceImpl.getAllBlogs());
+        return modelAndView;
+    }
+
+    @PostMapping("/blogs")
+    public ResponseEntity<Blog> postBlog(@RequestBody Blog blogData){
+        return ResponseEntity.ok(blogServiceImpl.saveBlogArticle(blogData));
+    }
+
+    @GetMapping("/blogs/{articleUrl}")
+    public ModelAndView getBlogArticle(@PathVariable String articleUrl, ModelAndView modelAndView){
+        modelAndView.addObject("blog", blogServiceImpl.getBlogByArticleUrl(articleUrl));
+        modelAndView.setViewName("blog");
+        return modelAndView;
+    }
+
+    @GetMapping("/add-blog")
+    public String getAddBlogForm(){
+        return "add-blog";
     }
 }

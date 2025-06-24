@@ -17,6 +17,7 @@ public class Station {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private boolean isLive;
     private String name="error";
     private String formattedName="error";
     private String metaDescription;
@@ -42,6 +43,14 @@ public class Station {
 
     public void setAbout(String about) {
         this.about = about;
+    }
+
+    public boolean getIsLive() {
+        return isLive;
+    }
+
+    public void setIsLive(boolean isLive) {
+        this.isLive = isLive;
     }
 
     public String getName() {

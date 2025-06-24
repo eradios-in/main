@@ -45,18 +45,18 @@ public class StationServiceImpl implements StationService {
 
     @Override
     public Page<Station> getAllStations(PageRequest pageRequest) {
-        return stationRepo.findAll(pageRequest);
+        return stationRepo.findAllByIsLiveTrue(pageRequest);
     }
 
     @Override
     public Page<StationOutDao> getAllStationsOut(PageRequest pageRequest) {
-        Page<Station> stations = stationRepo.findAll(pageRequest);
+        Page<Station> stations = stationRepo.findAllByIsLiveTrue(pageRequest);
         return stations.map(station -> mapper.convertValue(station, StationOutDao.class));
     }
 
     @Override
     public ResponseEntity<List<StationOutDao>> getRelatedStations() {
-        List<Station> stations = stationRepo.findFirst9ByOrderByLanguage();
+        List<Station> stations = stationRepo.findFirst10ByIsLiveTrueOrderByLanguage();
         List<StationOutDao> stationOutDaos = mapper.convertValue(stations, new TypeReference<List<StationOutDao>>() {});
         return new ResponseEntity<>(stationOutDaos, HttpStatus.OK);
     }
@@ -104,7 +104,7 @@ public class StationServiceImpl implements StationService {
 
     @Override
     public Page<StationOutDao> searchStations(String name, String tags, Pageable pageable) {
-        Page<Station> stations = stationRepo.findByNameContainingIgnoreCaseOrTagsContainingIgnoreCase(
+        Page<Station> stations = stationRepo.findByIsLiveTrueAndNameContainingIgnoreCaseOrIsLiveTrueAndTagsContainingIgnoreCase(
                 name, tags, pageable);
         return stations.map(station -> mapper.convertValue(station, StationOutDao.class));
     }

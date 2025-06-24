@@ -13,11 +13,12 @@ import com.rebellion.radioweb.entity.Station;
 
 @Repository
 public interface StationRepo extends JpaRepository<Station, Integer> {
-    List<Station> findFirst9ByOrderByLanguage();
+    Page<Station> findAllByIsLiveTrue(Pageable pageable);
+    List<Station> findFirst10ByIsLiveTrueOrderByLanguage();
 
     Optional<Station> findByFormattedName(String formattedName);
 
-    Page<Station> findByNameContainingIgnoreCaseOrTagsContainingIgnoreCase(
+    Page<Station> findByIsLiveTrueAndNameContainingIgnoreCaseOrIsLiveTrueAndTagsContainingIgnoreCase(
             String name, String tags, Pageable pageable);
 
     @Query("SELECT CONCAT('stations/', s.formattedName) FROM Station s WHERE s.formattedName IS NOT NULL AND s.formattedName <> '' AND s.formattedName <> 'error'")

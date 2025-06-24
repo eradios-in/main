@@ -326,6 +326,7 @@
                                     class="fas fa-play-circle"></i></a>
                         </div>
                     </div>
+                    <hr>
 
                     <!-- Audio Player Script for this station -->
                     <script th:inline="javascript">
@@ -395,10 +396,25 @@
                         /*]]>*/
                     </script>
 
+                    <!-- Pagination Buttons -->
+                    <div class="d-flex justify-content-between my-3">
+                        <a th:href="@{'/filter?page=' + ${currentPage-1}}"><button
+                                class="btn btn-custom">Prev</button></a>
+                        <a th:href="@{'/filter?page=' + ${currentPage+1}}"><button
+                                class="btn btn-custom">Next</button></a>
+                    </div>
+
                     <!-- Form -->
                     <form class="form-group station-form mb-4" th:id="'stationForm_' + ${iterStat.index}">
+
+                        <label th:for="'isLive_' + ${iterStat.index}" class="form-label">Is Live:</label>
+                        <select th:id="'isLive_' + ${iterStat.index}" class="form-select mb-3">
+                            <option th:value="true" th:selected="${item.isLive} == true">True</option>
+                            <option th:value="false" th:selected="${item.isLive} == false">False</option>
+                        </select>
                         <input th:id="'id_' + ${iterStat.index}" class="w-100 form-control mb-2" type="text"
                             th:value="${item.id}" readonly />
+
                         <label class="form-label" th:for="'name_' + ${iterStat.index}">Name:</label>
                         <a target="_blank" th:href="@{'https://www.google.com/search?q=' + ${item.name}}"
                             class="text-end text-primary">&nbsp;&nbsp;&nbsp;&nbsp;Google It</a>
@@ -479,12 +495,14 @@
                                 th:data-index="${iterStat.index}">Submit</button>
                         </div>
                     </form>
-                </div>
 
-                <!-- Pagination Buttons -->
-                <div class="d-flex justify-content-between mt-3">
-                    <a th:href="@{'/filter?page=' + ${currentPage-1}}"><button class="btn btn-custom">Prev</button></a>
-                    <a th:href="@{'/filter?page=' + ${currentPage+1}}"><button class="btn btn-custom">Next</button></a>
+                    <!-- Pagination Buttons -->
+                    <div class="d-flex justify-content-between mt-3">
+                        <a th:href="@{'/filter?page=' + ${currentPage-1}}"><button
+                                class="btn btn-custom">Prev</button></a>
+                        <a th:href="@{'/filter?page=' + ${currentPage+1}}"><button
+                                class="btn btn-custom">Next</button></a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -669,6 +687,7 @@
                                 state: state,
                                 language: language,
                                 genre: genre,
+                                isLive: form.querySelector('[id^="isLive_"]').value
                             })
                         });
                         if (!response.ok) {

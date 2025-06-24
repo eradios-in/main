@@ -173,7 +173,7 @@
       position: relative;
     }
 
-    .blog-card:hover{
+    .blog-card:hover {
       box-shadow: 0px 0px 10px gray;
     }
 
@@ -190,18 +190,15 @@
 
     .toggle-button {
       display: inline-block;
-      background: none;
-      border: none;
-      color: #0e56a3;
+      background-color: #bd9208;
       cursor: pointer;
       padding: 5px 0;
       font-size: 14px;
-      text-decoration: underline;
+      color: #f8f9fa;
     }
 
     .toggle-button:hover {
-      color: #0056b3;
-      text-decoration: none;
+      background-color: #e4b620;
     }
   </style>
   <!-- Meta Tags for SEO -->
@@ -279,28 +276,30 @@
 
   <!-- Main Content -->
   <section class="features-section py-4">
-  <div class="container main-section">
-    <h1 class="mb-4">Blogs</h1>
+    <div class="container main-section">
+      <h1 class="mb-4">Blogs</h1>
 
-    <div class="blog-card border border-secondary rounded-3 p-3 mb-4" th:each="blog : ${blogs}">
-      <h2 class="h5 fw-bold mb-3" th:text="${blog.title}">Blog Title</h2>
+      <div class="blog-card border border-secondary rounded-3 p-3 mb-4" th:each="blog : ${blogs}">
+        <h2 class="h4 fw-bold mb-3" th:text="${blog.title}">Blog Title</h2>
 
-      <div class="d-flex flex-column flex-md-row gap-3 align-items-start">
-        <div class="img-wrapper flex-shrink-0">
-          <img th:src="${blog.faviconUrl}" th:alt="'eRadios.in | Blog: ' + ${blog.title}"
-            width="120" height="120" class="rounded border object-fit-cover">
-        </div>
-
-        <div class="description-container">
-          <div class="description-text small text-body" th:utext="${blog.content}" id="descriptionText">
-            Station description goes here.
+        <div class="d-flex flex-column flex-md-row gap-3 align-items-start">
+          <div class="img-wrapper flex-shrink-0">
+            <img th:src="${blog.faviconUrl}" th:alt="'eRadios.in | Blog: ' + ${blog.title}" width="120" height="120"
+              class="rounded border object-fit-cover">
           </div>
-          <a th:href="'/blogs/' + ${blog.articleUrl}" class="btn btn-sm btn-outline-primary mt-2">Read More</a>
+
+          <div class="description-container">
+            <div class="description-text small text-body" th:utext="${blog.content}" id="descriptionText">
+              Station description goes here.
+            </div>
+            <div class="text-end"> <a th:href="'/blogs/' + ${blog.articleUrl}"
+                class="btn btn-sm toggle-button px-3">Read More</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <!-- Footer -->
   <footer class="bg-dark text-secondary py-4">

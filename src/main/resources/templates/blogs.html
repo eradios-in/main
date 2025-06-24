@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <title>Error | eRadios.in - Indian Online Radio Streaming</title>
+  <title>Blogs | eRadios.in - Indian Online Radio Streaming</title>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
@@ -98,10 +98,17 @@
       color: #333333;
     }
 
-    .error-code {
-      font-size: 5rem;
-      font-weight: 600;
-      color: red;
+    .ad-space {
+      width: 100%;
+      min-height: 60px;
+      background: #f8f9fa;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 1rem auto;
+      max-width: 100%;
     }
 
     /* Adjustments for larger screens */
@@ -118,6 +125,11 @@
       p,
       ul {
         font-size: 1rem;
+      }
+
+      .ad-space {
+        max-width: 468px;
+        min-height: 60px;
       }
     }
 
@@ -139,6 +151,11 @@
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         border-radius: 15px;
       }
+
+      .ad-space {
+        max-width: 728px;
+        min-height: 90px;
+      }
     }
 
     @media (min-width: 992px) {
@@ -151,6 +168,69 @@
       }
     }
   </style>
+  <style>
+    .description-container {
+      position: relative;
+    }
+
+    .blog-card:hover{
+      box-shadow: 0px 0px 10px gray;
+    }
+
+    .description-text {
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      line-clamp: 4;
+      /* Limits text to 4 lines */
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-justify: justify;
+      text-overflow: ellipsis;
+    }
+
+    .toggle-button {
+      display: inline-block;
+      background: none;
+      border: none;
+      color: #0e56a3;
+      cursor: pointer;
+      padding: 5px 0;
+      font-size: 14px;
+      text-decoration: underline;
+    }
+
+    .toggle-button:hover {
+      color: #0056b3;
+      text-decoration: none;
+    }
+  </style>
+  <!-- Meta Tags for SEO -->
+  <meta name="google-adsense-account" content="ca-pub-2939946349164066">
+  <meta name="description"
+    content="Explore articles and insights on Indian radio, music trends, genres, station guides, and more. Stay informed with eRadios.in blog.">
+  <meta name="keywords"
+    content="radio blog, Indian radio insights, online radio trends, music genres, FM station guides, internet radio articles, eRadios blog">
+  <meta name="author" content="eRadios.in">
+
+  <!-- Open Graph (Facebook, LinkedIn) -->
+  <meta property="og:title" content="eRadios Blog – Radio Insights, Trends & Guides">
+  <meta property="og:description"
+    content="Explore Indian and global radio insights, genre guides, and latest trends on the eRadios.in blog. Learn more about your favorite stations.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.eradios.in/blogs">
+  <meta property="og:site_name" content="eRadios.in">
+  <meta property="og:image" content="https://www.eradios.in/images/logo.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="eRadios Blog – Radio Insights, Trends & Guides">
+  <meta name="twitter:description"
+    content="Discover music trends, station guides, and radio culture across India and beyond. Read expert articles on the eRadios blog.">
+  <meta name="twitter:image" content="https://www.eradios.in/images/logo.png">
+
+  <!-- Ads + Favicon -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2939946349164066"
+    crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -198,17 +278,29 @@
   </nav>
 
   <!-- Main Content -->
-  <section class="features-section py-5 min-vh-100">
-    <div class="container main-section py-5">
-      <div class="d-flex flex-column align-items-center py-5">
-        <div class="error-code">404</div>
-        <div class="mt-3 fs-5 fw-200 text-secondary">
-          <p>Oops! You caught us. We will fix it quick.</p>
+  <section class="features-section py-4">
+  <div class="container main-section">
+    <h1 class="mb-4">Blogs</h1>
+
+    <div class="blog-card border border-secondary rounded-3 p-3 mb-4" th:each="blog : ${blogs}">
+      <h2 class="h5 fw-bold mb-3" th:text="${blog.title}">Blog Title</h2>
+
+      <div class="d-flex flex-column flex-md-row gap-3 align-items-start">
+        <div class="img-wrapper flex-shrink-0">
+          <img th:src="${blog.faviconUrl}" th:alt="'eRadios.in | Blog: ' + ${blog.title}"
+            width="120" height="120" class="rounded border object-fit-cover">
         </div>
-        <button class="btn btn-secondary back-btn me-2" onclick="history.back()">Go Back</button>
+
+        <div class="description-container">
+          <div class="description-text small text-body" th:utext="${blog.content}" id="descriptionText">
+            Station description goes here.
+          </div>
+          <a th:href="'/blogs/' + ${blog.articleUrl}" class="btn btn-sm btn-outline-primary mt-2">Read More</a>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- Footer -->
   <footer class="bg-dark text-secondary py-4">

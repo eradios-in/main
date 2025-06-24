@@ -8,7 +8,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -30,6 +32,13 @@ public class ApiController {
     @Autowired
     public ApiController(StationServiceImpl stationServiceImpl) {
         this.stationServiceImpl = stationServiceImpl;
+    }
+
+    @GetMapping("/status")
+    public HashMap<String, String> keepRenderAlive(){
+        HashMap<String, String> map = new HashMap<>();
+        map.put("Status", "Up and Running");
+        return map;
     }
 
     @GetMapping("/stations")

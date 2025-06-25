@@ -250,7 +250,7 @@
     <!-- Add Station Form -->
     <section class="py-3">
         <div class="container">
-            <div class="add-station-form-container min-vh-100">
+            <div class="add-station-form-container min-vh-75">
                 <h2>Add Your Radio Station</h2>
                 <div id="formMessage" class="mb-3"></div>
                 <form id="addStationForm" action="/add-station" method="POST" novalidate>
@@ -261,7 +261,7 @@
                         <input type="text" class="form-control" id="name" name="name" required
                             placeholder="Enter station name">
                         <div class="invalid-feedback">
-                            Please enter the station name.
+                            Please enter the station name
                         </div>
                     </div>
 
@@ -271,7 +271,7 @@
                         <input type="email" class="form-control" id="email" name="email" required
                             placeholder="Enter your email">
                         <div class="invalid-feedback">
-                            Please enter a valid email address.
+                            Please enter a valid email address
                         </div>
                     </div>
 
@@ -281,7 +281,7 @@
                         <input type="url" class="form-control" id="favicon_url" name="favicon_url"
                             placeholder="https://example.com/favicon.png">
                         <div class="invalid-feedback">
-                            Please enter a valid image URL.
+                            Please enter a valid image URL
                         </div>
                     </div>
 
@@ -291,34 +291,20 @@
                         <input type="url" class="form-control" id="url" name="url" required
                             placeholder="https://example.com/stream.mp3">
                         <div class="invalid-feedback">
-                            Please enter a valid streaming URL.
+                            Please enter a valid streaming URL
                         </div>
                     </div>
 
-                    <!-- State -->
+                    <!-- Tags -->
                     <div class="mb-3">
-                        <label for="state" class="form-label">States</label>
-                        <input type="text" class="form-control" id="state" name="state" placeholder="Enter states name">
-                    </div>
-
-                    <!-- Language -->
-                    <div class="mb-3">
-                        <label for="language" class="form-label">Languages</label>
-                        <input type="text" class="form-control" id="language" name="language"
-                            placeholder="e.g. Hindi, Tamil, Bengali">
-                    </div>
-
-                    <!-- Genre -->
-                    <div class="mb-3">
-                        <label for="genre" class="form-label">Genres</label>
-                        <input type="text" class="form-control" id="genre" name="genre"
-                            placeholder="e.g. Music, Talk, News">
+                        <label for="tags" class="form-label">Tags</label>
+                        <input type="text" class="form-control" id="tags" name="tags" placeholder="Enter comma separated tags">
                     </div>
 
                     <div class="mb-3">
                         <label for="comment" class="form-label">Comment</label>
                         <textarea class="form-control" id="comment" name="comment"
-                            placeholder="Share your feedback here..." rows="5"></textarea>
+                            placeholder="Want to add anything more..." rows="5"></textarea>
                     </div>
 
                     <!-- Submit Button -->
@@ -402,9 +388,8 @@
                     email: form.email.value.trim(),
                     favicon_url: form.favicon_url.value.trim(),
                     url: form.url.value.trim(),
-                    state: form.state.value.trim(),
-                    language: form.language.value.trim(),
-                    genre: form.genre.value.trim()
+                    tags: form.tags.value.trim(),
+                    comment: form.comment.value.trim()
                 };
 
                 const formMessage = document.getElementById('formMessage');

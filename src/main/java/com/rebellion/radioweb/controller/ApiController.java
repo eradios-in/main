@@ -88,7 +88,7 @@ public ResponseEntity<Map<String, Object>> searchStations(
         }
         // set tags for the station
         if (input.getTags() == null || input.getTags().isEmpty()) {
-            input.setTags(input.getLanguage(), input.getGenre(), input.getState());
+            input.setTags(input.getTags());
         }
         // set favicon URL if not provided
         if (input.getFavicon() == null || input.getFavicon().isEmpty()) {

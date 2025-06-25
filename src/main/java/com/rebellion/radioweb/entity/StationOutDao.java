@@ -6,9 +6,7 @@ public class StationOutDao {
     private String name;
     private String formattedName;
     private String favicon;
-    private String state;
-    private String language;
-    private String genre;
+    private String tags;
 
     public StationOutDao() {
     }
@@ -29,16 +27,8 @@ public class StationOutDao {
         return favicon;
     }
 
-    public String getState() {
-        return state;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public String getGenre() {
-        return genre;
+    public String getTags() {
+        return tags;
     }
 
     

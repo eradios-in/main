@@ -41,7 +41,7 @@ public class MetaFileController  {
         );
 
         // Simulated dynamic URLs (e.g., fetched from DB)
-        List<String> dynamicUrls = stationServiceImpl.getListOfAllValidStationFormattedNames();
+        List<String> dynamicUrls = stationServiceImpl.getListOfStationsForSitemap();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 

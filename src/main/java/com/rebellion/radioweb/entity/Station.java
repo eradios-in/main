@@ -1,7 +1,5 @@
 package com.rebellion.radioweb.entity;
 
-import java.util.Optional;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -27,12 +25,10 @@ public class Station {
     private String url_resolved;
     @Column(length = 2048)
     private String homepage;
+    @Column(length = 1024)
     private String tags;
     @Column(length = 2048)
     private String favicon = "/images/station_fallback_image.webp";
-    private String state;
-    private String language;
-    private String genre;
 
     public Station() {
     }
@@ -61,10 +57,6 @@ public class Station {
         this.name = name;
     }
 
-    public String getGenre() {
-        return genre;
-    }
-
     public String getMetaDescription() {
         return metaDescription;
     }
@@ -79,10 +71,6 @@ public class Station {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
     }
 
     public String getUrl_resolved() {
@@ -105,8 +93,8 @@ public class Station {
         return tags;
     }
 
-    public void setTags(String language, String genre, String state) {
-        this.tags = String.join(", ", Optional.ofNullable(language).orElse(""), Optional.ofNullable(genre).orElse(""), Optional.ofNullable(state).orElse(""));
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 
     public String getFavicon() {
@@ -117,23 +105,6 @@ public class Station {
         this.favicon = favicon;
     }
 
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-
     public String getFormattedName() {
         return formattedName;
     }
@@ -141,5 +112,4 @@ public class Station {
     public void setFormattedName(String name) {
         this.formattedName = name.trim().toLowerCase().replaceAll(" ", "-");
     }
-
 }

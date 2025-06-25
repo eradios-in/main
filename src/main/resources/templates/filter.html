@@ -198,7 +198,7 @@
             }
 
             .play-btn i {
-                font-size: 2rem;
+                font-size: 3rem;
             }
 
             .btn-custom,
@@ -446,63 +446,16 @@
                         <label class="form-label" th:for="'favicon_' + ${iterStat.index}">Favicon:</label>
                         <input th:id="'favicon_' + ${iterStat.index}" class="w-100 form-control mb-2" type="text"
                             th:value="${item.favicon}" />
-
-                        <label th:for="'state_' + ${iterStat.index}" class="form-label">State:</label>&nbsp;<span
-                            class="text-primary" th:text="${item.state}"></span>
-                        <div th:id="'selectedStates_' + ${iterStat.index}" class="mb-2 d-flex flex-wrap gap-2"></div>
-                        <div class="dropdown">
-                            <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button"
-                                th:id="'state_' + ${iterStat.index}" data-bs-toggle="dropdown" aria-expanded="false">
-                                -- Select States --
-                            </button>
-                            <ul class="dropdown-menu w-100 p-2" aria-labelledby="state"
-                                style="max-height: 250px; overflow-y: auto;"
-                                th:id="'checkboxMenu_' + ${iterStat.index}">
-                            </ul>
-                        </div>
-
-                        <label th:for="'languageDropdown_' + ${iterStat.index}"
-                            class="form-label">Language:</label>&nbsp;<span class="text-primary"
-                            th:text="${item.language}"></span>
-                        <div th:id="'selectedLanguages_' + ${iterStat.index}" class="mb-2 d-flex flex-wrap gap-2"></div>
-                        <div class="dropdown">
-                            <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button"
-                                th:id="'languageDropdown_' + ${iterStat.index}" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                -- Select Languages --
-                            </button>
-                            <ul class="dropdown-menu w-100 p-2" style="max-height: 250px; overflow-y: auto;"
-                                th:id="'languageMenu_' + ${iterStat.index}">
-                            </ul>
-                        </div>
-
-                        <label th:for="'genreDropdown_' + ${iterStat.index}"
-                            class="form-label">Genre:</label>&nbsp;<span class="text-primary"
-                            th:text="${item.genre}"></span>
-                        <div th:id="'selectedGenres_' + ${iterStat.index}" class="mb-2 d-flex flex-wrap gap-2"></div>
-                        <div class="dropdown">
-                            <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button"
-                                th:id="'genreDropdown_' + ${iterStat.index}" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                -- Select Genres --
-                            </button>
-                            <ul class="dropdown-menu w-100 p-2" style="max-height: 250px; overflow-y: auto;"
-                                th:id="'genreMenu_' + ${iterStat.index}">
-                            </ul>
-                        </div>
+                        
+                        <label class="form-label" th:for="'tags_' + ${iterStat.index}">Tags:</label>
+                        <input th:id="'tags_' + ${iterStat.index}" class="w-100 form-control mb-2" type="text"
+                            th:value="${item.tags}" />
+                        
                         <div class="d-flex justify-content-center mt-3">
                             <button class="btn btn-dark px-3 submitBtn" type="button"
                                 th:data-index="${iterStat.index}">Submit</button>
                         </div>
                     </form>
-
-                    <!-- Pagination Buttons -->
-                    <div class="d-flex justify-content-between mt-3">
-                        <a th:href="@{'/filter?page=' + ${currentPage-1}}"><button
-                                class="btn btn-custom">Prev</button></a>
-                        <a th:href="@{'/filter?page=' + ${currentPage+1}}"><button
-                                class="btn btn-custom">Next</button></a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -559,116 +512,14 @@
             }, 400);
         });
 
-        // Data for dropdowns
-        const states = [
-            "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh",
-            "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland",
-            "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal"
-        ];
-        const languages = [
-            "Assamese", "Bengali", "Bodo", "Dogri", "Gujarati", "Hindi", "Kannada", "Kashmiri", "Konkani",
-            "Maithili", "Malayalam", "Manipuri", "Marathi", "Nepali", "Odia", "Punjabi", "Sanskrit",
-            "Santhali", "Sindhi", "Tamil", "Telugu", "Urdu"
-        ];
-        const genres = [
-            "Bollywood", "Retro", "Classical", "Folk", "Devotional", "Regional", "Indie", "Pop", "Rock",
-            "Hip-Hop", "EDM", "Jazz", "Blues", "Instrumental", "Romantic", "News", "Talkshows", "Interviews",
-            "Comedy", "Motivation", "Storytime", "Spiritual", "Learning", "Fitness", "Meditation",
-            "Business", "Travel", "Sports", "Kids", "Youth", "Women"
-        ];
-
         // Initialize dropdowns and badges for each form
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelectorAll('.station-form').forEach(function (form, idx) {
-                // State
-                const checkboxMenu = form.querySelector('[id^="checkboxMenu_"]');
-                const selectedStates = form.querySelector('[id^="selectedStates_"]');
-                states.forEach(state => {
-                    const id = state.replace(/\s+/g, '') + '_' + idx;
-                    const li = document.createElement('li');
-                    li.className = 'form-check';
-                    li.innerHTML = `
-                        <input class="form-check-input" type="checkbox" value="${state}" id="${id}">
-                        <label class="form-check-label" for="${id}">${state}</label>
-                    `;
-                    checkboxMenu.appendChild(li);
-                });
-                checkboxMenu.addEventListener('change', () => {
-                    const checkboxes = checkboxMenu.querySelectorAll('input[type="checkbox"]');
-                    selectedStates.innerHTML = '';
-                    checkboxes.forEach(cb => {
-                        if (cb.checked) {
-                            const span = document.createElement('span');
-                            span.className = 'badge bg-primary';
-                            span.textContent = cb.value;
-                            selectedStates.appendChild(span);
-                        }
-                    });
-                });
-
-                // Language
-                const languageMenu = form.querySelector('[id^="languageMenu_"]');
-                const selectedLanguages = form.querySelector('[id^="selectedLanguages_"]');
-                languages.forEach(lang => {
-                    const id = lang.toLowerCase() + '_' + idx;
-                    const li = document.createElement('li');
-                    li.className = 'form-check';
-                    li.innerHTML = `
-                        <input class="form-check-input" type="checkbox" value="${lang}" id="${id}">
-                        <label class="form-check-label" for="${id}">${lang}</label>
-                    `;
-                    languageMenu.appendChild(li);
-                });
-                languageMenu.addEventListener('change', () => {
-                    const checkboxes = languageMenu.querySelectorAll('input[type="checkbox"]');
-                    selectedLanguages.innerHTML = '';
-                    checkboxes.forEach(cb => {
-                        if (cb.checked) {
-                            const badge = document.createElement('span');
-                            badge.className = 'badge bg-success';
-                            badge.textContent = cb.value;
-                            selectedLanguages.appendChild(badge);
-                        }
-                    });
-                });
-
-                // Genre
-                const genreMenu = form.querySelector('[id^="genreMenu_"]');
-                const selectedGenres = form.querySelector('[id^="selectedGenres_"]');
-                genres.forEach(genre => {
-                    const id = genre.toLowerCase().replace(/\s+/g, '-') + '_' + idx;
-                    const li = document.createElement('li');
-                    li.className = 'form-check';
-                    li.innerHTML = `
-                        <input class="form-check-input" type="checkbox" value="${genre}" id="${id}">
-                        <label class="form-check-label" for="${id}">${genre}</label>
-                    `;
-                    genreMenu.appendChild(li);
-                });
-                genreMenu.addEventListener('change', () => {
-                    const checkboxes = genreMenu.querySelectorAll('input[type="checkbox"]');
-                    selectedGenres.innerHTML = '';
-                    checkboxes.forEach(cb => {
-                        if (cb.checked) {
-                            const badge = document.createElement('span');
-                            badge.className = 'badge bg-info text-dark';
-                            badge.textContent = cb.value;
-                            selectedGenres.appendChild(badge);
-                        }
-                    });
-                });
-            });
-
+        document.addEventListener('DOMContentLoaded', function () {                
             // Submit handler for each form
             document.querySelectorAll('.submitBtn').forEach(function (btn) {
                 btn.addEventListener('click', async function (event) {
                     event.preventDefault();
                     const idx = btn.getAttribute('data-index');
                     const form = document.getElementById('stationForm_' + idx);
-
-                    const state = Array.from(form.querySelectorAll('[id^="selectedStates_"] .badge')).map(badge => badge.textContent).join(', ');
-                    const language = Array.from(form.querySelectorAll('[id^="selectedLanguages_"] .badge')).map(badge => badge.textContent).join(', ');
-                    const genre = Array.from(form.querySelectorAll('[id^="selectedGenres_"] .badge')).map(badge => badge.textContent).join(', ');
 
                     try {
                         const response = await fetch('/api/filter', {
@@ -684,9 +535,7 @@
                                 url_resolved: form.querySelector('[id^="url_resolved_"]').value,
                                 homepage: form.querySelector('[id^="homepage_"]').value,
                                 favicon: form.querySelector('[id^="favicon_"]').value,
-                                state: state,
-                                language: language,
-                                genre: genre,
+                                tags: form.querySelector('[id^="tags_"]').value,
                                 isLive: form.querySelector('[id^="isLive_"]').value
                             })
                         });

@@ -89,7 +89,7 @@ public class MVCController {
     public ModelAndView getDataFilterPage(ModelAndView modelAndView, 
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "1") int limit, 
-            @RequestParam(defaultValue = "name") String sortBy) {
+            @RequestParam(defaultValue = "id") String sortBy) {
         PageRequest pageRequest = PageRequest.of(page - 1, limit, Sort.by(sortBy));
         Page<Station> response = stationServiceImpl.getAllStations(pageRequest);
         List<Station> list = response.getContent();

@@ -8,4 +8,6 @@ public interface BlogService {
     Blog getBlogByArticleUrl(String articleUrl);
     Blog saveBlogArticle(Blog blogData);
     List<Blog> getAllBlogs();
+
+    List<String> getListOfBlogsForSitemap();
 }

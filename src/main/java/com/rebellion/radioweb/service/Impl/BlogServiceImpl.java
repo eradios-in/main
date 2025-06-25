@@ -46,4 +46,12 @@ public class BlogServiceImpl implements BlogService{
         return blogRepo.findAll();
     }
 
+
+    @Override
+    public List<String> getListOfBlogsForSitemap() {
+        return blogRepo.findAllArticleUrls();
+   }
+
+    
+
 }

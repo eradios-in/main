@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.rebellion.radioweb.service.Impl.BlogServiceImpl;
 import com.rebellion.radioweb.service.Impl.StationServiceImpl;
 
 import java.io.PrintWriter;
@@ -20,10 +20,12 @@ public class MetaFileController  {
 
     private String baseUrl = "https://www.eradios.in";
     private final StationServiceImpl stationServiceImpl;
+    private final BlogServiceImpl blogServiceImpl;
 
     @Autowired
-    public MetaFileController (StationServiceImpl stationServiceImpl) {
+    public MetaFileController (StationServiceImpl stationServiceImpl, BlogServiceImpl blogServiceImpl) {
         this.stationServiceImpl = stationServiceImpl;
+        this.blogServiceImpl = blogServiceImpl;
     }
 
     @GetMapping(value = "/sitemap.xml", produces = "application/xml")
@@ -35,13 +37,16 @@ public class MetaFileController  {
             "", // home
             "stations",
             "contact",
+            "add-station",
             "privacy",
             "about",
-            "terms"
+            "terms",
+            "blogs"
         );
 
         // Simulated dynamic URLs (e.g., fetched from DB)
-        List<String> dynamicUrls = stationServiceImpl.getListOfStationsForSitemap();
+        List<String> dynamicStationUrls = stationServiceImpl.getListOfStationsForSitemap();
+        List<String> dynamicBlogUrls = blogServiceImpl.getListOfBlogsForSitemap();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -57,12 +62,21 @@ public class MetaFileController  {
             writer.println("  </url>");
         }
 
-        for (String path : dynamicUrls) {
+        for (String path : dynamicStationUrls) {
             writer.println("  <url>");
-            writer.println("    <loc>" + baseUrl + "/" + path + "</loc>");
+            writer.println("    <loc>" + baseUrl + "/stations/" + path + "</loc>");
             writer.println("    <lastmod>" + LocalDateTime.now().format(formatter) + "</lastmod>");
             writer.println("    <changefreq>daily</changefreq>");
             writer.println("    <priority>0.6</priority>");
+            writer.println("  </url>");
+        }
+
+        for (String path : dynamicBlogUrls) {
+            writer.println("  <url>");
+            writer.println("    <loc>" + baseUrl + "/blogs/" + path + "</loc>");
+            writer.println("    <lastmod>" + LocalDateTime.now().format(formatter) + "</lastmod>");
+            writer.println("    <changefreq>daily</changefreq>");
+            writer.println("    <priority>0.4</priority>");
             writer.println("  </url>");
         }
 
@@ -79,6 +93,7 @@ public class MetaFileController  {
 
         writer.println("Disallow: /error");
         writer.println("Disallow: /filter");
+        writer.println("Disallow: /add-blog");
         writer.println();
         
         writer.println("Sitemap: " + baseUrl + "/sitemap.xml");

@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -82,10 +80,7 @@ public class StationServiceImpl implements StationService {
     }
 
     public List<String> getListOfStationsForSitemap() {
-        List<String> liveStationFormattedNames = stationRepo.findAllFormattedNamesByIsLiveTrue();
-        return liveStationFormattedNames.stream()
-                .map(s -> "stations/" + s)
-                .collect(Collectors.toList());
+        return stationRepo.findAllFormattedNamesByIsLiveTrue();
     }
 
     @Override

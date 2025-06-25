@@ -14,13 +14,15 @@ import com.rebellion.radioweb.entity.Station;
 @Repository
 public interface StationRepo extends JpaRepository<Station, Integer> {
     Page<Station> findAllByIsLiveTrue(Pageable pageable);
-    List<Station> findFirst10ByIsLiveTrueOrderByLanguage();
+    List<Station> findFirst10ByIsLiveTrue();
 
     Optional<Station> findByFormattedName(String formattedName);
 
     Page<Station> findByIsLiveTrueAndNameContainingIgnoreCaseOrIsLiveTrueAndTagsContainingIgnoreCase(
             String name, String tags, Pageable pageable);
 
-    @Query("SELECT CONCAT('stations/', s.formattedName) FROM Station s WHERE s.formattedName IS NOT NULL AND s.formattedName <> '' AND s.formattedName <> 'error'")
-    List<String> findAllValidFormattedNames(); // for sitemap controller
+    List<String> findAllByIsLiveTrue(); // for sitemap controller
+
+    @Query("SELECT s.formattedName FROM Station s WHERE s.isLive = true")
+    List<String> findAllFormattedNamesByIsLiveTrue();
 }

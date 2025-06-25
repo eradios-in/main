@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -45,7 +46,7 @@ public class StationServiceImpl implements StationService {
 
     @Override
     public Page<Station> getAllStations(PageRequest pageRequest) {
-        return stationRepo.findAllByIsLiveTrue(pageRequest);
+        return stationRepo.findAll(pageRequest);
     }
 
     @Override
@@ -56,11 +57,13 @@ public class StationServiceImpl implements StationService {
 
     @Override
     public ResponseEntity<List<StationOutDao>> getRelatedStations() {
-        List<Station> stations = stationRepo.findFirst10ByIsLiveTrueOrderByLanguage();
-        List<StationOutDao> stationOutDaos = mapper.convertValue(stations, new TypeReference<List<StationOutDao>>() {});
+        List<Station> stations = stationRepo.findFirst10ByIsLiveTrue();
+        List<StationOutDao> stationOutDaos = mapper.convertValue(stations, new TypeReference<List<StationOutDao>>() {
+        });
         return new ResponseEntity<>(stationOutDaos, HttpStatus.OK);
     }
 
+    @Override
     public ResponseEntity<Station> getStationById(int id) {
         Optional<Station> station = stationRepo.findById(id);
         if (station.isPresent()) {
@@ -72,14 +75,17 @@ public class StationServiceImpl implements StationService {
     @Override
     public ResponseEntity<Station> getStationByFormattedName(String formattedName) {
         Optional<Station> station = stationRepo.findByFormattedName(formattedName);
-        if (station.isPresent()) {
+        if (station.isPresent() && station.get().getIsLive()) {
             return new ResponseEntity<>(station.get(), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    public List<String> getListOfAllValidStationFormattedNames(){
-        return stationRepo.findAllValidFormattedNames();
+    public List<String> getListOfStationsForSitemap() {
+        List<String> liveStationFormattedNames = stationRepo.findAllFormattedNamesByIsLiveTrue();
+        return liveStationFormattedNames.stream()
+                .map(s -> "stations/" + s)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -89,13 +95,13 @@ public class StationServiceImpl implements StationService {
 
     @Override
     public boolean sendContactEmail(Map<String, String> emailData) {
-        if(emailData == null) {
+        if (emailData == null) {
             return false;
         }
-         String message = "Sender's Name: " + emailData.get("fullName") + "\n"
-                       + "Sender's Email: " + emailData.get("email") + "\n"
-                       + "Subject: " + emailData.get("subject") + "\n"
-                       + "Message: " + emailData.get("content");
+        String message = "Sender's Name: " + emailData.get("fullName") + "\n"
+                + "Sender's Email: " + emailData.get("email") + "\n"
+                + "Subject: " + emailData.get("subject") + "\n"
+                + "Message: " + emailData.get("content");
 
         // Send the email
         emailService.sendEmail(emailData.get("email"), emailData.get("subject"), message);
@@ -104,12 +110,30 @@ public class StationServiceImpl implements StationService {
 
     @Override
     public Page<StationOutDao> searchStations(String name, String tags, Pageable pageable) {
-        Page<Station> stations = stationRepo.findByIsLiveTrueAndNameContainingIgnoreCaseOrIsLiveTrueAndTagsContainingIgnoreCase(
-                name, tags, pageable);
+        Page<Station> stations = stationRepo
+                .findByIsLiveTrueAndNameContainingIgnoreCaseOrIsLiveTrueAndTagsContainingIgnoreCase(
+                        name, tags, pageable);
         return stations.map(station -> mapper.convertValue(station, StationOutDao.class));
     }
 
-    // ************************************* DANGER ZONE ******************************************
+    @Override
+    public boolean addStationRequest(StationInDto input) {
+        // User submits a station via form.
+        // Submit for review if stream URL is valid.
+        // Send a confirmation email if accepted.
+        RestTemplate restTemplate = new RestTemplate();
+        HttpStatusCode status = restTemplate.getForEntity(input.getUrl(), Void.class).getStatusCode();
+        if (status.is2xxSuccessful()) {
+            String content = String.format("Email: %s\nStation Name: %s\nFav Url: %s\nStream Url: %s\nTags: %s\nComment: %s", input.getEmail(),
+                    input.getName(), input.getFavicon_url(), input.getUrl(), input.getTags(), input.getComment());
+            emailService.sendEmail(input.getEmail(), "Add Station: " + input.getName(), content);
+            return true;
+        }
+        return false;
+    }
+
+    // ************************************* DANGER ZONE
+    // ******************************************
     /**
      * Fetches stations from an external API and saves them to the repository.
      * 
@@ -145,20 +169,5 @@ public class StationServiceImpl implements StationService {
             e.printStackTrace();
         }
         return stations;
-    }
-
-    @Override
-    public boolean addStationRequest(StationInDto input) {
-        // User submits a station via form.
-        // Submit for review if stream URL is valid.
-        // Send a confirmation email if accepted.
-        RestTemplate restTemplate = new RestTemplate();
-        HttpStatusCode status = restTemplate.getForEntity(input.getUrl(), Void.class).getStatusCode();
-        if(status.is2xxSuccessful()) {
-            String content = String.format("Email: %s\nName: %s\nFav Url: %s\nStream Url: %s\nStates: %s\nLanguages: %s\nGenres: %s", input.getEmail(), input.getName(), input.getFavicon_url(), input.getUrl(), input.getState(), input.getLanguage(), input.getGenre());
-            emailService.sendEmail(input.getEmail(), "Add Station: " + input.getName(), content);
-            return true;
-        }
-        return false;
     }
 }

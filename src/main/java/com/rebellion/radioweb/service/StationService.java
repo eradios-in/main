@@ -17,10 +17,10 @@ public interface StationService {
     Page<Station> getAllStations(PageRequest pageRequest);
     Page<StationOutDao> getAllStationsOut(PageRequest pageRequest);
     ResponseEntity<Station> getStationByFormattedName(String formattedName);
-    // Map<String, List<String>> getAllFilters();
     Station saveStation(Station station);
     boolean sendContactEmail(Map<String, String> emailData);
     Page<StationOutDao> searchStations(String name, String tags, Pageable pageable);
-    List<String> getListOfAllValidStationFormattedNames();
+    List<String> getListOfStationsForSitemap();
     boolean addStationRequest(StationInDto stationInDto);
+    ResponseEntity<Station> getStationById(int id);
 }

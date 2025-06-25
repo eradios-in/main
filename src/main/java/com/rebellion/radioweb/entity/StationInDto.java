@@ -6,10 +6,8 @@ public class StationInDto {
     private String email;
     private String favicon_url;
     private String url;
-    private String state = "";
-    private String language = "";
-    private String genre = "";
-    private String comments;
+    private String tags;
+    private String comment;
 
     public StationInDto() {
     }
@@ -22,12 +20,12 @@ public class StationInDto {
         this.name = name;
     }
 
-    public String getComments() {
-        return comments;
+    public String getComment() {
+        return comment;
     }
 
-    public void setComments(String comments) {
-        this.comments = comments;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public String getEmail() {
@@ -54,29 +52,13 @@ public class StationInDto {
         this.url = url;
     }
 
-    public String getState() {
-        return state;
+    public String getTags() {
+        return tags;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setTags(String tags) {
+        this.tags = tags;
     }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
+    
     
 }

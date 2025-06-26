@@ -98,19 +98,6 @@
       color: #333333;
     }
 
-    .ad-space {
-      width: 100%;
-      min-height: 60px;
-      background: #f8f9fa;
-      border-radius: 6px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 1rem auto;
-      max-width: 100%;
-    }
-
     /* Adjustments for larger screens */
     @media (min-width: 576px) {
       h1 {
@@ -125,11 +112,6 @@
       p,
       ul {
         font-size: 1rem;
-      }
-
-      .ad-space {
-        max-width: 468px;
-        min-height: 60px;
       }
     }
 
@@ -151,11 +133,6 @@
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         border-radius: 15px;
       }
-
-      .ad-space {
-        max-width: 728px;
-        min-height: 90px;
-      }
     }
 
     @media (min-width: 992px) {
@@ -171,10 +148,6 @@
   <style>
     .description-container {
       position: relative;
-    }
-
-    .blog-card:hover {
-      box-shadow: 0px 0px 10px gray;
     }
 
     .description-text {
@@ -279,7 +252,7 @@
     <div class="container main-section">
       <h1 class="mb-4">Blogs</h1>
 
-      <div class="blog-card border border-secondary rounded-3 p-3 mb-4" th:each="blog : ${blogs}">
+      <div class="blog-card border rounded-3 p-3 mb-4" th:each="blog : ${blogs}">
         <h2 class="h4 fw-bold mb-3" th:text="${blog.title}">Blog Title</h2>
 
         <div class="d-flex flex-column flex-md-row gap-3 align-items-start">
@@ -323,7 +296,10 @@
             <li><a href="/privacy" class="text-secondary text-decoration-none">Privacy</a></li>
             <li><a href="/about" class="text-secondary text-decoration-none">About</a></li>
             <li><a href="/terms" class="text-secondary text-decoration-none">Terms</a></li>
-            <li><a href="/blogs" class="text-secondary text-decoration-none">Blogs</a></li>
+            <li><a href="/blogs" class="text-secondary text-decoration-none">Blog</a></li>
+            <li><a href="/terms#dmca" class="text-secondary text-decoration-none">DMCA</a></li>
+            <li><a href="/terms#disclaimer" class="text-secondary text-decoration-none">Disclaimer</a></li>
+            <li><a href="/terms#submission-terms" class="text-secondary text-decoration-none">Submission Terms</a></li>
           </ul>
         </div>
       </div>

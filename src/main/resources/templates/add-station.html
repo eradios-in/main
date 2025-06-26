@@ -251,7 +251,7 @@
     <section class="py-3">
         <div class="container">
             <div class="add-station-form-container min-vh-75">
-                <h2>Add Your Radio Station</h2>
+                <h2>Add Radio Station</h2>
                 <div id="formMessage" class="mb-3"></div>
                 <form id="addStationForm" action="/add-station" method="POST" novalidate>
 
@@ -298,13 +298,20 @@
                     <!-- Tags -->
                     <div class="mb-3">
                         <label for="tags" class="form-label">Tags</label>
-                        <input type="text" class="form-control" id="tags" name="tags" placeholder="Enter comma separated tags">
+                        <input type="text" class="form-control" id="tags" name="tags"
+                            placeholder="Enter comma separated tags">
                     </div>
 
                     <div class="mb-3">
                         <label for="comment" class="form-label">Comment</label>
                         <textarea class="form-control" id="comment" name="comment"
                             placeholder="Want to add anything more..." rows="5"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="checkbox" name="terms" id="terms" class="form-check-input me-1">
+                        <label for="terms" class="form-label small">I agree to <a href="/terms#submission-terms"
+                                target="_blank">submission terms</a></label>
                     </div>
 
                     <!-- Submit Button -->
@@ -341,8 +348,11 @@
                         <li><a href="/privacy" class="text-secondary text-decoration-none">Privacy</a></li>
                         <li><a href="/about" class="text-secondary text-decoration-none">About</a></li>
                         <li><a href="/terms" class="text-secondary text-decoration-none">Terms</a></li>
-                        <li><a href="/blogs" class="text-secondary text-decoration-none">Blogs</a></li>
-
+                        <li><a href="/blogs" class="text-secondary text-decoration-none">Blog</a></li>
+                        <li><a href="/terms#dmca" class="text-secondary text-decoration-none">DMCA</a></li>
+                        <li><a href="/terms#disclaimer" class="text-secondary text-decoration-none">Disclaimer</a></li>
+                        <li><a href="/terms#submission-terms" class="text-secondary text-decoration-none">Submission
+                                Terms</a></li>
                     </ul>
                 </div>
             </div>

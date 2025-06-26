@@ -31,7 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
-application-dev.properties
 application.properties
 render_env.txt
 todo.java
+add-blog.html
+filter.html

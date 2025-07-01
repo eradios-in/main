@@ -22,6 +22,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.rebellion.radioweb.entity.Blog;
 import com.rebellion.radioweb.entity.Station;
 import com.rebellion.radioweb.entity.StationInDto;
 import com.rebellion.radioweb.entity.StationOutDao;
@@ -34,12 +35,14 @@ public class StationServiceImpl implements StationService {
     private final EmailService emailService;
     private final StationRepo stationRepo;
     private final ObjectMapper mapper;
+    private final BlogServiceImpl blogServiceImpl;
 
     @Autowired
-    public StationServiceImpl(EmailService emailService, StationRepo stationRepo, ObjectMapper mapper) {
+    public StationServiceImpl(EmailService emailService, StationRepo stationRepo, ObjectMapper mapper, BlogServiceImpl blogServiceImpl) {
         this.emailService = emailService;
         this.stationRepo = stationRepo;
         this.mapper = mapper;
+        this.blogServiceImpl = blogServiceImpl;
     }
 
     @Override
@@ -125,6 +128,12 @@ public class StationServiceImpl implements StationService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<Blog> getRelatedBlogs(String formattedName) {
+        List<Blog> foundBlog = blogServiceImpl.getBlogsRelatedToStation(formattedName);
+        return foundBlog;
     }
 
     // ************************************* DANGER ZONE

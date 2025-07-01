@@ -1,5 +1,6 @@
 package com.rebellion.radioweb.service.Impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,9 +36,10 @@ public class BlogServiceImpl implements BlogService{
         Optional<Blog> foundBlog = blogRepo.findByArticleUrl(blogData.getArticleUrl());
         if(!foundBlog.isPresent()){
             blogData.setArticleUrl(blogData.getTitle());
+            blogData.setRelatedStations(blogData.getRelatedStations().replace("  ", ""));;
             return blogRepo.save(blogData);
         }
-        return new Blog(); 
+        return new Blog();
     }
 
 
@@ -51,6 +53,16 @@ public class BlogServiceImpl implements BlogService{
     public List<String> getListOfBlogsForSitemap() {
         return blogRepo.findAllArticleUrls();
    }
+
+
+    @Override
+    public List<Blog> getBlogsRelatedToStation(String formattedName) {
+        Optional<List<Blog>> foundBlogs = blogRepo.findByRelatedStationsContainingIgnoreCase(formattedName);
+        if(foundBlogs.isPresent()){
+            return foundBlogs.get();
+        }
+        return new ArrayList<>();
+    }
 
     
 

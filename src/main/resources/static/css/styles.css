@@ -1,8 +1,5 @@
 body {
-    background: linear-gradient(360deg, rgb(58, 58, 58), rgba(63, 63, 63, 0.397)), url('/images/body-bg.webp');
-    background-repeat: repeat-y;
-    background-position: center top;
-    background-attachment: fixed;
+    background-color: whitesmoke;
 }
 
 .navbar-nav .nav-link {

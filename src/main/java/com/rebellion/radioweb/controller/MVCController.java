@@ -61,6 +61,7 @@ public class MVCController {
         modelAndView.addObject("station", station);
         modelAndView.addObject("tags", tags);
         modelAndView.addObject("related", stationServiceImpl.getRelatedStations().getBody());
+        modelAndView.addObject("relatedBlogs", stationServiceImpl.getRelatedBlogs(formattedName));
         modelAndView.setViewName("station");
         return modelAndView;
     }

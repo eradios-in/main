@@ -18,13 +18,8 @@
 
   <!-- Mobile-First Custom Styles -->
   <style>
-    /* Base styles for mobile (default) */
-    body {
-      font-family: 'Roboto', sans-serif;
-      color: #333333;
-      font-size: 16px;
-      margin: 0;
-      padding: 0;
+    #stationSearch{
+      border: 3px solid #bd9208;
     }
 
     h1 {
@@ -149,25 +144,6 @@
       margin: 0 auto;
     }
 
-    .search-wrapper {
-      max-width: 75%;
-      margin: 40px auto;
-      color: #ccc;
-    }
-    #stationSearch {
-      margin: 0 auto;
-      width: 70%;
-      transition: width 1s;
-      border: 2px solid #bd9208;
-      border-radius: 30px;
-    }
-    #stationSearch:focus {
-      background-color: #bd93083d;
-      box-shadow: 0px 0px 3px #bd9208;
-      border-color: #bd9208;
-      width: 100%;
-    }
-
     /* Adjustments for larger screens */
     @media (min-width: 576px) {
       h1 {
@@ -196,11 +172,6 @@
         padding: 0.6rem 1.2rem;
         font-size: 1rem;
       }
-
-      .ad-space {
-        max-width: 468px;
-        min-height: 60px;
-      }
     }
 
     @media (min-width: 768px) {
@@ -220,11 +191,6 @@
         padding: 2rem;
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         border-radius: 15px;
-      }
-
-      .ad-space {
-        max-width: 728px;
-        min-height: 90px;
       }
     }
 
@@ -262,39 +228,9 @@
      crossorigin="anonymous"></script>
 </head>
 
+
 <body>
-  <script>
-    document.addEventListener('contextmenu', function (e) {
-      e.preventDefault();
-    });
-    document.addEventListener('keydown', function (e) {
-      // F12
-      if (e.keyCode === 123) {
-        e.preventDefault();
-      }
 
-      // Ctrl+Shift+I
-      if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
-        e.preventDefault();
-      }
-
-      // Ctrl+Shift+J (console)
-      if (e.ctrlKey && e.shiftKey && e.keyCode === 74) {
-        e.preventDefault();
-      }
-
-      // Ctrl+U (view source)
-      if (e.ctrlKey && e.keyCode === 85) {
-        e.preventDefault();
-      }
-
-      // Ctrl+Shift+C (inspect element)
-      if (e.ctrlKey && e.shiftKey && e.keyCode === 67) {
-        e.preventDefault();
-      }
-    });
-
-  </script>
   <!-- Loader Overlay -->
   <div id="pageLoader" style="
     position:fixed;
@@ -344,9 +280,9 @@
       <h1>Radio Stations</h1>
 
       <!-- Search Bar Section -->
-      <div class="search-wrapper">
-        <div class="mb-3">
-          <input type="text" id="stationSearch" class="form-control form-control-md"
+      <div class="search-wrapper py-4">
+        <div>
+          <input type="text" id="stationSearch" class="form-control form-control-md rounded-pill"
             placeholder="Search stations..." oninput="searchStations()" />
         </div>
       </div>

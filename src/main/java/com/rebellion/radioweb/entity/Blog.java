@@ -16,6 +16,8 @@ public class Blog {
     private String metaDesc;
     @Id
     private String articleUrl;
+    @Column(length=4096)
+    private String relatedStations;
 
     public Blog() {
     }
@@ -58,5 +60,13 @@ public class Blog {
 
     public void setArticleUrl(String title) {
         this.articleUrl = title.replace(" ", "-").toLowerCase();
+    }
+
+    public String getRelatedStations() {
+        return relatedStations;
+    }
+
+    public void setRelatedStations(String relatedStations) {
+        this.relatedStations = relatedStations;
     }
 }

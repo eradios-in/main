@@ -15,4 +15,6 @@ public interface BlogRepo extends JpaRepository<Blog, Integer> {
 
     @Query("SELECT b.articleUrl FROM Blog b")
     List<String> findAllArticleUrls();
+
+    Optional<List<Blog>> findByRelatedStationsContainingIgnoreCase(String formattedName);
 }

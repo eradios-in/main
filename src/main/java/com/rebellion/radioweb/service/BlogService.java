@@ -10,4 +10,6 @@ public interface BlogService {
     List<Blog> getAllBlogs();
 
     List<String> getListOfBlogsForSitemap();
+
+    List<Blog> getBlogsRelatedToStation(String formattedName);
 }

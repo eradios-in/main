@@ -3,7 +3,7 @@
 
 <head>
   <!-- Common Links -->
-  <th:block th:insert="~{/fragments/main :: headlinks}" />
+  <th:block th:insert="~{fragments/main :: headlinks}" />
 
   <!-- Page Specific -->
   <title th:text="${station.name} + ' | eRadios.in - Indian Online Radio Streaming'">Station - eRadios.in</title>
@@ -71,10 +71,10 @@
 
 <body>
   <!-- Loader Overlay -->
-  <div th:replace="~{/fragments/main :: pageloader}"></div>
+  <div th:replace="~{fragments/main :: pageloader}"></div>
 
   <!-- Navigation Bar -->
-  <div th:replace="~{/fragments/main :: navbar}"></div>
+  <div th:replace="~{fragments/main :: navbar}"></div>
 
   <!-- Main Content -->
   <section>
@@ -148,7 +148,7 @@
   </section>
 
   <!-- Footer -->
-  <div th:replace="~{/fragments/main :: footer}"></div>
+  <div th:replace="~{fragments/main :: footer}"></div>
 
 
   <!-- Bootstrap JS -->

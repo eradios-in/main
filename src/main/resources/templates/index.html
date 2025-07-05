@@ -3,7 +3,7 @@
 
 <head>
     <!-- Common Links -->
-    <th:block th:insert="~{/fragments/main :: headlinks}" />
+    <th:block th:insert="~{fragments/main :: headlinks}" />
 
     <!-- Page specific -->
     <title>eRadios.in - Stream Indian Online Radio | Hindi, Tamil, FM & Live Music</title>
@@ -41,10 +41,10 @@
 
 <body>
     <!-- Loader Overlay -->
-    <div th:replace="~{/fragments/main :: pageloader}"></div>
+    <div th:replace="~{fragments/main :: pageloader}"></div>
 
     <!-- Navigation Bar -->
-    <div th:replace="~{/fragments/main :: navbar}"></div>
+    <div th:replace="~{fragments/main :: navbar}"></div>
 
     <!-- Hero Section -->
     <section class="hero-section text-center text-white d-flex align-items-center">
@@ -120,7 +120,7 @@
     </section>
 
       <!-- Footer -->
-    <div th:replace="~{/fragments/main :: footer}"></div>
+    <div th:replace="~{fragments/main :: footer}"></div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

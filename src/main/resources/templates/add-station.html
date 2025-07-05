@@ -2,185 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Add Station | eRadios.in - Indian Online Radio Streaming</title>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto&display=swap"
-        rel="stylesheet">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <link rel="icon" href="/images/icon.png" type="image/x-icon">
+    <!-- Common Links -->
+    <th:block th:insert="~{/fragments/main :: headlinks}" />
 
-    <!-- Mobile-First Custom Styles -->
-    <style>
-        /* Base styles for mobile (default) */
-        body {
-            font-family: 'Roboto', sans-serif;
-            color: #333333;
-            font-size: 16px;
-            margin: 0;
-            padding: 0;
-        }
+    <!-- Page Specific -->
+    <title>Add Station | eRadios.in - Add your station</title>
+    <link rel="canonical" href="https://www.eradios.in/add-station" />
 
-        .add-station-form-container {
-            margin: 1.5rem auto;
-            padding: 1.5rem;
-            background-color: #ffffff;
-            border-radius: 10px;
-            max-width: 100%;
-        }
 
-        h2 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: #1a1a2e;
-            margin-bottom: 1rem;
-            border-bottom: 2px solid #bd9208;
-            text-align: center;
-        }
-
-        .form-label {
-            font-weight: 500;
-            color: #333333;
-            font-size: 0.9rem;
-        }
-
-        .form-control,
-        .form-select {
-            border-radius: 6px;
-            border: 1px solid #ced4da;
-            font-size: 0.9rem;
-            transition: border-color 0.3s ease-in-out;
-        }
-
-        .form-control:focus,
-        .form-select:focus {
-            border-color: #bd9208;
-            box-shadow: 0 0 5px rgba(189, 146, 8, 0.3);
-        }
-
-        .btn-submit {
-            background-color: #bd9208;
-            border: none;
-            padding: 0.5rem 1rem;
-            font-weight: 500;
-            font-size: 0.9rem;
-            color: #fff;
-            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
-        }
-
-        .btn-submit:hover {
-            background-color: #a07a06;
-            transform: scale(1.05);
-        }
-
-        .invalid-feedback {
-            font-size: 0.8rem;
-        }
-
-        .navbar-brand i {
-            color: #bd9208;
-        }
-
-        footer a {
-            color: #fff;
-            text-decoration: none;
-            transition: color 0.3s ease-in-out;
-        }
-
-        footer a:hover {
-            color: #bd9208;
-        }
-
-        .container {
-            padding: 0 1rem;
-        }
-
-        .ad-space {
-            width: 100%;
-            min-height: 60px;
-            background: #f8f9fa;
-            border-radius: 6px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 1rem auto;
-            max-width: 100%;
-        }
-
-        /* Adjustments for larger screens */
-        @media (min-width: 576px) {
-            h2 {
-                font-size: 1.8rem;
-                text-align: left;
-            }
-
-            .form-label {
-                font-size: 1rem;
-            }
-
-            .form-control,
-            .form-select {
-                font-size: 1rem;
-            }
-
-            .btn-submit {
-                padding: 0.6rem 1.2rem;
-                font-size: 1rem;
-            }
-
-            .invalid-feedback {
-                font-size: 0.875rem;
-            }
-
-            .ad-space {
-                max-width: 468px;
-                min-height: 60px;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .add-station-form-container {
-                padding: 2rem;
-                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-                border-radius: 15px;
-            }
-
-            h2 {
-                font-size: 2rem;
-            }
-
-            .container {
-                padding: 0 1.5rem;
-            }
-
-            .ad-space {
-                max-width: 728px;
-                min-height: 90px;
-            }
-        }
-
-        @media (min-width: 992px) {
-            .container {
-                max-width: 900px;
-            }
-
-            .add-station-form-container {
-                padding: 2.5rem;
-            }
-        }
-    </style>
     <!-- SEO and Social Sharing Meta Tags -->
-    <meta name="google-adsense-account" content="ca-pub-2939946349164066">
     <meta name="description"
         content="Add your radio station to eRadios.in and reach global listeners. Submit your station easily and expand your audience today.">
     <meta name="keywords"
@@ -198,100 +28,45 @@
     <meta name="twitter:description"
         content="Submit your station to eRadios.in and reach a global audience. Get listed on our popular online radio directory today.">
     <meta name="twitter:image" content="https://www.eradios.in/images/logo.png">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2939946349164066"
-        crossorigin="anonymous"></script>
-
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Add Station - eRadios.in",
+            "description": "Submit your radio station to eRadios.in. Connect with global listeners by getting listed on our Indian radio streaming platform.",
+            "url": "https://www.eradios.in/add-station"
+        }
+    </script>
 </head>
 
 <body>
-    <script>
-    document.addEventListener('contextmenu', function (e) {
-      e.preventDefault();
-    });
-    document.addEventListener('keydown', function (e) {
-      // F12
-      if (e.keyCode === 123) {
-        e.preventDefault();
-      }
-
-      // Ctrl+Shift+I
-      if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
-        e.preventDefault();
-      }
-
-      // Ctrl+Shift+J (console)
-      if (e.ctrlKey && e.shiftKey && e.keyCode === 74) {
-        e.preventDefault();
-      }
-
-      // Ctrl+U (view source)
-      if (e.ctrlKey && e.keyCode === 85) {
-        e.preventDefault();
-      }
-
-      // Ctrl+Shift+C (inspect element)
-      if (e.ctrlKey && e.shiftKey && e.keyCode === 67) {
-        e.preventDefault();
-      }
-    });
-
-  </script>
     <!-- Loader Overlay -->
-    <div id="pageLoader" style="
-    position:fixed;
-    top:0;left:0;width:100vw;height:100vh;
-    background:linear-gradient(135deg, #fffbe6 0%, #fff3cd 100%);
-    z-index:9999;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition:opacity 0.4s;
-  ">
-        <div style="text-align:center;">
-            <i class="fas fa-radiation fa-spin" style="font-size:8rem;color:#bd9208;"></i>
-        </div>
-    </div>
+    <div th:replace="~{/fragments/main :: pageloader}"></div>
 
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="/"><i class="fas fa-radiation fa-spin fs-3 me-2"></i>eRadios.in</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/stations">Stations</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/contact">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/add-station"><i class="fas fa-plus-circle"></i></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <div th:replace="~{/fragments/main :: navbar}"></div>
 
     <!-- Add Station Form -->
     <section class="py-3">
         <div class="container">
-            <div class="add-station-form-container min-vh-75">
-                <h2>Add Radio Station</h2>
+            <div class="feature-section mb-3">
+                <h1 class="h5">Add Station</h1>
+                <p class="small text-light">
+                    Want to grow your radio station's reach? Use the form below to submit your station to eRadios.in,
+                    India's dedicated online radio directory. We welcome FM, internet, and community stations in any
+                    language. By joining our platform, your station becomes accessible to thousands of listeners
+                    worldwide through mobile and desktop browsers. Please ensure all required details are filled out
+                    correctly. We will review the submission within 5 business days.
+                </p>
+            </div>
+            <div class="bg-white p-3">
                 <div id="formMessage" class="mb-3"></div>
                 <form id="addStationForm" action="/add-station" method="POST" novalidate>
-
                     <!-- Name -->
                     <div class="mb-3">
                         <label for="name" class="form-label">Station Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required
-                            placeholder="Enter station name">
+                        <input type="text" class="form-control form-control-sm text-muted " id="name" name="name"
+                            required placeholder="Enter station name">
                         <div class="invalid-feedback">
                             Please enter the station name
                         </div>
@@ -300,8 +75,8 @@
                     <!-- Email -->
                     <div class="mb-3">
                         <label for="email" class="form-label">Your Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required
-                            placeholder="Enter your email">
+                        <input type="email" class="form-control form-control-sm text-muted" id="email" name="email"
+                            required placeholder="Enter your email">
                         <div class="invalid-feedback">
                             Please enter a valid email address
                         </div>
@@ -310,8 +85,8 @@
                     <!-- Favicon URL -->
                     <div class="mb-3">
                         <label for="favicon_url" class="form-label">Favicon URL</label>
-                        <input type="url" class="form-control" id="favicon_url" name="favicon_url"
-                            placeholder="https://example.com/favicon.png">
+                        <input type="url" class="form-control form-control-sm text-muted" id="favicon_url"
+                            name="favicon_url" placeholder="https://example.com/favicon.png">
                         <div class="invalid-feedback">
                             Please enter a valid image URL
                         </div>
@@ -320,7 +95,7 @@
                     <!-- Station Stream URL -->
                     <div class="mb-3">
                         <label for="url" class="form-label">Stream URL</label>
-                        <input type="url" class="form-control" id="url" name="url" required
+                        <input type="url" class="form-control form-control-sm text-muted" id="url" name="url" required
                             placeholder="https://example.com/stream.mp3">
                         <div class="invalid-feedback">
                             Please enter a valid streaming URL
@@ -330,25 +105,26 @@
                     <!-- Tags -->
                     <div class="mb-3">
                         <label for="tags" class="form-label">Tags</label>
-                        <input type="text" class="form-control" id="tags" name="tags"
+                        <input type="text" class="form-control form-control-sm text-muted" id="tags" name="tags"
                             placeholder="Enter comma separated tags">
                     </div>
 
                     <div class="mb-3">
                         <label for="comment" class="form-label">Comment</label>
-                        <textarea class="form-control" id="comment" name="comment"
+                        <textarea class="form-control form-control-sm text-muted" id="comment" name="comment"
                             placeholder="Want to add anything more..." rows="5"></textarea>
                     </div>
 
                     <div class="mb-3">
-                        <input type="checkbox" name="terms" id="terms" class="form-check-input me-1">
+                        <input type="checkbox" name="terms" id="terms"
+                            class="form-check-input text-danger border border-2 border-danger me-1">
                         <label for="terms" class="form-label small">I agree to <a href="/terms#submission-terms"
-                                target="_blank">submission terms</a></label>
+                                target="_blank" class="link-danger">submission terms</a></label>
                     </div>
 
                     <!-- Submit Button -->
                     <div class="d-grid">
-                        <button type="submit" class="btn btn-submit">Submit</button>
+                        <button type="submit" class="btn btn-warning btn-md btn-submit">Submit</button>
                     </div>
 
                 </form>
@@ -356,63 +132,22 @@
         </div>
     </section>
 
+    <section>
+        <div class="container">
+            <p class="small">
+                Want to explore how your station will appear? <a href="/stations" class="text-secondary">View existing stations</a>.
+            </p>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="bg-dark text-secondary py-4">
-        <div class="container">
-            <!-- First Row: Description and Links -->
-            <div class="row align-items-start">
-                <!-- Description Column -->
-                <div class="col-md-8 col-12 mb-3 mb-md-0">
-                    <small>
-                        <p>
-                            eRadios.in offers a wide variety of Indian radio stations for every taste and region. Stream
-                            Hindi, Tamil, Bengali, Telugu, Malayalam, Marathi and more, featuring music, news, and
-                            devotional content from India and around the globe. Access is completely free and
-                            mobile-friendly, with new stations added regularly. Discover the sounds of India — live,
-                            online, and anywhere.
-                        </p>
-                    </small>
-                </div>
-                <!-- Links Column -->
-                <div class="col-md-4 col-12 text-md-end text-center">
-                    <ul class="list-unstyled">
-                        <li><a href="/privacy" class="text-secondary text-decoration-none">Privacy</a></li>
-                        <li><a href="/about" class="text-secondary text-decoration-none">About</a></li>
-                        <li><a href="/terms" class="text-secondary text-decoration-none">Terms</a></li>
-                        <li><a href="/blogs" class="text-secondary text-decoration-none">Blog</a></li>
-                        <li><a href="/terms#dmca" class="text-secondary text-decoration-none">DMCA</a></li>
-                        <li><a href="/terms#disclaimer" class="text-secondary text-decoration-none">Disclaimer</a></li>
-                        <li><a href="/terms#submission-terms" class="text-secondary text-decoration-none">Submission
-                                Terms</a></li>
-                    </ul>
-                </div>
-            </div>
-            <!-- Second Row: Copyright -->
-            <div class="row mt-3">
-                <div class="col-12 text-center">
-                    <p class="mb-0 fs-6">&copy; 2025 eRadios.in</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div th:replace="~{/fragments/main :: footer}"></div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Form Validation Script -->
     <script>
-        // Hide loader after DOM is ready
         document.addEventListener('DOMContentLoaded', function () {
-            setTimeout(function () {
-                const loader = document.getElementById('pageLoader');
-                if (loader) {
-                    loader.style.opacity = '0';
-                    setTimeout(() => loader.style.display = 'none', 400);
-                }
-            }, 400);
-        });
-
-        (function () {
             'use strict';
             const form = document.getElementById('addStationForm');
             form.addEventListener('submit', function (event) {
@@ -470,8 +205,9 @@
                     });
             }, false);
         })();
-
     </script>
+    <!-- Custom JS -->
+    <script th:src="@{/js/scripts.js}"></script>
 </body>
 
 </html>

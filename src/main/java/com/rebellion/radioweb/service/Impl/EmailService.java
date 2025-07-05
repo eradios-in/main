@@ -1,6 +1,5 @@
 package com.rebellion.radioweb.service.Impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -15,7 +14,6 @@ public class EmailService {
     @Value("${spring.mail.username}")
     private String toEmail;
 
-    @Autowired
     public EmailService(JavaMailSender mailSender) {
         this.mailSender = mailSender;
     }

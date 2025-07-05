@@ -3,7 +3,6 @@ package com.rebellion.radioweb.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -27,7 +26,6 @@ public class ApiController {
 
     private StationServiceImpl stationServiceImpl;
 
-    @Autowired
     public ApiController(StationServiceImpl stationServiceImpl) {
         this.stationServiceImpl = stationServiceImpl;
     }

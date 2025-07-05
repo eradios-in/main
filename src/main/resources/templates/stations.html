@@ -2,210 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <!-- Common Links -->
+  <th:block th:insert="~{/fragments/main :: headlinks}" />
+
+  <!-- Page Specific -->
   <title>Stations | eRadios.in - Indian Online Radio Streaming</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto&display=swap"
-    rel="stylesheet">
-  <!-- Font Awesome for Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Custom CSS -->
-  <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <link rel="icon" href="/images/icon.png" type="image/x-icon">
+  <link rel="canonical" href="https://www.eradios.in/stations" />
 
-  <!-- Mobile-First Custom Styles -->
-  <style>
-    #stationSearch{
-      border: 3px solid #bd9208;
-    }
-
-    h1 {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 700;
-      font-size: 1.8rem;
-      color: #1a1a2e;
-      margin-bottom: 0.5rem;
-      border-bottom: 2px solid #bd9208;
-      text-align: center;
-    }
-
-    h2 {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 600;
-      font-size: 1.2rem;
-      color: #1a1a2e;
-      margin-top: 1.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    p,
-    label,
-    .card-text {
-      font-family: 'Roboto', sans-serif;
-      font-size: 0.9rem;
-      line-height: 1.6;
-      margin-bottom: 1rem;
-    }
-
-    a {
-      color: #bd9208;
-      text-decoration: none;
-      transition: color 0.3s ease-in-out;
-    }
-
-    a:hover {
-      color: #a07a06;
-    }
-
-    .station-logo {
-      width: 40px;
-      height: 40px;
-      object-fit: contain;
-      aspect-ratio: 1/1;
-      margin-right: 0.5rem;
-    }
-
-    .navbar-brand i {
-      color: #bd9208;
-    }
-
-    footer a {
-      color: #fff;
-    }
-
-    footer a:hover {
-      color: #bd9208;
-    }
-
-    .btn-custom {
-      background-color: #bd9208;
-      color: #fff;
-      border: none;
-      padding: 0.5rem 1rem;
-      font-size: 0.9rem;
-      transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
-    }
-
-    hr.section-divider {
-      border: 0;
-      border-top: 1px solid #bd9208;
-      margin: 1.5rem 0;
-    }
-
-    .btn-custom:hover {
-      background-color: #a07a06;
-      color: #fff;
-      transform: scale(1.05);
-    }
-
-    .station-card {
-      border: 1px solid rgba(95, 95, 95, 0.555);
-      transition: transform 0.3s ease-in-out;
-    }
-
-    .station-card:hover {
-      transform: scale(1.03);
-      background-color: rgba(128, 128, 128, 0.1);
-    }
-
-    .pagination .page-link {
-      color: #232526;
-      background-color: #fff;
-      border: none;
-      border-radius: 0.5rem;
-      margin: 0 0.2rem;
-      font-size: 0.9rem;
-      transition: background 0.15s, color 0.15s;
-    }
-
-    .pagination .page-link:hover {
-      background-color: #bd9208;
-      color: #232526;
-    }
-
-    .pagination .active .page-link {
-      background-color: #bd9208;
-      color: #232526;
-      font-weight: bold;
-      border: none;
-    }
-
-    .container {
-      padding: 0 1rem;
-    }
-
-    .main-section {
-      background-color: #ffffff;
-      border-radius: 10px;
-      padding: 1.3rem;
-      margin: 0 auto;
-    }
-
-    /* Adjustments for larger screens */
-    @media (min-width: 576px) {
-      h1 {
-        font-size: 2rem;
-        text-align: left;
-      }
-
-      h2 {
-        font-size: 1.4rem;
-      }
-
-      p,
-      label,
-      .card-text {
-        font-size: 1rem;
-      }
-
-      .station-logo {
-        width: 50px;
-        height: 50px;
-        box-shadow: 0px 0px 2px #aaa;
-        padding: 2px;
-      }
-
-      .btn-custom {
-        padding: 0.6rem 1.2rem;
-        font-size: 1rem;
-      }
-    }
-
-    @media (min-width: 768px) {
-      h1 {
-        font-size: 2.5rem;
-      }
-
-      h2 {
-        font-size: 1.5rem;
-      }
-
-      .container {
-        padding: 0 1.5rem;
-      }
-
-      .main-section {
-        padding: 2rem;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        border-radius: 15px;
-      }
-    }
-
-    @media (min-width: 992px) {
-      .container {
-        max-width: 900px;
-      }
-
-      .main-section {
-        padding: 2.5rem;
-      }
-    }
-  </style>
   <!-- SEO Meta Tags -->
-   <meta name="google-adsense-account" content="ca-pub-2939946349164066">
   <meta name="description"
     content="Discover and listen to the best Indian radio stations online. Stream live music, news, and entertainment in your favorite language, state, or genre on eRadios.in. Enjoy high-quality, mobile-friendly radio streaming for free.">
   <meta name="keywords"
@@ -224,66 +28,75 @@
   <meta name="twitter:description"
     content="Stream India's top radio stations online. Listen to live music, news, and entertainment by language, state, or genre. 100% free and mobile-friendly.">
   <meta name="twitter:image" content="https://www.eradios.in/images/logo.png">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2939946349164066"
-     crossorigin="anonymous"></script>
+  <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          "name": "Indian Online Radio Stations",
+          "description": "Browse and stream the best Indian FM and internet radio stations online.",
+          "url": "https://www.eradios.in/stations"
+        }
+    </script>
+  <script>
+    <noscript>
+      <div class="station-fallback">
+        <h2>Popular Stations</h2>
+        <ul>
+          <li><a href="/stations/air-akashvani-madikeri">AIR Akashvani Madikeri</a></li>
+          <li><a href="/stations/air-akashvani-indraprastha">AIR Akashvani Indraprastha</a></li>
+          <li><a href="/stations/air-akashvani-alappuzha">AIR Akashvani Alappuzha</a></li>
+          <li><a href="/stations/air-akashvani-satara">AIR Akashvani Satara</a></li>
+          <li><a href="/stations/tamil-89.4-fm-(dubai)">Tamil 89.4 FM (Dubai)</a></li>
+          <li><a href="/stations/air-akashvani-mysore">AIR Akashvani Mysore</a></li>
+          <li><a href="/stations/air-akashvani-nagaon">AIR Akashvani Nagaon</a></li>
+          <li><a href="/stations/air-akashvani-bhawanipatna">AIR Akashvani Bhawanipatna</a></li>
+          <li><a href="/stations/air-akashvani-jalandhar">AIR Akashvani Jalandhar</a></li>
+          <li><a href="/stations/air-akashvani-kolkata-geetanjali">AIR Akashvani Kolkata Geetanjali</a></li>
+          <li><a href="/stations/2b!-radio-sangam-devi-maa">2b! Radio Sangam Devi Maa</a></li>
+          <li><a href="/stations/air-akashvani-kolhapur">AIR Akashvani Kolhapur</a></li>
+          <li><a href="/stations/vividh-bharti-radio">Vividh Bharti Radio</a></li>
+          <li><a href="/stations/air-akashvani-khandwa">AIR Akashvani Khandwa</a></li>
+          <li><a href="/stations/air-akashvani-nanded">AIR Akashvani Nanded</a></li>
+          <li><a href="/stations/air-akashvani-alwar-103.1-fm">AIR Akashvani Alwar 103.1 FM</a></li>
+          <li><a href="/stations/radio-hungama-90s-once-again">Radio Hungama 90s Once Again</a></li>
+          <li><a href="/stations/a1-tamil-radio">A1 Tamil Radio</a></li>
+          <li><a href="/stations/aap-ki-awaz-up">AAP Ki Awaz UP</a></li>
+          <li><a href="/stations/air-akashvani-cuddapah-(akashvani-kadapa)">AIR Akashvani Cuddapah (Akashvani Kadapa)</a></li>
+          <li><a href="/stations/radio-hungama-90s-once-again">Radio Hungama 90s Once Again</a></li>
+          <li><a href="/stations/air-akashvani-urdu">AIR Akashvani Urdu</a></li>
+        </ul>
+      </div>
+    </noscript>
+
+  </script>
 </head>
 
 
 <body>
-
   <!-- Loader Overlay -->
-  <div id="pageLoader" style="
-    position:fixed;
-    top:0;left:0;width:100vw;height:100vh;
-    background:linear-gradient(135deg, #fffbe6 0%, #fff3cd 100%);
-    z-index:9999;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition:opacity 0.4s;
-  ">
-    <div style="text-align:center;">
-      <i class="fas fa-radiation fa-spin" style="font-size:8rem;color:#bd9208;"></i>
-    </div>
-  </div>
+  <div th:replace="~{/fragments/main :: pageloader}"></div>
 
   <!-- Navigation Bar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand" href="/"><i class="fas fa-radiation fa-spin fs-3 me-2"></i>eRadios.in</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="/stations">Stations</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/contact">Contact</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/add-station"><i class="fas fa-plus-circle"></i></a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <div th:replace="~{/fragments/main :: navbar}"></div>
 
   <!-- Main Content -->
   <section class="py-3">
-    <div class="container main-section">
-      <h1>Radio Stations</h1>
+    <div class="container">
+      <div class="feature-section mb-0">
+        <h1 class="h5">Stream Indian Online Radio Stations – Hindi, Tamil, Regional & More</h1>
+        <p class=" small mb-3 text-light">
+          Discover a wide collection of live Indian radio stations on eRadios.in. This page features stations across all
+          states, languages, and genres—ranging from Bollywood hits and regional folk music to devotional, news, and
+          talk shows. Browse the complete directory below or use the search bar to quickly find stations by name,
+          location, language, or type.
+        </p>
 
-      <!-- Search Bar Section -->
-      <div class="search-wrapper py-4">
-        <div>
-          <input type="text" id="stationSearch" class="form-control form-control-md rounded-pill"
-            placeholder="Search stations..." oninput="searchStations()" />
+        <!-- Search Bar Section -->
+        <div class="search-wrapper py-3">
+          <div>
+            <input type="text" id="stationSearch" class="form-control form-control-md rounded-pill"
+              placeholder="Search stations..." oninput="searchStations()" />
+          </div>
         </div>
       </div>
 
@@ -301,38 +114,21 @@
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="bg-dark text-secondary py-4">
-    <div class="container">
-        <!-- First Row: Description and Links -->
-        <div class="row align-items-start">
-            <!-- Description Column -->
-            <div class="col-md-8 col-12 mb-3 mb-md-0">
-                <small><p>
-                    eRadios.in offers a wide variety of Indian radio stations for every taste and region. Stream Hindi, Tamil, Bengali, Telugu, Malayalam, Marathi and more, featuring music, news, and devotional content from India and around the globe. Access is completely free and mobile-friendly, with new stations added regularly. Discover the sounds of India — live, online, and anywhere.
-                </p></small>
-            </div>
-            <!-- Links Column -->
-            <div class="col-md-4 col-12 text-md-end text-center">
-                <ul class="list-unstyled">
-            <li><a href="/privacy" class="text-secondary text-decoration-none">Privacy</a></li>
-            <li><a href="/about" class="text-secondary text-decoration-none">About</a></li>
-            <li><a href="/terms" class="text-secondary text-decoration-none">Terms</a></li>
-            <li><a href="/blogs" class="text-secondary text-decoration-none">Blog</a></li>
-            <li><a href="/terms#dmca" class="text-secondary text-decoration-none">DMCA</a></li>
-            <li><a href="/terms#disclaimer" class="text-secondary text-decoration-none">Disclaimer</a></li>
-            <li><a href="/terms#submission-terms" class="text-secondary text-decoration-none">Submission Terms</a></li>
-          </ul>
-            </div>
-        </div>
-        <!-- Second Row: Copyright -->
-        <div class="row mt-3">
-            <div class="col-12 text-center">
-                <p class="mb-0 fs-6">&copy; 2025 eRadios.in</p>
-            </div>
-        </div>
+  <section class="py-3">
+    <div class="container text-center">
+      <p class="text-muted small p-2">
+        Our station directory is updated daily, bringing you live streams from both popular FM broadcasters and
+        community-driven digital radios. Whether you’re looking for Tamil devotional stations, Bollywood classics, or
+        regional language news, you’ll find it all here—streamed instantly and ad-free. We support independent voices
+        and
+        aim to make radio discovery simple, fast, and free for everyone.
+      </p>
     </div>
-</footer>
+  </section>
+
+  <!-- Footer -->
+  <div th:replace="~{/fragments/main :: footer}"></div>
+
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -403,17 +199,16 @@
         const card = document.createElement('div');
         card.className = 'col';
         card.innerHTML = `
-        <div class="card h-100 border shadow-sm station-card">
+        <a class="text-decoration-none" href="/stations/${station.formattedName}"><div class="card h-100 border shadow-sm station-card" style="">
           <div class="card-body d-flex align-items-center">
-            <img src="${station.favicon}" alt="${station.name} Logo" class="station-logo rounded">
+            <img src="${station.favicon}" alt="${station.name} Logo" class="border p-2 rounded me-2" style="height:75px; width:75px; aspect-ratio: 1/1;">
             <div class="flex-grow-1">
-              <p class="card-text mb-0">${station.name}</p>
+              <p class="h4 mb-1">${station.name}</p>
+              <em><p class="small text-muted">${station.metaDescription}</p></em>
             </div>
-            <a class="text-decoration-none" href="/stations/${station.formattedName}">
-              <button class="btn btn-custom">Visit</button>
-            </a>
           </div>
         </div>
+        </a>
       `;
         container.appendChild(card);
       });

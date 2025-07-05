@@ -2,172 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Contact | eRadios.in - Indian Online Radio Streaming</title>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto&display=swap"
-        rel="stylesheet">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <link rel="icon" href="/images/icon.png" type="image/x-icon">
+    <!-- Common Links -->
+    <th:block th:insert="~{/fragments/main :: headlinks}" />
 
-    <!-- Mobile-First Custom Styles -->
-    <style>
-        /* Base styles for mobile (default) */
-        body {
-            font-family: 'Roboto', sans-serif;
-            color: #333333;
-            font-size: 16px;
-            margin: 0;
-            padding: 0;
-        }
+    <!-- Page Specific -->
+    <title>Contact Us | eRadios.in - Submit Enquiries or Feedback</title>
+    <link rel="canonical" href="https://www.eradios.in/contact" />
 
-        .contact-form-container {
-            margin: 1.5rem auto;
-            padding: 1.5rem;
-            background-color: #ffffff;
-            border-radius: 10px;
-            max-width: 100%;
-        }
-
-        h1 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: #1a1a2e;
-            margin-bottom: 1rem;
-            border-bottom: 2px solid #bd9208;
-            text-align: center;
-        }
-
-        .form-label {
-            font-weight: 500;
-            color: #333333;
-            font-size: 0.9rem;
-        }
-
-        .form-control,
-        .form-select {
-            border-radius: 6px;
-            border: 1px solid #ced4da;
-            font-size: 0.9rem;
-            transition: border-color 0.3s ease-in-out;
-        }
-
-        .form-control:focus,
-        .form-select:focus {
-            border-color: #bd9208;
-            box-shadow: 0 0 5px rgba(189, 146, 8, 0.3);
-        }
-
-        .btn-submit {
-            background-color: #bd9208;
-            border: none;
-            padding: 0.5rem 1rem;
-            font-weight: 500;
-            font-size: 0.9rem;
-            color: #fff;
-            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
-        }
-
-        .btn-submit:hover {
-            background-color: #a07a06;
-            transform: scale(1.05);
-        }
-
-        .invalid-feedback {
-            font-size: 0.8rem;
-        }
-
-        .navbar-brand i {
-            color: #bd9208;
-        }
-
-        footer a {
-            color: #fff;
-            text-decoration: none;
-            transition: color 0.3s ease-in-out;
-        }
-
-        footer a:hover {
-            color: #bd9208;
-        }
-
-        .container {
-            padding: 0 1rem;
-        }
-
-        /* Adjustments for larger screens */
-        @media (min-width: 576px) {
-            h1 {
-                font-size: 1.8rem;
-                text-align: left;
-            }
-
-            .form-label {
-                font-size: 1rem;
-            }
-
-            .form-control,
-            .form-select {
-                font-size: 1rem;
-            }
-
-            .btn-submit {
-                padding: 0.6rem 1.2rem;
-                font-size: 1rem;
-            }
-
-            .invalid-feedback {
-                font-size: 0.875rem;
-            }
-
-            .ad-space {
-                max-width: 468px;
-                min-height: 60px;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .contact-form-container {
-                padding: 2rem;
-                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-                border-radius: 15px;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            .container {
-                padding: 0 1.5rem;
-            }
-
-            .ad-space {
-                max-width: 728px;
-                min-height: 90px;
-            }
-        }
-
-        @media (min-width: 992px) {
-            .container {
-                max-width: 900px;
-            }
-
-            .contact-form-container {
-                padding: 2.5rem;
-            }
-        }
-    </style>
     <!-- SEO and Social Sharing Meta Tags -->
-    <meta name="google-adsense-account" content="ca-pub-2939946349164066">
     <meta name="description"
         content="Contact eRadios.in for feedback, support, copyright issues, or to add your station. We're here to help you with any enquiry about our global radio streaming platform.">
     <meta name="keywords"
@@ -185,97 +27,47 @@
     <meta name="twitter:description"
         content="Reach out to eRadios.in for support, feedback, or to add your radio station. We're here to help you enjoy the best global radio streaming experience.">
     <meta name="twitter:image" content="https://www.eradios.in/images/logo.png">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2939946349164066"
-        crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "ContactPage",
+            "name": "Contact Us - eRadios.in",
+            "url": "https://www.eradios.in/contact",
+            "description": "Use our contact form to reach eRadios.in for support, feedback, or station submissions.",
+            "publisher": {
+                "@type": "Organization",
+                "name": "eRadios.in"
+            }
+        }
+    </script>
 </head>
 
 <body>
-    <script>
-    document.addEventListener('contextmenu', function (e) {
-      e.preventDefault();
-    });
-    document.addEventListener('keydown', function (e) {
-      // F12
-      if (e.keyCode === 123) {
-        e.preventDefault();
-      }
 
-      // Ctrl+Shift+I
-      if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
-        e.preventDefault();
-      }
-
-      // Ctrl+Shift+J (console)
-      if (e.ctrlKey && e.shiftKey && e.keyCode === 74) {
-        e.preventDefault();
-      }
-
-      // Ctrl+U (view source)
-      if (e.ctrlKey && e.keyCode === 85) {
-        e.preventDefault();
-      }
-
-      // Ctrl+Shift+C (inspect element)
-      if (e.ctrlKey && e.shiftKey && e.keyCode === 67) {
-        e.preventDefault();
-      }
-    });
-
-  </script>
     <!-- Loader Overlay -->
-    <div id="pageLoader" style="
-    position:fixed;
-    top:0;left:0;width:100vw;height:100vh;
-    background:linear-gradient(135deg, #fffbe6 0%, #fff3cd 100%);
-    z-index:9999;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition:opacity 0.4s;
-  ">
-        <div style="text-align:center;">
-            <i class="fas fa-radiation fa-spin" style="font-size:8rem;color:#bd9208;"></i>
-        </div>
-    </div>
+    <div th:replace="~{/fragments/main :: pageloader}"></div>
 
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="/"><i class="fas fa-radiation fa-spin fs-3 me-2"></i>eRadios.in</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/stations">Stations</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/contact">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/add-station"><i class="fas fa-plus-circle"></i></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <div th:replace="~{/fragments/main :: navbar}"></div>
 
     <!-- Contact Form -->
     <section class="py-3">
         <div class="container">
-            <div class="contact-form-container min-vh-100">
-                <h1>Contact Us</h1>
+            <div class="feature-section mb-3">
+                <h1 class="h5">Contact Us</h1>
+                <p class="small text-light">
+                    Have a question, suggestion, or copyright concern? We'd love to hear from you.
+                    Use the form below to get in touch — whether you're a listener, station
+                    owner, or just curious. We usually respond within 1–2 business days.
+                </p>
+            </div>
+            <div class="bg-white p-3">
                 <div id="formMessage" class="mb-3"></div>
                 <form id="contactForm" action="/contact/submit" method="POST" novalidate>
                     <!-- Full Name -->
                     <div class="mb-3">
                         <label for="fullName" class="form-label">Full Name</label>
-                        <input type="text" class="form-control" id="fullName" name="fullName" required
+                        <input type="text" class="form-control form-control-sm text-muted" id="fullName" name="fullName" required
                             pattern="[A-Za-z\s]{2,50}" placeholder="Enter your full name">
                         <div class="invalid-feedback">
                             Please enter a valid name (2-50 characters, letters and spaces only).
@@ -285,7 +77,7 @@
                     <!-- Email -->
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required
+                        <input type="email" class="form-control form-control-sm text-muted" id="email" name="email" required
                             placeholder="Enter your email">
                         <div class="invalid-feedback">
                             Please enter a valid email address.
@@ -295,7 +87,7 @@
                     <!-- Subject -->
                     <div class="mb-3">
                         <label for="subject" class="form-label">Subject</label>
-                        <select class="form-select" id="subject" name="subject" required>
+                        <select class="form-select form-select-sm text-muted" id="subject" name="subject" required>
                             <option value="" disabled selected>Select a subject</option>
                             <option value="Something is broken on website">Something is broken on website</option>
                             <option value="Copyright Infringement report">Copyright Infringement report</option>
@@ -310,7 +102,7 @@
                     <!-- Content -->
                     <div class="mb-3">
                         <label for="content" class="form-label">Message</label>
-                        <textarea class="form-control" id="content" name="content" rows="17" required minlength="10"
+                        <textarea class="form-control form-control-sm text-muted" id="content" name="content" rows="17" required minlength="10"
                             maxlength="500" placeholder="Write your message here"></textarea>
                         <div class="invalid-feedback">
                             Please enter a message (10-500 characters).
@@ -319,7 +111,7 @@
 
                     <!-- Submit Button -->
                     <div class="d-grid">
-                        <button type="submit" class="btn btn-submit">Submit</button>
+                        <button type="submit" class="btn btn-warning btn-md btn-submit">Submit</button>
                     </div>
                 </form>
             </div>
@@ -327,60 +119,13 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark text-secondary py-4">
-        <div class="container">
-            <!-- First Row: Description and Links -->
-            <div class="row align-items-start">
-                <!-- Description Column -->
-                <div class="col-md-8 col-12 mb-3 mb-md-0">
-                    <small>
-                        <p>
-                            eRadios.in offers a wide variety of Indian radio stations for every taste and region. Stream
-                            Hindi, Tamil, Bengali, Telugu, Malayalam, Marathi and more, featuring music, news, and
-                            devotional content from India and around the globe. Access is completely free and
-                            mobile-friendly, with new stations added regularly. Discover the sounds of India — live,
-                            online, and anywhere.
-                        </p>
-                    </small>
-                </div>
-                <!-- Links Column -->
-                <div class="col-md-4 col-12 text-md-end text-center">
-                    <ul class="list-unstyled">
-            <li><a href="/privacy" class="text-secondary text-decoration-none">Privacy</a></li>
-            <li><a href="/about" class="text-secondary text-decoration-none">About</a></li>
-            <li><a href="/terms" class="text-secondary text-decoration-none">Terms</a></li>
-            <li><a href="/blogs" class="text-secondary text-decoration-none">Blog</a></li>
-            <li><a href="/terms#dmca" class="text-secondary text-decoration-none">DMCA</a></li>
-            <li><a href="/terms#disclaimer" class="text-secondary text-decoration-none">Disclaimer</a></li>
-            <li><a href="/terms#submission-terms" class="text-secondary text-decoration-none">Submission Terms</a></li>
-          </ul>
-                </div>
-            </div>
-            <!-- Second Row: Copyright -->
-            <div class="row mt-3">
-                <div class="col-12 text-center">
-                    <p class="mb-0 fs-6">&copy; 2025 eRadios.in</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div th:replace="~{/fragments/main :: footer}"></div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Form Validation Script -->
     <script>
-        // Hide loader after DOM is ready
         document.addEventListener('DOMContentLoaded', function () {
-            setTimeout(function () {
-                const loader = document.getElementById('pageLoader');
-                if (loader) {
-                    loader.style.opacity = '0';
-                    setTimeout(() => loader.style.display = 'none', 400);
-                }
-            }, 400);
-        });
-
-        (function () {
             'use strict';
             const form = document.getElementById('contactForm');
             form.addEventListener('submit', function (event) {
@@ -437,6 +182,8 @@
             }, false);
         })();
     </script>
+    <!-- Custom JS -->
+    <script th:src="@{/js/scripts.js}"></script>
 </body>
 
 </html>

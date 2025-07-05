@@ -2,7 +2,6 @@ package com.rebellion.radioweb.controller;
 
 import jakarta.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +21,6 @@ public class MetaFileController  {
     private final StationServiceImpl stationServiceImpl;
     private final BlogServiceImpl blogServiceImpl;
 
-    @Autowired
     public MetaFileController (StationServiceImpl stationServiceImpl, BlogServiceImpl blogServiceImpl) {
         this.stationServiceImpl = stationServiceImpl;
         this.blogServiceImpl = blogServiceImpl;

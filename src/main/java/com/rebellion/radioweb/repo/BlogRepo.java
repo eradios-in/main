@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.rebellion.radioweb.entity.Blog;
 
 @Repository
-public interface BlogRepo extends JpaRepository<Blog, Integer> {
+public interface BlogRepo extends JpaRepository<Blog, String> {
     Optional<Blog> findByArticleUrl(String articleUrl);
 
     @Query("SELECT b.articleUrl FROM Blog b")

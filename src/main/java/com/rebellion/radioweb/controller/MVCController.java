@@ -12,7 +12,6 @@ import com.rebellion.radioweb.service.Impl.StationServiceImpl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -30,7 +29,6 @@ public class MVCController {
     private StationServiceImpl stationServiceImpl;
     private BlogServiceImpl blogServiceImpl;
 
-    @Autowired
     public MVCController(StationServiceImpl stationServiceImpl, BlogServiceImpl blogServiceImpl) {
         this.stationServiceImpl = stationServiceImpl;
         this.blogServiceImpl = blogServiceImpl;

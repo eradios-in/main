@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.rebellion.radioweb.entity.Blog;
 import com.rebellion.radioweb.repo.BlogRepo;
@@ -15,7 +14,6 @@ public class BlogServiceImpl implements BlogService{
 
     private BlogRepo blogRepo;
 
-    @Autowired
     public BlogServiceImpl(BlogRepo blogRepo) {
         this.blogRepo = blogRepo;
     }

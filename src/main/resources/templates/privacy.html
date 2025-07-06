@@ -122,18 +122,16 @@
                 <p>Have questions or suggestions? We’d love to hear from you! Reach out to us via <a
                         href="/contact">Contact
                         Us</a> page.
-                <p>Thank you for choosing <a href="/stations">eRadios.in</a>—let’s tune in to a world of sound together!</p>
+                <p>Thank you for choosing <a href="/stations">eRadios.in</a>—let’s tune in to a world of sound together!
+                </p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <div th:replace="~{fragments/main :: footer}"></div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS -->
-    <script th:src="@{/js/scripts.js}"></script>
+    <!-- Footer Scripts-->
+    <div th:replace="~{fragments/main :: footerScripts}"></div>
 </body>
 
 </html>

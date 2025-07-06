@@ -57,9 +57,32 @@
                 <h1 class="h5">Contact Us</h1>
                 <p class="small text-light">
                     Have a question, suggestion, or copyright concern? We'd love to hear from you.
-                    Use the form below to get in touch — whether you're a listener, station
-                    owner, or just curious. We usually respond within 1–2 business days.
                 </p>
+                <details class="mb-1">
+                    <summary class="small">Why contact eRadios.in?</summary>
+                    <p class="small">
+                        At eRadios.in, we’re
+                        committed to building a helpful, inclusive platform for radio listeners and broadcasters across
+                        India and beyond. Whether you are a casual listener, a station owner, a developer, or simply
+                        curious
+                        about our service, our team is ready to assist you. You can use the contact form below to get in
+                        touch with us regarding station submissions, technical issues, advertising inquiries, content
+                        feedback, or legal/copyright notices.
+                    </p>
+                    <p class="small">
+                        Because we care about your voice. Our mission is to make radio more
+                        accessible and better organized for everyone. If you're a broadcaster, we can help you get
+                        listed
+                        and reach new listeners. If you're a listener looking for your favorite station or facing a
+                        playback
+                        issue, we’re here to resolve it. We aim to respond to most queries within 1–2 business days.
+                        Your
+                        feedback not only helps us improve but also shapes the future of radio streaming for our
+                        community.
+                        We respect your privacy and handle all inquiries with care. Thank you for choosing eRadios.in —
+                        India’s growing radio directory for live stations across languages, genres, and regions.
+                    </p>
+                </details>
             </div>
             <div class="bg-white p-3">
                 <div id="formMessage" class="mb-3"></div>
@@ -67,8 +90,8 @@
                     <!-- Full Name -->
                     <div class="mb-3">
                         <label for="fullName" class="form-label">Full Name</label>
-                        <input type="text" class="form-control form-control-sm text-muted" id="fullName" name="fullName" required
-                            pattern="[A-Za-z\s]{2,50}" placeholder="Enter your full name">
+                        <input type="text" class="form-control form-control-sm text-muted" id="fullName" name="fullName"
+                            required pattern="[A-Za-z\s]{2,50}" placeholder="Enter your full name">
                         <div class="invalid-feedback">
                             Please enter a valid name (2-50 characters, letters and spaces only).
                         </div>
@@ -77,8 +100,8 @@
                     <!-- Email -->
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control form-control-sm text-muted" id="email" name="email" required
-                            placeholder="Enter your email">
+                        <input type="email" class="form-control form-control-sm text-muted" id="email" name="email"
+                            required placeholder="Enter your email">
                         <div class="invalid-feedback">
                             Please enter a valid email address.
                         </div>
@@ -102,8 +125,8 @@
                     <!-- Content -->
                     <div class="mb-3">
                         <label for="content" class="form-label">Message</label>
-                        <textarea class="form-control form-control-sm text-muted" id="content" name="content" rows="17" required minlength="10"
-                            maxlength="500" placeholder="Write your message here"></textarea>
+                        <textarea class="form-control form-control-sm text-muted" id="content" name="content" rows="17"
+                            required minlength="10" maxlength="500" placeholder="Write your message here"></textarea>
                         <div class="invalid-feedback">
                             Please enter a message (10-500 characters).
                         </div>
@@ -120,70 +143,8 @@
 
     <!-- Footer -->
     <div th:replace="~{fragments/main :: footer}"></div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Form Validation Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            'use strict';
-            const form = document.getElementById('contactForm');
-            form.addEventListener('submit', function (event) {
-                event.preventDefault();
-                event.stopPropagation();
-
-                if (!form.checkValidity()) {
-                    form.classList.add('was-validated');
-                    return;
-                }
-
-                // Gather form data
-                const data = {
-                    fullName: form.fullName.value,
-                    email: form.email.value,
-                    subject: form.subject.value,
-                    content: form.content.value
-                };
-
-                const formMessage = document.getElementById('formMessage');
-                const submitBtn = form.querySelector('button[type="submit"], .submitBtn');
-                const originalBtnContent = submitBtn.innerHTML;
-
-                // Show loader on button and disable it
-                submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Sending...`;
-                submitBtn.disabled = true;
-                formMessage.textContent = '';
-                formMessage.className = 'mb-3';
-
-                fetch('/api/email', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                })
-                    .then(response => {
-                        if (response.ok) {
-                            formMessage.textContent = 'Your message has been sent successfully!';
-                            formMessage.className = 'mb-3 alert alert-success';
-                            form.reset();
-                            form.classList.remove('was-validated');
-                        } else {
-                            formMessage.textContent = 'There was an error sending your message. Please try again later.';
-                            formMessage.className = 'mb-3 alert alert-danger';
-                        }
-                    })
-                    .catch(() => {
-                        formMessage.textContent = 'There was an error sending your message. Please try again later.';
-                        formMessage.className = 'mb-3 alert alert-danger';
-                    })
-                    .finally(() => {
-                        submitBtn.innerHTML = originalBtnContent;
-                        submitBtn.disabled = false;
-                    });
-            }, false);
-        })();
-    </script>
-    <!-- Custom JS -->
-    <script th:src="@{/js/scripts.js}"></script>
+    <!-- Footer Scripts-->
+    <div th:replace="~{fragments/main :: footerScripts}"></div>
 </body>
 
 </html>

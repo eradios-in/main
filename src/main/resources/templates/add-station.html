@@ -86,7 +86,7 @@
                     <div class="mb-3">
                         <label for="favicon_url" class="form-label">Favicon URL</label>
                         <input type="url" class="form-control form-control-sm text-muted" id="favicon_url"
-                            name="favicon_url" placeholder="https://example.com/favicon.png">
+                            name="favicon_url" placeholder="https://example.com/favicon.png" required>
                         <div class="invalid-feedback">
                             Please enter a valid image URL
                         </div>
@@ -106,7 +106,10 @@
                     <div class="mb-3">
                         <label for="tags" class="form-label">Tags</label>
                         <input type="text" class="form-control form-control-sm text-muted" id="tags" name="tags"
-                            placeholder="Enter comma separated tags">
+                            placeholder="Enter comma separated tags" required>
+                            <div class="invalid-feedback">
+                             Tags are mandatory.
+                        </div>
                     </div>
 
                     <div class="mb-3">
@@ -117,9 +120,12 @@
 
                     <div class="mb-3">
                         <input type="checkbox" name="terms" id="terms"
-                            class="form-check-input text-danger border border-2 border-danger me-1">
+                            class="form-check-input text-secondary border border-2 border-secondary me-1" required>
                         <label for="terms" class="form-label small">I agree to <a href="/terms#submission-terms"
-                                target="_blank" class="link-danger">submission terms</a></label>
+                                target="_blank" class="link-secondary">submission terms</a></label>
+                        <div class="invalid-feedback">
+                            You must agree to the submission terms to proceed
+                        </div>
                     </div>
 
                     <!-- Submit Button -->
@@ -141,73 +147,9 @@
     </section>
 
     <!-- Footer -->
-    <div th:replace="~{fragments/main :: footer}"></div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Form Validation Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            'use strict';
-            const form = document.getElementById('addStationForm');
-            form.addEventListener('submit', function (event) {
-                event.preventDefault();
-                event.stopPropagation();
-
-                if (!form.checkValidity()) {
-                    form.classList.add('was-validated');
-                    return;
-                }
-
-                // Gather form data
-                const data = {
-                    name: form.name.value.trim(),
-                    email: form.email.value.trim(),
-                    favicon_url: form.favicon_url.value.trim(),
-                    url: form.url.value.trim(),
-                    tags: form.tags.value.trim(),
-                    comment: form.comment.value.trim()
-                };
-
-                const formMessage = document.getElementById('formMessage');
-                const submitBtn = form.querySelector('button[type="submit"], .submitBtn');
-                const originalBtnContent = submitBtn.innerHTML;
-
-                // Show loader on button and disable it
-                submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Sending...`;
-                submitBtn.disabled = true;
-                formMessage.textContent = '';
-                formMessage.className = 'mb-3';
-
-                fetch('/add-station', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                })
-                    .then(response => {
-                        if (response.ok) {
-                            formMessage.textContent = 'Your station has been submitted successfully!';
-                            formMessage.className = 'mb-3 alert alert-success';
-                            form.reset();
-                            form.classList.remove('was-validated');
-                        } else {
-                            formMessage.textContent = 'Error submitting the form. Please try again later.';
-                            formMessage.className = 'mb-3 alert alert-danger';
-                        }
-                    })
-                    .catch(() => {
-                        formMessage.textContent = 'Network error. Please try again later.';
-                        formMessage.className = 'mb-3 alert alert-danger';
-                    })
-                    .finally(() => {
-                        submitBtn.innerHTML = originalBtnContent;
-                        submitBtn.disabled = false;
-                    });
-            }, false);
-        })();
-    </script>
-    <!-- Custom JS -->
-    <script th:src="@{/js/scripts.js}"></script>
+    <div th:replace="~{fragments/main :: footer}"></div>   
+    <!-- Footer Scripts-->
+  <div th:replace="~{fragments/main :: footerScripts}"></div>
 </body>
 
 </html>

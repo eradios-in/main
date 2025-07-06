@@ -82,17 +82,41 @@
   <!-- Main Content -->
   <section class="py-3">
     <div class="container">
-      <div class="feature-section mb-0">
+      <div class="feature-section mb-0" style="text-align: justify;">
         <h1 class="h5">Stream Indian Online Radio Stations – Hindi, Tamil, Regional & More</h1>
-        <p class=" small mb-3 text-light">
-          Discover a wide collection of live Indian radio stations on eRadios.in. This page features stations across all
-          states, languages, and genres—ranging from Bollywood hits and regional folk music to devotional, news, and
-          talk shows. Browse the complete directory below or use the search bar to quickly find stations by name,
-          location, language, or type.
+        <p class=" small text-light">
+          Discover a wide collection of live Indian radio stations at eRadios.in, your go-to platform for streaming
+          audio content across India’s diverse linguistic and cultural landscape.
         </p>
+        <details class="mb-2">
+          <summary class="small">Read More</summary>
+          <p class="small">
+            This page offers access to stations
+            from all Indian states and territories, covering an extensive range of languages such as Hindi, Tamil,
+            Telugu, Malayalam, Bengali, Punjabi, Gujarati, Marathi, Kannada, and more. Whether you're looking for
+            Bollywood
+            hits, classic retro tunes, devotional bhajans, local folk music, live news, or informative talk shows,
+            eRadios.in
+            brings it all together in one convenient place.
+          </p>
+          <p class="small">
+            Use the integrated search bar to quickly locate stations by name, state, language, or genre. Our station
+            directory is updated daily, featuring live streams from both leading FM broadcasters and independent,
+            community-driven internet radios. We prioritize high-quality streaming and a mobile-friendly interface,
+            ensuring a smooth listening experience without unnecessary interruptions.
+          </p>
+
+          <p class="small">
+            At eRadios.in, we’re committed to promoting audio content from across India’s vibrant cultural spectrum.
+            Whether you're a casual listener, a regional music fan, or an NRI seeking a connection to your roots, you’ll
+            find stations that resonate with your interests. Best of all, it’s free to use and requires no signup.
+            Discover your next favorite station today and enjoy the sounds of India—anytime, anywhere.
+          </p>
+          </p>
+        </details>
 
         <!-- Search Bar Section -->
-        <div class="search-wrapper py-3">
+        <div class="search-wrapper py-2">
           <div>
             <input type="text" id="stationSearch" class="form-control form-control-md rounded-pill"
               placeholder="Search stations..." oninput="searchStations()" />
@@ -114,26 +138,8 @@
     </div>
   </section>
 
-  <section class="py-3">
-    <div class="container text-center">
-      <p class="text-muted small p-2">
-        Our station directory is updated daily, bringing you live streams from both popular FM broadcasters and
-        community-driven digital radios. Whether you’re looking for Tamil devotional stations, Bollywood classics, or
-        regional language news, you’ll find it all here—streamed instantly and ad-free. We support independent voices
-        and
-        aim to make radio discovery simple, fast, and free for everyone.
-      </p>
-    </div>
-  </section>
-
   <!-- Footer -->
   <div th:replace="~{fragments/main :: footer}"></div>
-
-
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Stations Data and Logic -->
   <script>
     let allStations = [];
     let filteredStations = [];
@@ -199,17 +205,19 @@
         const card = document.createElement('div');
         card.className = 'col';
         card.innerHTML = `
-        <a class="text-decoration-none" href="/stations/${station.formattedName}"><div class="card h-100 border shadow-sm station-card" style="">
-          <div class="card-body d-flex align-items-center">
-            <img src="${station.favicon}" alt="${station.name} Logo" class="border p-2 rounded me-2" style="height:75px; width:75px; aspect-ratio: 1/1;">
-            <div class="flex-grow-1">
-              <p class="h4 mb-1">${station.name}</p>
-              <em><p class="small text-muted">${station.metaDescription}</p></em>
-            </div>
-          </div>
+  <a class="text-decoration-none" href="/stations/${station.formattedName}">
+    <div class="card h-100 border shadow-sm station-card" style="">
+      <div class="card-body d-flex align-items-center">
+        <img src="${station.favicon}" alt="${station.name} Logo" class="border p-2 rounded me-2"
+          style="height:75px; width:75px; aspect-ratio: 1/1;">
+        <div class="flex-grow-1">
+          <p class="h5 mb-1">${station.name}</p>
+          <p class="small text-muted">${station.metaDescription}</p>
         </div>
-        </a>
-      `;
+      </div>
+    </div>
+  </a>
+  `;
         container.appendChild(card);
       });
 
@@ -225,28 +233,25 @@
       // Show a window of 4 pages, centered on currentPage if possible
       let startPage = Math.max(1, currentPage - 1);
       let endPage = Math.min(totalPages, startPage + 3);
-      if (endPage - startPage < 3) {
-        startPage = Math.max(1, endPage - 3);
-      }
-
-      // Previous
-      const prevLi = document.createElement('li');
-      prevLi.className = 'page-item' + (currentPage === 1 ? ' disabled' : '');
-      prevLi.innerHTML = `<a class="page-link" href="javascript:void(0)" onclick="changePage(${currentPage - 1})">Previous</a>`;
+      if (endPage - startPage < 3) { startPage = Math.max(1, endPage - 3); } // Previous const
+      prevLi = document.createElement('li'); prevLi.className = 'page-item' + (currentPage === 1 ? ' disabled' : '');
+      prevLi.innerHTML = `<a class="page-link" href="javascript:void(0)" onclick="changePage(${currentPage - 1})">
+    Previous</a>`;
       pagination.appendChild(prevLi);
 
       // Page numbers
       for (let i = startPage; i <= endPage; i++) {
-        const li = document.createElement('li');
-        li.className = 'page-item' + (i === currentPage ? ' active' : '');
-        li.innerHTML = `<a class="page-link" href="javascript:void(0)" onclick="changePage(${i})">${i}</a>`;
+        const li = document.createElement('li'); li.className = 'page-item' +
+          (i === currentPage ? ' active' : ''); li.innerHTML = `<a class="page-link" href="javascript:void(0)"
+      onclick="changePage(${i})">${i}</a>`;
         pagination.appendChild(li);
       }
 
       // Next
       const nextLi = document.createElement('li');
       nextLi.className = 'page-item' + (currentPage === totalPages ? ' disabled' : '');
-      nextLi.innerHTML = `<a class="page-link" href="javascript:void(0)" onclick="changePage(${currentPage + 1})">Next</a>`;
+      nextLi.innerHTML = `<a class="page-link" href="javascript:void(0)"
+        onclick="changePage(${currentPage + 1})">Next</a>`;
       pagination.appendChild(nextLi);
     }
 
@@ -260,8 +265,8 @@
     // Initial fetch
     fetchStationsForPage(currentPage);
   </script>
-  <!-- Custom JS -->
-  <script th:src="@{/js/scripts.js}"></script>
+  <!-- Footer Scripts-->
+  <div th:replace="~{fragments/main :: footerScripts}"></div>
 </body>
 
 </html>

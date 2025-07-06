@@ -1,0 +1,275 @@
+const PageScripts = {
+    "/filter": {
+        init() {
+            filterScript()
+        }
+    },
+    "/add-blog": {
+        init() {
+            addBlogScript()
+        }
+    },
+    "/add-station": {
+        init() {
+            addStationScript()
+        }
+    },
+    "/contact": {
+        init() {
+            contactScript()
+        }
+    },
+    "/stations": {
+        init() {
+            stationsScript()
+        }
+    }
+};
+
+function pageSetup() {
+    closePageLoader();
+    disableRightClickAndInspect();
+    const path = window.location.pathname;
+    let matched = !1;
+    for (const route in PageScripts) {
+        const config = PageScripts[route];
+        if (config.match && typeof config.match === "function") {
+            if (config.match(path)) {
+                config.init();
+                matched = !0;
+                break
+            }
+        } else if (route === path) {
+            config.init();
+            matched = !0;
+            break
+        }
+    }
+    if (!matched) {
+        console.log("No specific JS for this page.")
+    }
+}
+
+function closePageLoader() {
+    setTimeout(function () {
+        const loader = document.getElementById('pageLoader');
+        if (loader) {
+            loader.style.opacity = '0';
+            setTimeout(() => loader.style.display = 'none', 400)
+        }
+    }, 400)
+}
+
+function disableRightClickAndInspect() {
+    document.addEventListener('contextmenu', function (e) {
+        e.preventDefault()
+    });
+    document.addEventListener('keydown', function (e) {
+        if (e.keyCode === 123) {
+            e.preventDefault()
+        }
+        if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+            e.preventDefault()
+        }
+        if (e.ctrlKey && e.shiftKey && e.keyCode === 74) {
+            e.preventDefault()
+        }
+        if (e.ctrlKey && e.keyCode === 85) {
+            e.preventDefault()
+        }
+        if (e.ctrlKey && e.shiftKey && e.keyCode === 67) {
+            e.preventDefault()
+        }
+    })
+}
+
+function addBlogScript() {
+    const form = document.getElementById('add-blog-form');
+    const messageDiv = document.getElementById('formMessage');
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        if (!form.checkValidity()) {
+            form.classList.add('was-validated');
+            return
+        }
+        const data = {
+            faviconUrl: form.faviconUrl.value.trim(),
+            title: form.title.value.trim(),
+            content: form.content.value.trim(),
+            metaDesc: form.metaDesc.value.trim(),
+            relatedStations: form.relatedStations.value.trim()
+        };
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.innerHTML;
+        submitBtn.disabled = !0;
+        submitBtn.innerHTML = 'Submitting...';
+        messageDiv.innerHTML = '';
+        messageDiv.className = '';
+        console.log(data);
+        try {
+            const response = await fetch('/blogs', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            if (response.ok) {
+                messageDiv.className = 'alert alert-success';
+                messageDiv.innerText = 'Blog submitted successfully!';
+                form.reset();
+                form.classList.remove('was-validated')
+            } else {
+                messageDiv.className = 'alert alert-danger';
+                messageDiv.innerText = 'Submission failed. Please try again.'
+            }
+        } catch (error) {
+            console.error(error);
+            messageDiv.className = 'alert alert-danger';
+            messageDiv.innerText = 'An error occurred. Please try again later.'
+        } finally {
+            submitBtn.disabled = !1;
+            submitBtn.innerHTML = originalBtnText
+        }
+    })
+}
+
+function addStationScript() {
+    'use strict';
+    const form = document.getElementById('addStationForm');
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        if (!form.checkValidity()) {
+            form.classList.add('was-validated');
+            return
+        }
+        const data = {
+            name: form.name.value.trim(),
+            email: form.email.value.trim(),
+            favicon_url: form.favicon_url.value.trim(),
+            url: form.url.value.trim(),
+            tags: form.tags.value.trim(),
+            comment: form.comment.value.trim(),
+            terms: form.terms.value
+        };
+        const formMessage = document.getElementById('formMessage');
+        const submitBtn = form.querySelector('button[type="submit"], .submitBtn');
+        const originalBtnContent = submitBtn.innerHTML;
+        submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Sending...`;
+        submitBtn.disabled = !0;
+        formMessage.textContent = '';
+        formMessage.className = 'mb-3';
+        fetch('/add-station', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(response => {
+            if (response.ok) {
+                formMessage.textContent = 'Your station has been submitted successfully!';
+                formMessage.className = 'mb-3 alert alert-success';
+                form.reset();
+                form.classList.remove('was-validated')
+            } else {
+                formMessage.textContent = 'Error submitting the form. Please try again later.';
+                formMessage.className = 'mb-3 alert alert-danger'
+            }
+        }).catch(() => {
+            formMessage.textContent = 'Network error. Please try again later.';
+            formMessage.className = 'mb-3 alert alert-danger'
+        }).finally(() => {
+            submitBtn.innerHTML = originalBtnContent;
+            submitBtn.disabled = !1
+        })
+    }, !1)
+}
+
+function contactScript() {
+    'use strict';
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        if (!form.checkValidity()) {
+            form.classList.add('was-validated');
+            return
+        }
+        const data = {
+            fullName: form.fullName.value,
+            email: form.email.value,
+            subject: form.subject.value,
+            content: form.content.value
+        };
+        const formMessage = document.getElementById('formMessage');
+        const submitBtn = form.querySelector('button[type="submit"], .submitBtn');
+        const originalBtnContent = submitBtn.innerHTML;
+        submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Sending...`;
+        submitBtn.disabled = !0;
+        formMessage.textContent = '';
+        formMessage.className = 'mb-3';
+        fetch('/api/email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(response => {
+            if (response.ok) {
+                formMessage.textContent = 'Your message has been sent successfully!';
+                formMessage.className = 'mb-3 alert alert-success';
+                form.reset();
+                form.classList.remove('was-validated')
+            } else {
+                formMessage.textContent = 'There was an error sending your message. Please try again later.';
+                formMessage.className = 'mb-3 alert alert-danger'
+            }
+        }).catch(() => {
+            formMessage.textContent = 'There was an error sending your message. Please try again later.';
+            formMessage.className = 'mb-3 alert alert-danger'
+        }).finally(() => {
+            submitBtn.innerHTML = originalBtnContent;
+            submitBtn.disabled = !1
+        })
+    }, !1)
+}
+
+function filterScript() {
+    document.querySelectorAll('.submitBtn').forEach(function (btn) {
+        btn.addEventListener('click', async function (event) {
+            event.preventDefault();
+            const idx = btn.getAttribute('data-index');
+            const form = document.getElementById('stationForm_' + idx);
+            try {
+                const response = await fetch('/api/filter', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        id: form.querySelector('[id^="id_"]').value,
+                        name: form.querySelector('[id^="name_"]').value,
+                        about: form.querySelector('[id^="about_"]').value,
+                        metaDescription: form.querySelector('[id^="meta_Description_"]').value,
+                        url_resolved: form.querySelector('[id^="url_resolved_"]').value,
+                        homepage: form.querySelector('[id^="homepage_"]').value,
+                        favicon: form.querySelector('[id^="favicon_"]').value,
+                        tags: form.querySelector('[id^="tags_"]').value,
+                        isLive: form.querySelector('[id^="isLive_"]').value
+                    })
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok')
+                }
+                const data = await response.json();
+                alert('Data submitted successfully');
+                window.location.reload()
+            } catch (error) {
+                console.error('There seems to be an error: ', error)
+            }
+        })
+    })
+}
+document.addEventListener('DOMContentLoaded', pageSetup)

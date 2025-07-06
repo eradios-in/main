@@ -28,7 +28,6 @@
   <!-- Fallback when favicon is missing -->
   <meta property="og:image" th:unless="${station.favicon != null}" content="/images/logo.png" />
 
-  <!-- RADIO STATION STRUCTURED DATA -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -78,9 +77,8 @@
 
   <!-- Main Content -->
   <section>
-
     <div class="container mt-3">
-      <div>
+      <div style="text-align: justify;">
         <p class="text-muted small">
           Listen to <strong th:text="${station.name}">[Station Name]</strong> online via eRadios.in. This station
           offers live streaming of music, news, or entertainment based on its regional focus and language.
@@ -122,7 +120,7 @@
       </div>
 
       <!-- Related Stations Section -->
-      <div class="mt-3">
+      <div class="my-3">
         <h2 class="h3">Related Stations</h2>
         <div class="row row-cols-1 g-3">
           <div class="col" th:each="relStation : ${related}">

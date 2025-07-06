@@ -2,169 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <!-- Common Links -->
+    <th:block th:insert="~{fragments/main :: headlinks}" />
+
+    <!-- Page Specific -->
     <title>Privacy Policy | eRadios.in - Indian Online Radio Streaming</title>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto&display=swap"
-        rel="stylesheet">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <link rel="icon" href="/images/icon.png" type="image/x-icon">
+    <link rel="canonical" href="https://www.eradios.in/privacy" />
 
-    <!-- Mobile-First Custom Styles -->
-    <style>
-        /* Base styles for mobile (default) */
-        body {
-            font-family: 'Roboto', sans-serif;
-            color: #333333;
-            font-size: 16px;
-            margin: 0;
-            padding: 0;
-        }
-
-        .features-section {
-            color: #fff;
-        }
-
-        .main-section {
-            background-color: #fff;
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin: 0 auto;
-            color: #333333;
-        }
-
-        h1 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 1.8rem;
-            color: #1a1a2e;
-            margin-bottom: 0.5em;
-            border-bottom: 2px solid #bd9208;
-            padding-bottom: 10px;
-        }
-
-        h2 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            font-size: 1.2rem;
-            color: #1a1a2e;
-            margin-top: 1.5em;
-            margin-bottom: 0.8em;
-        }
-
-        p,
-        ul {
-            font-family: 'Roboto', sans-serif;
-            font-size: 0.9rem;
-            line-height: 1.8;
-            margin-bottom: 1em;
-        }
-
-        a {
-            color: #bd9208;
-            text-decoration: none;
-            transition: color 0.3s ease-in-out;
-        }
-
-        a:hover {
-            color: #bd9208;
-        }
-
-        .navbar-brand i {
-            color: #bd9208;
-        }
-
-        footer a {
-            color: #fff;
-            transition: color 0.3s ease-in-out;
-        }
-
-        footer a:hover {
-            color: #bd9208;
-        }
-
-        .container {
-            padding: 0 1rem;
-        }
-
-        .ad-space {
-            width: 100%;
-            min-height: 60px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 1rem auto;
-            max-width: 100%;
-        }
-
-        /* Adjustments for larger screens */
-        @media (min-width: 576px) {
-            h1 {
-                font-size: 1.5rem;
-            }
-
-            h2 {
-                font-size: 1.4rem;
-            }
-
-            p,
-            ul {
-                font-size: 1rem;
-            }
-
-            .ad-space {
-                max-width: 468px;
-                min-height: 60px;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .main-section {
-                padding: 2rem;
-                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            }
-
-            h1 {
-                font-size: 2.5em;
-            }
-
-            h2 {
-                font-size: 1.5em;
-            }
-
-            .container {
-                padding: 0 1.5rem;
-            }
-
-            .ad-space {
-                max-width: 728px;
-                min-height: 90px;
-            }
-        }
-
-        @media (min-width: 992px) {
-            .container {
-                max-width: 900px;
-            }
-
-            .main-section {
-                padding: 2.5rem;
-            }
-        }
-    </style>
     <!-- SEO and Social Media Meta Tags -->
-    <meta name="google-adsense-account" content="ca-pub-2939946349164066">
     <meta name="description"
         content="Read the Privacy Policy for eRadios.in. Learn how we handle your data, use cookies for Google Ads, and protect your privacy while you enjoy high-quality radio streaming.">
     <meta name="keywords"
@@ -182,104 +27,47 @@
     <meta name="twitter:description"
         content="Learn how eRadios.in protects your privacy, uses cookies for Google Ads, and manages your data while you stream radio stations online.">
     <meta name="twitter:image" content="https://www.eradios.in/images/logo.png">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2939946349164066"
-        crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Privacy Policy",
+            "url": "https://www.eradios.in/privacy",
+            "description": "Learn how eRadios.in collects, uses, and protects your data. Review our privacy practices and user data policies for radio streaming services.",
+            "publisher": {
+                "@type": "Organization",
+                "name": "eRadios.in",
+                "url": "https://www.eradios.in"
+            }
+        }
+    </script>
 </head>
 
 <body>
-    <script>
-    document.addEventListener('contextmenu', function (e) {
-      e.preventDefault();
-    });
-    document.addEventListener('keydown', function (e) {
-      // F12
-      if (e.keyCode === 123) {
-        e.preventDefault();
-      }
-
-      // Ctrl+Shift+I
-      if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
-        e.preventDefault();
-      }
-
-      // Ctrl+Shift+J (console)
-      if (e.ctrlKey && e.shiftKey && e.keyCode === 74) {
-        e.preventDefault();
-      }
-
-      // Ctrl+U (view source)
-      if (e.ctrlKey && e.keyCode === 85) {
-        e.preventDefault();
-      }
-
-      // Ctrl+Shift+C (inspect element)
-      if (e.ctrlKey && e.shiftKey && e.keyCode === 67) {
-        e.preventDefault();
-      }
-    });
-
-  </script>
     <!-- Loader Overlay -->
-    <div id="pageLoader" style="
-    position:fixed;
-    top:0;left:0;width:100vw;height:100vh;
-    background:linear-gradient(135deg, #fffbe6 0%, #fff3cd 100%);
-    z-index:9999;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition:opacity 0.4s;
-  ">
-        <div style="text-align:center;">
-            <i class="fas fa-radiation fa-spin" style="font-size:8rem;color:#bd9208;"></i>
-        </div>
-    </div>
+    <div th:replace="~{fragments/main :: pageloader}"></div>
 
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="/"><i class="fas fa-radiation fa-spin fs-3 m-2"></i><span
-                    class="d-inline">eRadios.in</span></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/stations">Stations</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/contact">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/add-station"><i class="fas fa-plus-circle"></i></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <div th:replace="~{fragments/main :: navbar}"></div>
 
     <!-- Main Content -->
-    <section class="features-section py-3">
-        <div class="container">
-            <div class="main-section">
-                <h1>Privacy Policy for eRadios.in</h1>
-                <p><strong>Last Updated: June 15, 2025</strong></p>
+    <section class="py-3">
+        <div class="container" style="text-align: justify;">
+            <div class="feature-section">
+                <h1 class="h5">Privacy Policy for eRadios.in</h1>
+                <p class="small"><strong>Last Updated: June 15, 2025</strong></p>
                 <p>At eRadios.in, we value your privacy. This Privacy Policy explains how we handle information when you
                     visit
                     our website. We aim to be transparent about our practices, especially since we use cookies for
                     advertising purposes.</p>
-
-                <h2>Information We Collect</h2>
+            </div>
+            <div class="bg-white p-3">
+                <h2 class="h5 mt-3">Information We Collect</h2>
                 <p>We do not collect or store any personal information about our visitors, such as your name, email
                     address, or
                     other identifying details.</p>
 
-                <h2>Cookies and Google Ads</h2>
+                <h2 class="h5 mt-3">Cookies and Google Ads</h2>
                 <p>Our website uses cookies to enable Google Ads. These cookies are small text files placed on your
                     device to
                     help deliver advertisements that may be relevant to you. Google Ads may use these cookies to track
@@ -299,13 +87,13 @@
                     </li>
                 </ul>
 
-                <h2>How We Use Information</h2>
+                <h2 class="h5 mt-3">How We Use Information</h2>
                 <p>Since we do not collect personal information, the only data involved is the anonymous information
                     collected by
                     cookies for Google Ads. This data is used solely to serve relevant advertisements on our website.
                 </p>
 
-                <h2>Your Choices</h2>
+                <h2 class="h5 mt-3">Your Choices</h2>
                 <p>You can control how cookies are used on our website:</p>
                 <ul>
                     <li><strong>Browser Settings</strong>: Most web browsers allow you to manage or disable cookies
@@ -317,12 +105,12 @@
                             Advertising Opt-Out Help</a>.</li>
                 </ul>
 
-                <h2>Data Sharing</h2>
+                <h2 class="h5 mt-3">Data Sharing</h2>
                 <p>We do not collect or share any personal information. Any data collected by Google Ads cookies is
                     managed by
                     Google and is subject to their privacy practices.</p>
 
-                <h2>Changes to This Privacy Policy</h2>
+                <h2 class="h5 mt-3">Changes to This Privacy Policy</h2>
                 <p>We may update this Privacy Policy from time to time. If we make changes, we will update the "Last
                     Updated" date
                     at the top of this page. We encourage you to review this policy periodically to stay informed about
@@ -330,69 +118,22 @@
 
                 <p>By using our website, you consent to the terms of this Privacy Policy.</p>
 
-                <h2>Get in Touch</h2>
+                <h2 class="h5 mt-3">Get in Touch</h2>
                 <p>Have questions or suggestions? We’d love to hear from you! Reach out to us via <a
-                        href="/contact">Contact Us</a> page.
-                <p>Thank you for choosing eRadios.in—let’s tune in to a world of sound together!</p>
+                        href="/contact">Contact
+                        Us</a> page.
+                <p>Thank you for choosing <a href="/stations">eRadios.in</a>—let’s tune in to a world of sound together!</p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark text-secondary py-4">
-        <div class="container">
-            <!-- First Row: Description and Links -->
-            <div class="row align-items-start">
-                <!-- Description Column -->
-                <div class="col-md-8 col-12 mb-3 mb-md-0">
-                    <small>
-                        <p>
-                            eRadios.in offers a wide variety of Indian radio stations for every taste and region. Stream
-                            Hindi, Tamil, Bengali, Telugu, Malayalam, Marathi and more, featuring music, news, and
-                            devotional content from India and around the globe. Access is completely free and
-                            mobile-friendly, with new stations added regularly. Discover the sounds of India — live,
-                            online, and anywhere.
-                        </p>
-                    </small>
-                </div>
-                <!-- Links Column -->
-                <div class="col-md-4 col-12 text-md-end text-center">
-                    <ul class="list-unstyled">
-            <li><a href="/privacy" class="text-secondary text-decoration-none">Privacy</a></li>
-            <li><a href="/about" class="text-secondary text-decoration-none">About</a></li>
-            <li><a href="/terms" class="text-secondary text-decoration-none">Terms</a></li>
-            <li><a href="/blogs" class="text-secondary text-decoration-none">Blog</a></li>
-            <li><a href="/terms#dmca" class="text-secondary text-decoration-none">DMCA</a></li>
-            <li><a href="/terms#disclaimer" class="text-secondary text-decoration-none">Disclaimer</a></li>
-            <li><a href="/terms#submission-terms" class="text-secondary text-decoration-none">Submission Terms</a></li>
-          </ul>
-                </div>
-            </div>
-            <!-- Second Row: Copyright -->
-            <div class="row mt-3">
-                <div class="col-12 text-center">
-                    <p class="mb-0 fs-6">&copy; 2025 eRadios.in</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div th:replace="~{fragments/main :: footer}"></div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script th:src="@{/js/scripts.js}"></script>
-    <script>
-        // Hide loader after DOM is ready
-        document.addEventListener('DOMContentLoaded', function () {
-            setTimeout(function () {
-                const loader = document.getElementById('pageLoader');
-                if (loader) {
-                    loader.style.opacity = '0';
-                    setTimeout(() => loader.style.display = 'none', 400);
-                }
-            }, 400);
-        });
-    </script>
 </body>
 
 </html>

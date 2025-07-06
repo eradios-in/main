@@ -8,13 +8,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
-import com.rebellion.radioweb.entity.Blog;
 import com.rebellion.radioweb.entity.Station;
 import com.rebellion.radioweb.entity.StationInDto;
 import com.rebellion.radioweb.entity.StationOutDao;
 
 public interface StationService {
-    ResponseEntity<List<StationOutDao>> getRelatedStations();
     List<Station> fetchStationsFromAPI();
     Page<Station> getAllStations(PageRequest pageRequest);
     Page<StationOutDao> getAllStationsOut(PageRequest pageRequest);
@@ -25,5 +23,5 @@ public interface StationService {
     List<String> getListOfStationsForSitemap();
     boolean addStationRequest(StationInDto stationInDto);
     ResponseEntity<Station> getStationById(int id);
-    List<Blog> getRelatedBlogs(String formattedName);
+    List<StationOutDao> getRelatedStations(String searchTags, int currentStationId);
 }

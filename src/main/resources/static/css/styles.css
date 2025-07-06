@@ -58,28 +58,14 @@ a:hover,
 
 .description-text {
     display: -webkit-box;
-    -webkit-line-clamp: 4;
-    line-clamp: 4;
-    /* Limits text to 4 lines */
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    /* Limits text to 3 lines */
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-justify: justify;
     text-overflow: ellipsis;
 }
-
-.toggle-button {
-    display: inline-block;
-    background-color: #ffc107;
-    cursor: pointer;
-    padding: 5px 0;
-    font-size: 14px;
-    color: #f8f9fa;
-}
-
-.toggle-button:hover {
-    background-color: #af8507;
-}
-
 
 /* Adjustments for larger screens */
 @media (min-width: 576px) {}

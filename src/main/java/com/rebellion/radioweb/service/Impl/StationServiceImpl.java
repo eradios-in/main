@@ -5,6 +5,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -21,7 +22,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rebellion.radioweb.entity.Blog;
 import com.rebellion.radioweb.entity.Station;
 import com.rebellion.radioweb.entity.StationInDto;
 import com.rebellion.radioweb.entity.StationOutDao;
@@ -34,13 +34,11 @@ public class StationServiceImpl implements StationService {
     private final EmailService emailService;
     private final StationRepo stationRepo;
     private final ObjectMapper mapper;
-    private final BlogServiceImpl blogServiceImpl;
 
-    public StationServiceImpl(EmailService emailService, StationRepo stationRepo, ObjectMapper mapper, BlogServiceImpl blogServiceImpl) {
+    public StationServiceImpl(EmailService emailService, StationRepo stationRepo, ObjectMapper mapper) {
         this.emailService = emailService;
         this.stationRepo = stationRepo;
         this.mapper = mapper;
-        this.blogServiceImpl = blogServiceImpl;
     }
 
     @Override
@@ -55,11 +53,24 @@ public class StationServiceImpl implements StationService {
     }
 
     @Override
-    public ResponseEntity<List<StationOutDao>> getRelatedStations() {
-        List<Station> stations = stationRepo.findFirst10ByIsLiveTrue();
-        List<StationOutDao> stationOutDaos = mapper.convertValue(stations, new TypeReference<List<StationOutDao>>() {
-        });
-        return new ResponseEntity<>(stationOutDaos, HttpStatus.OK);
+    public List<StationOutDao> getRelatedStations(String searchTags, int currentStationId) {
+        List<String> tagList = Arrays.stream(searchTags.split(","))
+                .map(String::trim)
+                .map(String::toLowerCase)
+                .toList();
+
+        List<StationOutDao> result = stationRepo.findAllByIsLiveTrue().stream()
+                .filter(station -> {
+                    if (station.getTags() == null || (station.getId() == currentStationId))
+                        return false;
+                    String tags = station.getTags().toLowerCase();
+                    return tagList.stream().anyMatch(tags::contains);
+                })
+                .limit(10)
+                .map(station -> mapper.convertValue(station, StationOutDao.class))
+                .toList();
+
+        return result;
     }
 
     @Override
@@ -120,18 +131,13 @@ public class StationServiceImpl implements StationService {
         RestTemplate restTemplate = new RestTemplate();
         HttpStatusCode status = restTemplate.getForEntity(input.getUrl(), Void.class).getStatusCode();
         if (status.is2xxSuccessful()) {
-            String content = String.format("Email: %s\nStation Name: %s\nFav Url: %s\nStream Url: %s\nTags: %s\nComment: %s", input.getEmail(),
+            String content = String.format(
+                    "Email: %s\nStation Name: %s\nFav Url: %s\nStream Url: %s\nTags: %s\nComment: %s", input.getEmail(),
                     input.getName(), input.getFavicon_url(), input.getUrl(), input.getTags(), input.getComment());
             emailService.sendEmail(input.getEmail(), "Add Station: " + input.getName(), content);
             return true;
         }
         return false;
-    }
-
-    @Override
-    public List<Blog> getRelatedBlogs(String formattedName) {
-        List<Blog> foundBlog = blogServiceImpl.getBlogsRelatedToStation(formattedName);
-        return foundBlog;
     }
 
     // ************************************* DANGER ZONE

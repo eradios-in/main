@@ -73,7 +73,7 @@
 
   <section class="py-3">
     <div class="container">
-      <div class="blog-card border rounded-3 p-3 mb-4" th:each="blog : ${blogs}">
+      <div class="blog-card border rounded-3 p-3 mb-4 bg-white" th:each="blog : ${blogs}">
         <h2 class="h4 fw-bold mb-3" th:text="${blog.title}">Blog Title</h2>
 
         <div class="d-flex flex-column flex-md-row gap-3 align-items-start">
@@ -83,11 +83,11 @@
           </div>
 
           <div class="description-container">
-            <div class="description-text small text-body" th:utext="${blog.content}" id="descriptionText">
+            <div class="description-text small text-body mb-2" th:utext="${blog.content}" id="descriptionText">
               Station description goes here.
             </div>
             <div class="text-end"> <a th:href="'/blogs/' + ${blog.articleUrl}"
-                class="btn btn-sm toggle-button px-3">Read More</a>
+                class="btn btn-warning btn-sm px-3">Read More</a>
             </div>
           </div>
         </div>

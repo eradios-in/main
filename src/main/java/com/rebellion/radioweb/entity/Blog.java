@@ -16,8 +16,8 @@ public class Blog {
     private String metaDesc;
     @Id
     private String articleUrl;
-    @Column(length=4096)
-    private String relatedStations;
+    @Column(length=1024)
+    private String tags;
 
     public Blog() {
     }
@@ -62,11 +62,11 @@ public class Blog {
         this.articleUrl = title.replace(" ", "-").toLowerCase();
     }
 
-    public String getRelatedStations() {
-        return relatedStations;
+    public String getTags() {
+        return tags;
     }
 
-    public void setRelatedStations(String relatedStations) {
-        this.relatedStations = relatedStations;
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 }

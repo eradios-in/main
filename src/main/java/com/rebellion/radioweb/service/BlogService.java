@@ -1,8 +1,9 @@
 package com.rebellion.radioweb.service;
 
 import java.util.List;
-
+import org.springframework.http.ResponseEntity;
 import com.rebellion.radioweb.entity.Blog;
+import com.rebellion.radioweb.entity.StationOutDao;
 
 public interface BlogService {
     Blog getBlogByArticleUrl(String articleUrl);
@@ -11,5 +12,6 @@ public interface BlogService {
 
     List<String> getListOfBlogsForSitemap();
 
-    List<Blog> getBlogsRelatedToStation(String formattedName);
+    ResponseEntity<List<Blog>> getRelatedBlogs(String searchTags, String currentStationId);
+    ResponseEntity<List<StationOutDao>> getRelatedStations(String searchTags, int currentStationId);
 }

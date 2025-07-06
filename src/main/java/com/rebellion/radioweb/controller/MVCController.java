@@ -55,11 +55,10 @@ public class MVCController {
         List<String> tags = null;
         if(station != null) {
              tags = List.of(station.getTags().split(",")).stream().map(String::trim).toList();
+             modelAndView.addObject("related", stationServiceImpl.getRelatedStations(station.getTags(), station.getId()));
         }
         modelAndView.addObject("station", station);
         modelAndView.addObject("tags", tags);
-        modelAndView.addObject("related", stationServiceImpl.getRelatedStations().getBody());
-        modelAndView.addObject("relatedBlogs", stationServiceImpl.getRelatedBlogs(formattedName));
         modelAndView.setViewName("station");
         return modelAndView;
     }
@@ -123,7 +122,10 @@ public class MVCController {
 
     @GetMapping("/blogs/{articleUrl}")
     public ModelAndView getBlogArticle(@PathVariable String articleUrl, ModelAndView modelAndView){
-        modelAndView.addObject("blog", blogServiceImpl.getBlogByArticleUrl(articleUrl));
+        Blog foundBlog = blogServiceImpl.getBlogByArticleUrl(articleUrl);
+        modelAndView.addObject("blog", foundBlog);
+        modelAndView.addObject("relatedBlogs", blogServiceImpl.getRelatedBlogs(foundBlog.getTags(), foundBlog.getArticleUrl()).getBody());
+        modelAndView.addObject("relatedStations", blogServiceImpl.getRelatedStations(foundBlog.getTags(), 0).getBody());
         modelAndView.setViewName("blog");
         return modelAndView;
     }

@@ -52,12 +52,34 @@
             <div class="feature-section mb-3">
                 <h1 class="h5">Add Station</h1>
                 <p class="small text-light">
-                    Want to grow your radio station's reach? Use the form below to submit your station to eRadios.in,
-                    India's dedicated online radio directory. We welcome FM, internet, and community stations in any
-                    language. By joining our platform, your station becomes accessible to thousands of listeners
-                    worldwide through mobile and desktop browsers. Please ensure all required details are filled out
-                    correctly. We will review the submission within 5 business days.
+                    Want to grow your radio station's reach and attract more listeners? Use the form below to submit
+                    your station to eRadios.in, India's dedicated online radio directory.
                 </p>
+                <details class="mb-1">
+                    <summary class="small">Read more</summary>
+                    <p class="small">
+                        Whether you run an FM station, an internet radio channel, or a local community broadcast, we
+                        welcome stations in all languages,
+                        genres, and formats. Our platform helps your station become accessible to a growing audience
+                        across
+                        India and worldwide — no mobile app required. Listeners can discover your station easily through
+                        our
+                        mobile-optimized, fast-loading directory that works on all devices and browsers.
+                    </p>
+                    <p class="small">
+                        At eRadios.in, we’re committed to supporting both large broadcasters and independent voices. By
+                        adding your station to our curated collection, you can tap into an engaged and diverse listener
+                        base
+                        looking for content in Hindi, Tamil, Telugu, Punjabi, Marathi, Bengali, Kannada, Urdu, and more.
+                        From devotional channels and classical music to talk shows and trending hits, we feature it all.
+                    </p>
+                    <p class="small">
+                        Please ensure that your submission includes accurate details such as stream URL, station name,
+                        language, and a brief description. We manually review all station entries to ensure quality and
+                        relevance. Most submissions are reviewed and published within 3–5 business days. Join eRadios.in
+                        today and extend your station’s presence to thousands of new listeners across the globe.
+                    </p>
+                </details>
             </div>
             <div class="bg-white p-3">
                 <div id="formMessage" class="mb-3"></div>
@@ -107,8 +129,8 @@
                         <label for="tags" class="form-label">Tags</label>
                         <input type="text" class="form-control form-control-sm text-muted" id="tags" name="tags"
                             placeholder="Enter comma separated tags" required>
-                            <div class="invalid-feedback">
-                             Tags are mandatory.
+                        <div class="invalid-feedback">
+                            Tags are mandatory.
                         </div>
                     </div>
 
@@ -141,15 +163,16 @@
     <section>
         <div class="container">
             <p class="small">
-                Want to explore how your station will appear? <a href="/stations" class="text-secondary">View existing stations</a>.
+                Want to explore how your station will appear? <a href="/stations" class="text-secondary">View existing
+                    stations</a>.
             </p>
         </div>
     </section>
 
     <!-- Footer -->
-    <div th:replace="~{fragments/main :: footer}"></div>   
+    <div th:replace="~{fragments/main :: footer}"></div>
     <!-- Footer Scripts-->
-  <div th:replace="~{fragments/main :: footerScripts}"></div>
+    <div th:replace="~{fragments/main :: footerScripts}"></div>
 </body>
 
 </html>

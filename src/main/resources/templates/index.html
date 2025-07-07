@@ -123,7 +123,7 @@
     <!-- Footer -->
     <div th:replace="~{fragments/main :: footer}"></div>
     <!-- Footer Scripts-->
-    <div th:replace="~{fragments/main :: footerScripts}"></div>
+    <th:block th:insert="~{fragments/main :: footerScripts}"></th:block>
 </body>
 
 </html>

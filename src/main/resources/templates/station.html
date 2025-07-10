@@ -6,22 +6,22 @@
   <th:block th:insert="~{fragments/main :: headlinks}" />
 
   <!-- Page Specific -->
-  <title th:text="${station.name} + ' | eRadios.in - Indian Online Radio Streaming'">Station - eRadios.in</title>
+  <title th:text="${station.title}">Station - eRadios.in</title>
   <link rel="canonical" th:href="@{/stations/{name}(name=${station.formattedName})}" />
 
   <!-- SEO Meta Tags -->
   <meta name="description" th:content="${station.metaDescription}">
   <meta name="keywords"
-    th:content="'eRadios, ' + ${station.name} + ', online radio, live radio, radio streaming, music, news, entertainment, high-quality streaming, mobile-friendly, Indian stations'">
+    th:content="'eRadios, ' + ${station.title} + ', online radio, live radio, radio streaming, music, news, entertainment, high-quality streaming, mobile-friendly, Indian stations'">
   <meta name="author" content="eRadios.in">
-  <meta property="og:title" th:content="${station.name} + ' – Listen Live on eRadios.in'">
+  <meta property="og:title" th:content="${station.title}">
   <meta property="og:description" th:content="${station.metaDescription}">
   <meta property="og:type" content="music.radio_station">
   <meta property="og:url" th:content="@{/stations/{name}(name=${station.formattedName})}">
   <meta property="og:site_name" content="eRadios.in">
   <meta property="og:image" th:content="${station.favicon} ?: 'https://www.eradios.in/images/logo.png'">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" th:content="${station.name} + ' – Listen Live on eRadios.in'">
+  <meta name="twitter:title" th:content="${station.title}">
   <meta name="twitter:description" th:content="${station.metaDescription}">
   <!-- When favicon is available -->
   <meta property="og:image" th:if="${station.favicon != null}" th:content="${station.favicon}" />

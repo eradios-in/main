@@ -101,6 +101,11 @@ public ResponseEntity<Map<String, Object>> searchStations(
             input.setUrl_resolved("");
         }
 
+        // set url_resolved if not provided
+        if (input.getTitle() == null || input.getTitle().isEmpty()) {
+            input.setTitle("");
+        }
+
         // save input station to the database
         return stationServiceImpl.saveStation(input);
     }

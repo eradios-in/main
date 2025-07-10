@@ -29,6 +29,7 @@ public class Station {
     private String tags;
     @Column(length = 2048)
     private String favicon = "/images/station_fallback_image.webp";
+    private String title;
 
     public Station() {
     }
@@ -111,5 +112,13 @@ public class Station {
 
     public void setFormattedName(String name) {
         this.formattedName = name.trim().toLowerCase().replaceAll(" ", "-");
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

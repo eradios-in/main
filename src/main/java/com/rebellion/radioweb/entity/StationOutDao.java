@@ -8,6 +8,7 @@ public class StationOutDao {
     private String favicon;
     private String tags;
     private String metaDescription;
+    private String title;
 
     public StationOutDao() {
     }
@@ -36,4 +37,7 @@ public class StationOutDao {
         return metaDescription;
     }
 
+    public String getTitle() {
+        return title;
+    }
 }

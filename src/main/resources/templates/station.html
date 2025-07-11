@@ -149,81 +149,115 @@
   <!-- HLS.js must be loaded first -->
   <script src="https://cdn.jsdelivr.net/npm/hls.js@1.4.12/dist/hls.min.js"></script>
   <script th:inline="javascript">
-    const player = document.createElement('audio');
-    player.controls = false;
-    document.body.appendChild(player);
+  const player = document.createElement('audio');
+  player.controls = false;
+  player.autoplay = false;
+  player.preload = "none";
+  document.body.appendChild(player);
 
-    const playBtn = document.getElementById("play_btn");
-    const streamUrl = /*[[${station.url_resolved}]]*/ '';
-    const stationHomepage = /*[[${station.homepage}]]*/ '';
+  const playBtn = document.getElementById("play_btn");
+  const streamUrl = /*[[${station.url_resolved}]]*/ '';
+  const stationHomepage = /*[[${station.homepage}]]*/ '';
 
-    let isHls = streamUrl.endsWith(".m3u8") || streamUrl.includes(".m3u8");
+  let isHls = streamUrl.endsWith(".m3u8") || streamUrl.includes(".m3u8");
+  let hls = null;
+  let isPlaying = false;
 
-    function showLoader() {
-      playBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i>`;
+  function showLoader() {
+    playBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i>`;
+  }
+
+  function showPlayIcon() {
+    playBtn.innerHTML = `<i class="fas fa-play-circle"></i>`;
+  }
+
+  function showPauseIcon() {
+    playBtn.innerHTML = `<i class="fas fa-pause-circle"></i>`;
+  }
+
+  function setupStream() {
+    if (isHls && Hls.isSupported()) {
+      hls = new Hls({ autoStartLoad: true });
+      hls.loadSource(streamUrl);
+      hls.attachMedia(player);
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        showPlayIcon();
+      });
+      hls.on(Hls.Events.ERROR, function (event, data) {
+        console.warn("HLS error", data);
+        if (data.fatal) {
+          hls.destroy();
+          reconnectStream();
+        }
+      });
+    } else if (isHls && player.canPlayType('application/vnd.apple.mpegurl')) {
+      player.src = streamUrl;
+      player.addEventListener('loadedmetadata', () => {
+        showPlayIcon();
+      });
+    } else {
+      player.src = streamUrl;
+      player.addEventListener('canplay', () => {
+        showPlayIcon();
+      });
     }
 
-    function showPlayIcon() {
-      playBtn.innerHTML = `<i class="fas fa-play-circle"></i>`;
-    }
-
-    function showPauseIcon() {
-      playBtn.innerHTML = `<i class="fas fa-pause-circle"></i>`;
-    }
-
-    function setupStream() {
-      showLoader();
-
-      if (isHls && Hls.isSupported()) {
-        const hls = new Hls({ autoStartLoad: true });
-        hls.loadSource(streamUrl);
-        hls.attachMedia(player);
-        hls.on(Hls.Events.MANIFEST_PARSED, () => {
-          showPlayIcon();
-        });
-      } else if (isHls && player.canPlayType('application/vnd.apple.mpegurl')) {
-        // Safari HLS support
-        player.src = streamUrl;
-        player.addEventListener('loadedmetadata', () => {
-          showPlayIcon();
-        });
-      } else {
-        // MP3, AAC, etc.
-        player.src = streamUrl;
-        player.addEventListener('canplay', () => {
-          showPlayIcon();
-        });
-      }
-    }
-
-    setupStream();
-
-    playBtn.addEventListener('click', () => {
-      if (player.paused) {
-        showLoader(); // Show loader while trying to play
-        player.play().then(() => {
-          showPauseIcon(); // Switch to pause after successful play
-        }).catch(err => {
-          console.warn("Playback failed:", err);
-
-          if (isHls && Hls.isSupported()) {
-            const hls = new Hls();
-            hls.loadSource(streamUrl);
-            hls.attachMedia(player);
-            hls.on(Hls.Events.MANIFEST_PARSED, () => {
-              player.play();
-              showPauseIcon();
-            });
-          } else {
-            alert('Cannot play stream. Opening in external player...');
-            playBtn.innerHTML = `<a href="${stationHomepage}" target="_blank"><i class="play-icon fas fa-external-link-alt"></i></a>`;
-          }
-        });
-      } else {
-        player.pause();
-        showPlayIcon(); // Switch back to play icon when paused
-      }
+    // Global error fallback
+    player.addEventListener('error', (e) => {
+      console.warn("Audio error", e);
+      reconnectStream();
     });
+
+    player.addEventListener('stalled', () => {
+      console.warn("Audio stalled");
+      reconnectStream();
+    });
+
+    player.addEventListener('ended', () => {
+      console.log("Stream ended, trying to reconnect...");
+      reconnectStream();
+    });
+  }
+
+  function reconnectStream() {
+    showLoader();
+    setTimeout(() => {
+      if (hls) {
+        hls.destroy();
+        hls = null;
+      }
+      setupStream();
+      player.play().catch(() => {
+        showPlayIcon();
+      });
+    }, 3000);
+  }
+
+    let isInitialized = false;
+
+playBtn.addEventListener('click', () => {
+  if (!isInitialized) {
+    setupStream();
+    isInitialized = true;
+  }
+
+  if (player.paused || player.ended) {
+    showLoader();
+    player.play().then(() => {
+      isPlaying = true;
+      showPauseIcon();
+    }).catch(err => {
+      console.warn("Playback failed:", err);
+      showPlayIcon();
+      window.open(stationHomepage, "_blank");
+    });
+  } else {
+    player.pause();
+    isPlaying = false;
+    showPlayIcon();
+  }
+});
+
   </script>
   <!-- Footer Scripts-->
   <div th:replace="~{fragments/main :: footerScripts}"></div>

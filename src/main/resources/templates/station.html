@@ -2,265 +2,284 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <!-- Common Links -->
-  <th:block th:insert="~{fragments/main :: headlinks}" />
+    <!-- Common Links -->
+    <th:block th:insert="~{fragments/main :: headlinks}"/>
 
-  <!-- Page Specific -->
-  <title th:text="${station.title}">Station - eRadios.in</title>
-  <link rel="canonical" th:href="@{/stations/{name}(name=${station.formattedName})}" />
+    <!-- Page Specific -->
+    <title th:text="${station.title}">Station - eRadios.in</title>
+    <link rel="canonical" th:href="@{/stations/{name}(name=${station.formattedName})}"/>
 
-  <!-- SEO Meta Tags -->
-  <meta name="description" th:content="${station.metaDescription}">
-  <meta name="keywords"
-    th:content="'eRadios, ' + ${station.title} + ', online radio, live radio, radio streaming, music, news, entertainment, high-quality streaming, mobile-friendly, Indian stations'">
-  <meta name="author" content="eRadios.in">
-  <meta property="og:title" th:content="${station.title}">
-  <meta property="og:description" th:content="${station.metaDescription}">
-  <meta property="og:type" content="music.radio_station">
-  <meta property="og:url" th:content="@{/stations/{name}(name=${station.formattedName})}">
-  <meta property="og:site_name" content="eRadios.in">
-  <meta property="og:image" th:content="${station.favicon} ?: 'https://www.eradios.in/images/logo.png'">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" th:content="${station.title}">
-  <meta name="twitter:description" th:content="${station.metaDescription}">
-  <!-- When favicon is available -->
-  <meta property="og:image" th:if="${station.favicon != null}" th:content="${station.favicon}" />
-  <!-- Fallback when favicon is missing -->
-  <meta property="og:image" th:unless="${station.favicon != null}" content="/images/logo.png" />
+    <!-- SEO Meta Tags -->
+    <meta name="description" th:content="${station.metaDescription}">
+    <meta name="keywords"
+          th:content="'eRadios, ' + ${station.title} + ', online radio, live radio, radio streaming, music, news, entertainment, high-quality streaming, mobile-friendly, Indian stations'">
+    <meta content="eRadios.in" name="author">
+    <meta property="og:title" th:content="${station.title}">
+    <meta property="og:description" th:content="${station.metaDescription}">
+    <meta content="music.radio_station" property="og:type">
+    <meta property="og:url" th:content="@{/stations/{name}(name=${station.formattedName})}">
+    <meta content="eRadios.in" property="og:site_name">
+    <meta property="og:image" th:content="${station.favicon} ?: 'https://www.eradios.in/images/logo.png'">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta name="twitter:title" th:content="${station.title}">
+    <meta name="twitter:description" th:content="${station.metaDescription}">
+    <!-- When favicon is available -->
+    <meta property="og:image" th:content="${station.favicon}" th:if="${station.favicon != null}"/>
+    <!-- Fallback when favicon is missing -->
+    <meta content="/images/logo.png" property="og:image" th:unless="${station.favicon != null}"/>
 
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "RadioStation",
-      "name": "[[${station.name}]]",
-      "url": "https://www.eradios.in/stations/[[${station.formattedName}]]",
-      "logo": "[[${station.favicon}]]",
-      "description": "[[${station.metaDescription}]]"
-    }
-  </script>
-
-  <!-- BREADCRUMB STRUCTURED DATA -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
+    <script type="application/ld+json">
         {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://www.eradios.in/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Stations",
-          "item": "https://www.eradios.in/stations"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "[[${station.name}]]",
-          "item": "https://www.eradios.in/stations/[[${station.formattedName}]]"
+            "@context": "https://schema.org",
+            "@type": "RadioStation",
+            "name": "[[${station.name}]]",
+            "url": "https://www.eradios.in/stations/[[${station.formattedName}]]",
+            "logo": "[[${station.favicon}]]",
+            "description": "[[${station.metaDescription}]]"
         }
-      ]
-    }
-  </script>
+    </script>
+
+    <!-- BREADCRUMB STRUCTURED DATA -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://www.eradios.in/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Stations",
+                    "item": "https://www.eradios.in/stations"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "[[${station.name}]]",
+                    "item": "https://www.eradios.in/stations/[[${station.formattedName}]]"
+                }
+            ]
+        }
+    </script>
 </head>
 
 <body>
-  <!-- Loader Overlay -->
-  <div th:replace="~{fragments/main :: pageloader}"></div>
+<!-- Loader Overlay -->
+<div th:replace="~{fragments/main :: pageloader}"></div>
 
-  <!-- Navigation Bar -->
-  <div th:replace="~{fragments/main :: navbar}"></div>
+<!-- Navigation Bar -->
+<div th:replace="~{fragments/main :: navbar}"></div>
 
-  <!-- Main Content -->
-  <section>
+<!-- Main Content -->
+<section>
     <div class="container mt-3">
-      <div style="text-align: justify;">
-        <p class="text-muted small">
-          Listen to <strong th:text="${station.name}">[Station Name]</strong> online via eRadios.in. This station
-          offers live streaming of music, news, or entertainment based on its regional focus and language.
-        </p>
-      </div>
-      <!-- Breadcrumbs Section -->
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb py-1 mb-2">
-          <li class="breadcrumb-item"><a href="/">Home</a></li>
-          <li class="breadcrumb-item"><a href="/stations">Stations</a></li>
-          <li class="breadcrumb-item active" aria-current="page" th:text="${station.name}">Station Name</li>
-        </ol>
-      </nav>
-      <div class="feature-section mb-3">
-        <!-- Station Details Section -->
-        <div class="d-flex flex-column align-items-center">
-          <img th:src="${station.favicon}" th:alt="${station.name} + ' Logo'"
-            class="rounded border border-secondary border-2 mb-3 bg-light"
-            style="width: 150px; height: 150px; aspect-ratio: 1/1;">
-          <div class="d-flex align-items-center justify-content-between w-100 text-dark">
-            <h1 class="h2" th:text="${station.name}">Station Name</h1>
-            <a href="javascript:void(0);" class="text-dark display-4" id="play_btn">
-              <i class="fas fa-play-circle"></i>
-            </a>
-          </div>
+        <div style="text-align: justify;">
+            <p class="text-muted small">
+                Listen to <strong th:text="${station.name}">[Station Name]</strong> online via eRadios.in. This station
+                offers live streaming of music, news, or entertainment based on its regional focus and language.
+            </p>
         </div>
-      </div>
+        <!-- Breadcrumbs Section -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb py-1 mb-2">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/stations">Stations</a></li>
+                <li aria-current="page" class="breadcrumb-item active" th:text="${station.name}">Station Name</li>
+            </ol>
+        </nav>
+        <div class="feature-section mb-3">
+            <!-- Station Details Section -->
+            <div class="d-flex flex-column align-items-center">
+                <img class="rounded border border-secondary border-2 mb-3 bg-light" style="width: 150px; height: 150px; aspect-ratio: 1/1;"
+                     th:alt="${station.name} + ' Logo'"
+                     th:src="${station.favicon}">
+                <div class="d-flex align-items-center justify-content-between w-100 text-dark">
+                    <h1 class="h2" th:text="${station.name}">Station Name</h1>
+                    <a class="text-dark display-4" href="javascript:void(0);" id="play_btn">
+                        <i class="fas fa-play-circle"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="container">
-      <!-- Description -->
-      <div class="mt-3">
-        <h2 class="h3">Description</h2>
-        <div>
-          <div class="text-muted" th:utext="${station.about}" style="text-align: justify;">
-            Station description goes here.
-          </div>
-        </div>
-      </div>
-
-      <!-- Related Stations Section -->
-      <div class="my-3">
-        <h2 class="h3">Related Stations</h2>
-        <div class="row row-cols-1 g-3">
-          <div class="col" th:each="relStation : ${related}">
-            <a th:href="@{/stations/{name}(name=${relStation.formattedName})}">
-              <div class="card h-100 border shadow-sm station-card">
-                <div class="card-body d-flex align-items-center">
-                  <img th:src="${relStation.favicon}" th:alt="${relStation.name} + ' Logo'"
-                    class="border p-2 rounded me-2" style="height:75px; width:75px; aspect-ratio: 1/1;">
-                  <div class="flex-grow-1">
-                    <p class="h4 mb-1" th:text="${relStation.name}">Related Station</p>
-                    <p class="small text-muted" th:text="${relStation.metaDescription}">Related Station
-                        metaDescription</p>
-                  </div>
+        <!-- Description -->
+        <div class="mt-3">
+            <h2 class="h3">Description</h2>
+            <div>
+                <div class="text-muted" style="text-align: justify;" th:utext="${station.about}">
+                    Station description goes here.
                 </div>
-              </div>
-            </a>
-          </div>
+            </div>
         </div>
-      </div>
+
+        <!-- Related Stations Section -->
+        <div class="my-3">
+            <h2 class="h3">Related Stations</h2>
+            <div class="row row-cols-1 g-3">
+                <div class="col" th:each="relStation : ${related}">
+                    <a th:href="@{/stations/{name}(name=${relStation.formattedName})}">
+                        <div class="card h-100 border shadow-sm station-card">
+                            <div class="card-body d-flex align-items-center">
+                                <img class="border p-2 rounded me-2" style="height:75px; width:75px; aspect-ratio: 1/1;"
+                                     th:alt="${relStation.name} + ' Logo'"
+                                     th:src="${relStation.favicon}">
+                                <div class="flex-grow-1">
+                                    <p class="h4 mb-1" th:text="${relStation.name}">Related Station</p>
+                                    <p class="small text-muted" th:text="${relStation.metaDescription}">Related Station
+                                        metaDescription</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-  </section>
+</section>
 
-  <!-- Footer -->
-  <div th:replace="~{fragments/main :: footer}"></div>
+<!-- Footer -->
+<div th:replace="~{fragments/main :: footer}"></div>
 
-  <!-- HLS.js must be loaded first -->
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.4.12/dist/hls.min.js"></script>
-  <script th:inline="javascript">
-  const player = document.createElement('audio');
-  player.controls = false;
-  player.autoplay = false;
-  player.preload = "none";
-  document.body.appendChild(player);
+<!-- HLS.js must be loaded first -->
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.4.12/dist/hls.min.js"></script>
+<script th:inline="javascript">
+    const player = document.createElement('audio');
+    player.controls = false;
+    player.autoplay = false;
+    player.preload = "none";
+    document.body.appendChild(player);
 
-  const playBtn = document.getElementById("play_btn");
-  const streamUrl = /*[[${station.url_resolved}]]*/ '';
-  const stationHomepage = /*[[${station.homepage}]]*/ '';
+    const playBtn = document.getElementById("play_btn");
+    const streamUrl = /*[[${station.url_resolved}]]*/ '';
+    const stationHomepage = /*[[${station.homepage}]]*/ '';
 
-  let isHls = streamUrl.endsWith(".m3u8") || streamUrl.includes(".m3u8");
-  let hls = null;
-  let isPlaying = false;
+    let isHls = streamUrl.endsWith(".m3u8") || streamUrl.includes(".m3u8");
+    let hls = null;
+    let isPlaying = false;
 
-  function showLoader() {
-    playBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i>`;
-  }
+    function showLoader() {
+      playBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i>`;
+    }
 
-  function showPlayIcon() {
-    playBtn.innerHTML = `<i class="fas fa-play-circle"></i>`;
-  }
+    function showPlayIcon() {
+      playBtn.innerHTML = `<i class="fas fa-play-circle"></i>`;
+    }
 
-  function showPauseIcon() {
-    playBtn.innerHTML = `<i class="fas fa-pause-circle"></i>`;
-  }
+    function showPauseIcon() {
+      playBtn.innerHTML = `<i class="fas fa-pause-circle"></i>`;
+    }
 
-  function setupStream() {
-    if (isHls && Hls.isSupported()) {
-      hls = new Hls({ autoStartLoad: true });
-      hls.loadSource(streamUrl);
-      hls.attachMedia(player);
-      hls.on(Hls.Events.MANIFEST_PARSED, () => {
-        showPlayIcon();
+    function setupStream() {
+      if (isHls && Hls.isSupported()) {
+        hls = new Hls({ autoStartLoad: true });
+        hls.loadSource(streamUrl);
+        hls.attachMedia(player);
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          showPlayIcon();
+        });
+        hls.on(Hls.Events.ERROR, function (event, data) {
+          console.warn("HLS error", data);
+          if (data.fatal) {
+            hls.destroy();
+            reconnectStream();
+          }
+        });
+      } else if (isHls && player.canPlayType('application/vnd.apple.mpegurl')) {
+        player.src = streamUrl;
+        player.addEventListener('loadedmetadata', () => {
+          showPlayIcon();
+        });
+      } else {
+        player.src = streamUrl;
+        player.addEventListener('canplay', () => {
+          showPlayIcon();
+        });
+      }
+
+      // Global error fallback
+      player.addEventListener('error', (e) => {
+        console.warn("Audio error", e);
+        reconnectStream();
       });
-      hls.on(Hls.Events.ERROR, function (event, data) {
-        console.warn("HLS error", data);
-        if (data.fatal) {
-          hls.destroy();
-          reconnectStream();
-        }
+
+      player.addEventListener('stalled', () => {
+        console.warn("Audio stalled");
+        reconnectStream();
       });
-    } else if (isHls && player.canPlayType('application/vnd.apple.mpegurl')) {
-      player.src = streamUrl;
-      player.addEventListener('loadedmetadata', () => {
-        showPlayIcon();
-      });
-    } else {
-      player.src = streamUrl;
-      player.addEventListener('canplay', () => {
-        showPlayIcon();
+
+      player.addEventListener('ended', () => {
+        console.log("Stream ended, trying to reconnect...");
+        reconnectStream();
       });
     }
 
-    // Global error fallback
-    player.addEventListener('error', (e) => {
-      console.warn("Audio error", e);
-      reconnectStream();
-    });
-
-    player.addEventListener('stalled', () => {
-      console.warn("Audio stalled");
-      reconnectStream();
-    });
-
-    player.addEventListener('ended', () => {
-      console.log("Stream ended, trying to reconnect...");
-      reconnectStream();
-    });
-  }
-
-  function reconnectStream() {
+    function reconnectStream() {
     showLoader();
+
     setTimeout(() => {
       if (hls) {
         hls.destroy();
         hls = null;
       }
+
       setupStream();
-      player.play().catch(() => {
+
+      player.play().then(() => {
+        isPlaying = true;
+        showPauseIcon();
+      }).catch(() => {
+        isPlaying = false;
         showPlayIcon();
       });
     }, 3000);
   }
 
-    let isInitialized = false;
 
-playBtn.addEventListener('click', () => {
-  if (!isInitialized) {
-    setupStream();
-    isInitialized = true;
-  }
+      let isInitialized = false;
 
-  if (player.paused || player.ended) {
-    showLoader();
-    player.play().then(() => {
-      isPlaying = true;
-      showPauseIcon();
-    }).catch(err => {
-      console.warn("Playback failed:", err);
+  playBtn.addEventListener('click', () => {
+    if (!isInitialized) {
+      setupStream();
+      isInitialized = true;
+    }
+
+    if (player.paused || player.ended) {
+      showLoader();
+      player.play().then(() => {
+        isPlaying = true;
+        showPauseIcon();
+      }).catch(err => {
+        console.warn("Playback failed:", err);
+        showPlayIcon();
+        window.open(stationHomepage, "_blank");
+      });
+    } else {
+      player.pause();
+      isPlaying = false;
       showPlayIcon();
-      window.open(stationHomepage, "_blank");
-    });
-  } else {
-    player.pause();
+    }
+  });
+
+      player.addEventListener('playing', () => {
+    isPlaying = true;
+    showPauseIcon();
+  });
+
+  player.addEventListener('pause', () => {
     isPlaying = false;
     showPlayIcon();
-  }
-});
+  });
 
-  </script>
-  <!-- Footer Scripts-->
-  <div th:replace="~{fragments/main :: footerScripts}"></div>
+</script>
+<!-- Footer Scripts-->
+<div th:replace="~{fragments/main :: footerScripts}"></div>
 </body>
 
 </html>

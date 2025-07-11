@@ -9,6 +9,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import com.rebellion.radioweb.entity.StationSitemapDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -91,8 +93,8 @@ public class StationServiceImpl implements StationService {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    public List<String> getListOfStationsForSitemap() {
-        return stationRepo.findAllFormattedNamesByIsLiveTrue();
+    public List<StationSitemapDto> getStationsInfoForSitemap() {
+        return stationRepo.findAllFormattedNamesAndLastUpdateDateByIsLiveTrue();
     }
 
     @Override
@@ -160,7 +162,7 @@ public class StationServiceImpl implements StationService {
         try {
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
             if (response.statusCode() == 200) {
-                stations = mapper.readValue(response.body(), new TypeReference<List<Station>>() {
+                stations = mapper.readValue(response.body(), new TypeReference<>() {
                 });
                 for (Station station : stations) {
                     System.out.println(station);

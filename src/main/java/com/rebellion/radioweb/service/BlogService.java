@@ -1,6 +1,8 @@
 package com.rebellion.radioweb.service;
 
 import java.util.List;
+
+import com.rebellion.radioweb.entity.BlogSitemapDto;
 import org.springframework.http.ResponseEntity;
 import com.rebellion.radioweb.entity.Blog;
 import com.rebellion.radioweb.entity.StationOutDao;
@@ -10,7 +12,7 @@ public interface BlogService {
     Blog saveBlogArticle(Blog blogData);
     List<Blog> getAllBlogs();
 
-    List<String> getListOfBlogsForSitemap();
+    List<BlogSitemapDto> getBlogsInfoForSitemap();
 
     ResponseEntity<List<Blog>> getRelatedBlogs(String searchTags, String currentStationId);
     ResponseEntity<List<StationOutDao>> getRelatedStations(String searchTags, int currentStationId);

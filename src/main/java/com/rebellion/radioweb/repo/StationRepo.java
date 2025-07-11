@@ -3,6 +3,7 @@ package com.rebellion.radioweb.repo;
 import java.util.List;
 import java.util.Optional;
 
+import com.rebellion.radioweb.entity.StationSitemapDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,4 +25,8 @@ public interface StationRepo extends JpaRepository<Station, Integer> {
 
     @Query("SELECT s.formattedName FROM Station s WHERE s.isLive = true")
     List<String> findAllFormattedNamesByIsLiveTrue();
+
+    @Query("SELECT new com.rebellion.radioweb.entity.StationSitemapDto(s.formattedName, s.lastUpdateDate) " +
+            "FROM Station s WHERE s.isLive = true")
+    List<StationSitemapDto> findAllFormattedNamesAndLastUpdateDateByIsLiveTrue();
 }

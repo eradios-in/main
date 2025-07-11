@@ -1,5 +1,6 @@
 package com.rebellion.radioweb.controller;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -99,6 +100,11 @@ public ResponseEntity<Map<String, Object>> searchStations(
         // set url_resolved if not provided
         if (input.getUrl_resolved() == null || input.getUrl_resolved().isEmpty()) {
             input.setUrl_resolved("");
+        }
+
+        // set url_resolved if not provided
+        if (input.getLastUpdateDate() == null) {
+            input.setLastUpdateDate(LocalDate.now());
         }
 
         // set url_resolved if not provided

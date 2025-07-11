@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "blogs")
 public class Blog {
@@ -18,6 +20,7 @@ public class Blog {
     private String articleUrl;
     @Column(length=1024)
     private String tags;
+    private LocalDate lastUpdateDate;
 
     public Blog() {
     }
@@ -68,5 +71,13 @@ public class Blog {
 
     public void setTags(String tags) {
         this.tags = tags;
+    }
+
+    public LocalDate getLastUpdateDate() {
+        return lastUpdateDate;
+    }
+
+    public void setLastUpdateDate(LocalDate lastUpdateDate) {
+        this.lastUpdateDate = lastUpdateDate;
     }
 }

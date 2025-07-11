@@ -3,11 +3,10 @@ package com.rebellion.radioweb.service.Impl;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
+import com.rebellion.radioweb.entity.BlogSitemapDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import com.rebellion.radioweb.entity.Blog;
 import com.rebellion.radioweb.entity.StationOutDao;
 import com.rebellion.radioweb.repo.BlogRepo;
@@ -49,8 +48,8 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public List<String> getListOfBlogsForSitemap() {
-        return blogRepo.findAllArticleUrls();
+    public List<BlogSitemapDto> getBlogsInfoForSitemap() {
+        return blogRepo.findArticleUrlAndLastUpdateDate();
     }
 
     @Override

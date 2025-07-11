@@ -8,6 +8,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.time.LocalDate;
+
 @Entity
 @JsonIgnoreProperties
 public class Station {
@@ -30,6 +32,7 @@ public class Station {
     @Column(length = 2048)
     private String favicon = "/images/station_fallback_image.webp";
     private String title;
+    private LocalDate lastUpdateDate;
 
     public Station() {
     }
@@ -120,5 +123,13 @@ public class Station {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public LocalDate getLastUpdateDate() {
+        return lastUpdateDate;
+    }
+
+    public void setLastUpdateDate(LocalDate lastUpdateDate) {
+        this.lastUpdateDate = lastUpdateDate;
     }
 }

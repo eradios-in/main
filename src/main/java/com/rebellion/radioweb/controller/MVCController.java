@@ -10,6 +10,7 @@ import com.rebellion.radioweb.entity.StationInDto;
 import com.rebellion.radioweb.service.Impl.BlogServiceImpl;
 import com.rebellion.radioweb.service.Impl.StationServiceImpl;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -117,6 +118,10 @@ public class MVCController {
 
     @PostMapping("/blogs")
     public ResponseEntity<Blog> postBlog(@RequestBody Blog blogData){
+        // set url_resolved if not provided
+        if (blogData.getLastUpdateDate() == null) {
+            blogData.setLastUpdateDate(LocalDate.now());
+        }
         return ResponseEntity.ok(blogServiceImpl.saveBlogArticle(blogData));
     }
 
